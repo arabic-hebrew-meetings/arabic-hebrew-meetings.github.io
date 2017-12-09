@@ -133,7 +133,12 @@ footer {
   padding: 20px 0;
 }
 
-footer .col-sm-4 {
+footer .col-sm-1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+footer .col-sm-3 {
   display: flex;
   justify-content: flex-start;
 }
