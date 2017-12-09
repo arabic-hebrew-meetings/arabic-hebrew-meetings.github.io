@@ -5,6 +5,7 @@ body {
 
 header {
   padding: 20px 0;
+  background-color: white;
 }
 
 header .row,
@@ -26,7 +27,8 @@ header nav {
 }
 
 header li {
-	font-size: 20px;
+	font-size: 25px;
+	align-items: center;
 }
 
 header p {
@@ -38,6 +40,7 @@ header p {
   display: flex;
   align-items: center;
   height: 500px;
+  background-color : #cce6ff !important ;
 }
 
 .jumbotron h2 {
@@ -82,17 +85,35 @@ section .row img {
   margin: 0 0 30px;
 }
 
+.container2 {
+	margin: 10px;
+	background-color: white;
+}
+
+.container2 h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 15px;
+  color: black;
+}
+
+.container2 p {
+  color: black;
+  font-size: 20px;
+  margin: 15px;
+}
+
 footer {
   font-size: 15px;
   padding: 20px 0;
 }
 
-footer .col-sm-8 {
+footer .col-sm-4 {
   display: flex;
   justify-content: flex-start;
 }
 
-footer .col-sm-4 {
+footer .col-sm-8 {
   display: flex;
   justify-content: flex-end;
 }
