@@ -23,7 +23,7 @@ header nav {
   display: flex;
   justify-content: flex-end;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 header li .dropdown-toggle {
