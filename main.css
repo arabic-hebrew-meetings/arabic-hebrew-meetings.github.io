@@ -26,9 +26,13 @@ header nav {
   font-size: 20px;
 }
 
-header li {
+header li .dropdown-toggle {
 	font-size: 25px;
-	align-items: center;
+}
+
+header li .dropdown-menu {
+	font-size: 40px;
+	align-items: right;
 }
 
 header p {
@@ -39,7 +43,7 @@ header p {
 .jumbotron {
   display: flex;
   align-items: center;
-  height: 500px;
+  height: 700px;
   background-color : #cce6ff !important ;
 }
 
