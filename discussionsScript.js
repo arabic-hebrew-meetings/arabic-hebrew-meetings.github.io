@@ -1,8 +1,7 @@
-﻿var i = -1
-var numberOfDiscussions = 7
+var i = -1
 function getItem(){
 	i = i + 1;
-	if (i == numberOfDiscussions) {
+	if (i == hebrew.length) {
 		i = 0;
 	}
     document.getElementById("hebrewText").innerHTML = hebrew[i];

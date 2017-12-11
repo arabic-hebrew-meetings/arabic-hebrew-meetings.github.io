@@ -1,5 +1,22 @@
+var past = [];
 function getItem(){
-	var i = Math.floor(Math.random() * original.length)
+    if (past.length == original.length) {
+        past = [];
+    }
+    while (true) {
+        var i = Math.floor(Math.random() * original.length);
+        var found = false;
+        for (j = 0; j < past.length; j++) {
+            if (i == past[j]) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            break
+        }
+    }
+    past.push(i);
     document.getElementById("originalText").innerHTML = original[i];
 	document.getElementById("translationText").innerHTML = translation[i];
 }
