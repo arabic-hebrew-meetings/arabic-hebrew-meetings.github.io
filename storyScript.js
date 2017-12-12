@@ -19,6 +19,7 @@ function getItem(){
     past.push(i);
     document.getElementById("hebrewText").innerHTML = hebrew[i];
 	document.getElementById("arabicText").innerHTML = arabic[i];
+    document.getElementById("taaticText").innerHTML = taatic[i];
 }
 
 var hebrew = [
@@ -98,3 +99,43 @@ var arabic = [
 "حديقة الحيوانات",
 "عضّ"
 ];
+
+var taatic = [
+"ר׳ולה",
+"זראפה",
+"סחר",
+"חלאק",
+"כעכה",
+"אסטורה",
+"מסתשפא",
+"מחלוק פדאא׳י",
+"פרקה",
+"ג׳זירה",
+"נט",
+"כנז",
+"רקאס׳ה שרקיה",
+"קריה",
+"אשקר",
+"מנאפסה",
+"נכתה",
+"מהרג׳אן",
+"סכראן",
+"פסתאן",
+"קארב",
+"אנוולד",
+"סטו",
+"חות",
+"בוק",
+"טאר",
+"סיפ",
+"ר׳ד׳ב",
+"שדה",
+"מטלוב",
+"מר׳ארה",
+"עראפה",
+"שבח",
+"טביב",
+"חדיקת אלחיוואנאת",
+"עד׳"
+];
+
