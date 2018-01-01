@@ -16,6 +16,7 @@ function getItem(){
             break
         }
     }
+    console.log(i)
     past.push(i);
     document.getElementById("text").innerHTML = text[i];
 }
