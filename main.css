@@ -1,0 +1,168 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+header {
+  padding: 20px 0;
+  background-color: white;
+}
+
+header .row,
+footer .row {
+  display: flex;
+  align-items: center;
+}
+
+header h1 {
+  font-weight: 700;
+  margin: 0;
+}
+
+header nav {
+  display: flex;
+  justify-content: flex-start;
+  font-weight: 700;
+  font-size: 25px;
+}
+
+header li .dropdown-toggle {
+	font-size: 25px;
+}
+
+header li .dropdown-menu {
+	font-size: 40px;
+	align-items: right;
+}
+
+header p {
+  padding: 0 20px;
+  margin: 0;
+}
+
+.jumbotron {
+  display: flex;
+  align-items: center;
+  background-color : #81d14c !important ;
+}
+
+.jumbotron h2 {
+  font-size: 60px;
+  font-weight: 600;
+  margin: 40px;
+  color: black;
+}
+
+.jumbotron h3 {
+  margin: 40px;
+  color: black;
+}
+
+.jumbotron1 {
+  display: flex;
+  align-items: center;
+  background-color : #81d14c !important ;
+}
+
+.jumbotron1 h2 {
+  font-size: 60px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.jumbotron1 h3 {
+  margin: 30px;
+  color: black;
+}
+
+section .row img {
+  margin: 0 0 30px;
+  width: 100%;
+}
+
+.col-md-6 {
+  margin: 0 0 30px;
+}
+
+.btn.btn-primary {
+  font-size: 25px;
+  border-radius: 2px;
+  border: 0px;
+  color: black;
+  text-shadow: none;
+  background-color: white;
+  margin: 40px;
+}
+
+.btn.btn-primary:hover {
+  color: white;
+  background-color: black;
+}
+
+.btn-secondary {
+  background-color: #E8DFE0;
+  color: #ffffff;
+  margin: 0 0 30px;
+}
+
+.container {
+	height: 100%;
+}
+
+.container2 {
+	margin: 10px;
+	background-color: white;
+}
+
+.container2 h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 40px;
+  color: black;
+}
+
+.container2 p {
+  color: black;
+  font-size: 20px;
+  margin: 15px;
+}
+
+.row-image {
+	height: 50%;
+}
+
+footer {
+  font-size: 15px;
+  padding: 20px 0;
+}
+
+footer .col-sm-1 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+footer .col-sm-3 {
+  display: flex;
+  justify-content: flex-start;
+}
+
+footer .col-sm-8 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer li img {
+  width: 32px;
+  height: 32px;
+}
+
+.tab{
+     Padding-left:10px;
+}
+
