@@ -43,7 +43,7 @@ header p {
 .jumbotron {
   display: flex;
   align-items: center;
-  background-color : #cce6ff !important ;
+  background-color : #84c459 !important ;
 }
 
 .jumbotron h2 {
@@ -61,7 +61,7 @@ header p {
 .jumbotron1 {
   display: flex;
   align-items: center;
-  background-color : #cce6ff !important ;
+  background-color : #84c459 !important ;
 }
 
 .jumbotron1 h2 {
@@ -106,6 +106,10 @@ section .row img {
   margin: 0 0 30px;
 }
 
+.container {
+	height: 100%;
+}
+
 .container2 {
 	margin: 10px;
 	background-color: white;
@@ -123,6 +127,10 @@ section .row img {
   color: black;
   font-size: 20px;
   margin: 15px;
+}
+
+.row-image {
+	height: 50%;
 }
 
 footer {
@@ -157,3 +165,4 @@ footer li img {
 .tab{
      Padding-left:10px;
 }
+
