@@ -8,6 +8,7 @@ function getHeader(){
         <ul class="dropdown-menu">
 		  <li><a href="questions.html">שואלים אחד את השני  -   منسأل بعض</a></li>
 		  <li><a href="discussions.html">מועדון דיבייט  -   نادي النقاش</a></li>
+		  <li><a href="songs.html">שירים - اغاني</a></li>
           <li><a href="21questions.html">מפורסמים  -  مشاهير</a></li>
           <li><a href="fastest.html">הזוג הכי מהיר  -   أسرع اثنين</a></li>
           <li><a href="truth-or-lie.html">אמת או שקר  -  صدق او كذب</a></li>
