@@ -1,10 +1,10 @@
 var past = [];
 function getItem(){
-    if (past.length == hebrew.length) {
+    if (past.length == dataJson.length) {
         past = [];
     }
     while (true) {
-        var i = Math.floor(Math.random() * hebrew.length);
+        var i = Math.floor(Math.random() * dataJson.length);
         var found = false;
         for (j = 0; j < past.length; j++) {
             if (i == past[j]) {
@@ -17,125 +17,191 @@ function getItem(){
         }
     }
     past.push(i);
-    document.getElementById("hebrewText").innerHTML = hebrew[i];
-	document.getElementById("arabicText").innerHTML = arabic[i];
-    document.getElementById("taaticText").innerHTML = taatic[i];
+	document.getElementById("hebrewText").innerHTML = data[i].Hebrew;
+	document.getElementById("arabicText").innerHTML = data[i].Arabic;
+	document.getElementById("taatikText").innerHTML = data[i].Taatik;
 }
 
-var hebrew = [
-"מפלצת",
-"ג׳ירפה",
-"קסם",
-"(ספר (במספרה",
-"עוגה",
-"אגדה",
-"בית חולים",
-"חייזר",
-"להקה",
-"אי",
-"קפץ",
-"אוצר",
-"רקדנית בטן",
-"כפר",
-"בלונדיני",
-"תחרות",
-"בדיחה",
-"פסטיבל",
-"שיכור",
-"שמלה",
-"סירה",
-"נולד",
-"שוד",
-"לוויתן",
-"חצוצרה",
-"עף",
-"חרב",
-"כעס",
-"קלפים",
-"מבוקש",
-"מערה",
-"מגדת עתידות",
-"רוח רפאים",
-"רופא",
-"גן חיות",
-"נשך"
-];
-
-var arabic = [
-"غولة",
-"زرافة",
-"سحر",
-"حلّاق",
-"كعكه",
-"اسطورة",
-"مستشفى",
-"مخلوق فدائي",
-"فرقة",
-"جزيرة",
-"نطّ",
-"كنز",
-"رقّاصة شرقيّة",
-"قرية",
-"اشقر",
-"منافسة",
-"نكتة",
-"مهرجان",
-"سكران",
-"فستان",
-"قارب",
-"انولد",
-"سطو",
-"حوت",
-"بوق",
-"طار",
-"سيف",
-"غضب",
-"شدّة",
-"مطلوب",
-"مغارة",
-"عرّافة",
-"شبح",
-"طبيب",
-"حديقة الحيوانات",
-"عضّ"
-];
-
-var taatic = [
-"ר׳ולה",
-"זראפה",
-"סחר",
-"חלאק",
-"כעכה",
-"אסטורה",
-"מסתשפא",
-"מחלוק פדאא׳י",
-"פרקה",
-"ג׳זירה",
-"נט",
-"כנז",
-"רקאס׳ה שרקיה",
-"קריה",
-"אשקר",
-"מנאפסה",
-"נכתה",
-"מהרג׳אן",
-"סכראן",
-"פסתאן",
-"קארב",
-"אנוולד",
-"סטו",
-"חות",
-"בוק",
-"טאר",
-"סיפ",
-"ר׳ד׳ב",
-"שדה",
-"מטלוב",
-"מר׳ארה",
-"עראפה",
-"שבח",
-"טביב",
-"חדיקת אלחיוואנאת",
-"עד׳"
-];
-
+const dataJson = [
+  {
+    "Hebrew": "מפלצת",
+    "Arabic": "غولة",
+    "Taatik": "ע'ולה"
+  },
+  {
+    "Hebrew": "ג׳ירפה",
+    "Arabic": "زرافة",
+    "Taatik": "זראפה"
+  },
+  {
+    "Hebrew": "קסם",
+    "Arabic": "سحر",
+    "Taatik": "סחר"
+  },
+  {
+    "Hebrew": "ספר (במספרה)",
+    "Arabic": "حلّاق",
+    "Taatik": "חלאק"
+  },
+  {
+    "Hebrew": "עוגה",
+    "Arabic": "كعكه",
+    "Taatik": "כעכה"
+  },
+  {
+    "Hebrew": "אגדה",
+    "Arabic": "اسطورة",
+    "Taatik": "אסטורה"
+  },
+  {
+    "Hebrew": "בית חולים",
+    "Arabic": "مستشفى",
+    "Taatik": "מסתשפא"
+  },
+  {
+    "Hebrew": "חייזר",
+    "Arabic": "مخلوق فدائي",
+    "Taatik": "מח'לוק פדאאי"
+  },
+  {
+    "Hebrew": "להקה",
+    "Arabic": "فرقة",
+    "Taatik": "פרקה"
+  },
+  {
+    "Hebrew": "אי",
+    "Arabic": "جزيرة",
+    "Taatik": "ג'זירה"
+  },
+  {
+    "Hebrew": "קפץ",
+    "Arabic": "نطّ",
+    "Taatik": "נט"
+  },
+  {
+    "Hebrew": "אוצר",
+    "Arabic": "كنز",
+    "Taatik": "כנז"
+  },
+  {
+    "Hebrew": "רקדנית בטן",
+    "Arabic": "رقّاصة شرقيّة",
+    "Taatik": "רקאצה שרקיה"
+  },
+  {
+    "Hebrew": "כפר",
+    "Arabic": "قرية",
+    "Taatik": "קריה"
+  },
+  {
+    "Hebrew": "בלונדיני",
+    "Arabic": "اشقر",
+    "Taatik": "אשקר"
+  },
+  {
+    "Hebrew": "תחרות",
+    "Arabic": "منافسة",
+    "Taatik": "מנאפסה"
+  },
+  {
+    "Hebrew": "בדיחה",
+    "Arabic": "نكتة",
+    "Taatik": "נכתה"
+  },
+  {
+    "Hebrew": "פסטיבל",
+    "Arabic": "مهرجان",
+    "Taatik": "מהרג'אנ"
+  },
+  {
+    "Hebrew": "שיכור",
+    "Arabic": "سكران",
+    "Taatik": "סכראנ"
+  },
+  {
+    "Hebrew": "שמלה",
+    "Arabic": "فستان",
+    "Taatik": "פסתאנ"
+  },
+  {
+    "Hebrew": "סירה",
+    "Arabic": "قارب",
+    "Taatik": "קארב"
+  },
+  {
+    "Hebrew": "נולד",
+    "Arabic": "انولد",
+    "Taatik": "אנולד"
+  },
+  {
+    "Hebrew": "שוד",
+    "Arabic": "سطو",
+    "Taatik": "סטו"
+  },
+  {
+    "Hebrew": "לוויתן",
+    "Arabic": "حوت",
+    "Taatik": "חות"
+  },
+  {
+    "Hebrew": "חצוצרה",
+    "Arabic": "بوق",
+    "Taatik": "בוק"
+  },
+  {
+    "Hebrew": "עף",
+    "Arabic": "طار",
+    "Taatik": "טאר"
+  },
+  {
+    "Hebrew": "חרב",
+    "Arabic": "سيف",
+    "Taatik": "סיפ"
+  },
+  {
+    "Hebrew": "כעס",
+    "Arabic": "غضب",
+    "Taatik": "ע'צ'ב"
+  },
+  {
+    "Hebrew": "קלפים",
+    "Arabic": "شدّة",
+    "Taatik": "שדה"
+  },
+  {
+    "Hebrew": "מבוקש",
+    "Arabic": "مطلوب",
+    "Taatik": "מטלוב"
+  },
+  {
+    "Hebrew": "מערה",
+    "Arabic": "مغارة",
+    "Taatik": "מע'ארה"
+  },
+  {
+    "Hebrew": "מגדת עתידות",
+    "Arabic": "عرّافة",
+    "Taatik": "עראפה"
+  },
+  {
+    "Hebrew": "רוח רפאים",
+    "Arabic": "شبح",
+    "Taatik": "שבח"
+  },
+  {
+    "Hebrew": "רופא",
+    "Arabic": "طبيب",
+    "Taatik": "טביב"
+  },
+  {
+    "Hebrew": "גן חיות",
+    "Arabic": "حديقة الحيوانات",
+    "Taatik": "חדיקה אלחיואנאת"
+  },
+  {
+    "Hebrew": "נשך",
+    "Arabic": "عضّ",
+    "Taatik": "עצ'"
+  }
+]
+const data = JSON.parse(JSON.stringify(dataJson))
