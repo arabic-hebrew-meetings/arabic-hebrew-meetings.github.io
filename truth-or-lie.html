@@ -1,38 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>נפגשים לדבר ערבית ועברית</title>
+  <title>אתר הפעילויות למפגשי מדרסה</title>
   <meta charset="utf-8"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
-		<header class="container">
-		<div class="row">
-         <nav class="col-sm-10 text-left">
-    <ul class="nav navbar-nav">
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span>פעילויות &nbsp فعاليات</a>
-        <ul class="dropdown-menu">
-          <li><a href="questions.html">שואלים אחד את השני  -   منسأل بعض</a></li>
-		  <li><a href="discussions.html">מועדון דיבייט  -   نادي النقاش</a></li>
-          <li><a href="21questions.html">מפורסמים  -  مشاهير</a></li>
-          <li><a href="fastest.html">הזוג הכי מהיר  -   أسرع اثنين</a></li>
-          <li><a href="truth-or-lie.html">אמת או שקר  -  صدق او كذب</a></li>
-          <li><a href="jokes.html">בדיחות  -  نكت</a></li>
-          <li><a href="story.html">בונים ביחד סיפור  -  نبني مع بعض قصة</a></li>
-          <li><a href="slang.html">סלנג - مصطلحات عامية</a></li>
-          <li><a href="sayings.html">פתגמים  -  امثال</a></li>
-          <li><a href="picture.html">היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
-        </ul>
-      </li>
-      <li><a href="phrases.html">שיחון &nbsp عبارات شائعة</a></li>
-      <li><a href="index.html">בית &nbsp بيت</a></li>
-    </ul>
-      </nav>    
-		<img class="col-sm-2" src="logo-speaklang2-03.png"/>
-    </div>
+		<header class="container" id="header">
   </header>
   <section class="jumbotron">
     <div class="container">
@@ -60,22 +36,17 @@
 		</div>
     </div>
   </section>
-  <footer class="container">
-    <div class="row">
-      <ul class="col-sm-1">
-        <li class="col-sm-1">
-		<a href="https://www.facebook.com/madrasafree/">
-        	<img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/facebook.svg"/>
-        </a>
-		</li>
-      </ul>
-	  <p class="col-sm-3">הצטרפו אלינו בפייסבוק  -  انضموا الينا على فيسبوك</p>
-	  <p class="col-sm-8">נבנה ע"י רועי נחמיאס  2019 &copy;</p>
-    </div>
+  <footer class="container" id="footer">
   </footer>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="21questionsScript.js"></script>
+<script src="headerFooterScript.js"></script>
+<script> 
+        window.onload = function(){
+        getHeader();
+		getFooter();
+ }
+</script> 
 </body>
 </html>
