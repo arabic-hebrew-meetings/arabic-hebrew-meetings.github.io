@@ -120,6 +120,7 @@ section .row img {
 footer {
   font-size: 15px;
   padding: 20px 0;
+  text-align:center;
 }
 
 footer .col-sm-1 {

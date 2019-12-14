@@ -41,15 +41,13 @@ function getHeader(){
 function getFooter(){
 	console.log("getFooter Start");
 	document.getElementById("footer").innerHTML = `<div class="row">
-      <ul class="col-sm-1">
-        <li class="col-sm-1">
-		<a href="https://www.facebook.com/madrasafree/">
-        	<img src="https://s3.amazonaws.com/codecademy-content/projects/make-a-website/lesson-4/facebook.svg"/>
-        </a>
-		</li>
-      </ul>
-	  <p class="col-sm-3">הצטרפו אלינו בפייסבוק  -  انضموا الينا على فيسبوك</p>
-	  <p class="col-sm-8">נבנה ע"י רועי נחמיאס  2019 &copy;</p>
+  <figure class="col-sm-4">
+	  </figure>
+	  <figure class="col-sm-4">
+	  <p>נבנה ע"י רועי נחמיאס  2019 &copy;</p>
+	  </figure>
+	  <figure class="col-sm-4">
+	  </figure>
     </div>`;
 	console.log("getFooter End");
 }
