@@ -31,7 +31,7 @@ function getHeader(){
           <li><a href="picture.html">היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
           </ul>
         </li>
-		<li class="active"><a href="index.html">בית &nbsp بيت</a></li>
+		<li><a href="index.html">בית &nbsp بيت</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>`;
