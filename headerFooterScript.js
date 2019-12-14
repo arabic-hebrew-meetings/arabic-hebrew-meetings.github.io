@@ -11,7 +11,7 @@ function getHeader(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand active" href="#">מפגשי ערבית עברית</a>
+      <div class="navbar-brand active">מפגשי ערבית עברית</div>
     </div>
     <div class="collapse navbar-collapse pull-right">
       <ul class="nav navbar-nav pull-right">
