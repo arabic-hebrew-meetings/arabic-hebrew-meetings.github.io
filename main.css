@@ -46,7 +46,7 @@ header p {
   display: flex;
   align-items: center;
   background-color : #eee ;
-  padding-top:40px;
+  padding-top:50px;
   padding-bottom:40px;
 }
 
@@ -202,12 +202,14 @@ footer li img {
 	background-color:#229922;
     color:#ffffff;
   	border-radius:0;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
   
 .navbar-custom .navbar-nav > li > a {
   	color:#fff;
 	margin-right: 20px;
-	font-size: 20px;
+	font-size: 25px;
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
   background-color: #33aa33;
@@ -225,7 +227,7 @@ footer li img {
 /* dropdown */
 .navbar-custom .navbar-nav .dropdown-menu  { 
   background-color: #33aa33;
-  font-size: 20px;
+  font-size: 25px;
 }
 .navbar-custom .navbar-nav .dropdown-menu>li>a  { 
   color: #fff;
@@ -236,7 +238,7 @@ footer li img {
       
 .navbar-custom .navbar-brand {
   	color:#eeeeee;
-	font-size: 25px;
+	font-size: 30px;
 }
 .navbar-custom .navbar-toggle {
   	background-color:#eeeeee;
