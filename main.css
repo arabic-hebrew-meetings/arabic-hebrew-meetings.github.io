@@ -45,7 +45,7 @@ header p {
 .jumbotron1 {
   display: flex;
   align-items: center;
-  background-color : white !important ;
+  background-color : #eee ;
 }
 
 .jumbotron1 h2 {
