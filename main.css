@@ -3,6 +3,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  padding-top:50px;
 }
 
 header {
@@ -157,20 +158,6 @@ footer li img {
   text-align: right;
 }
 
-.navbar-inverse {
-  background-color: #54a120 !important;
-  border-color: #54a120 !important;
-}
-
-.navbar-inverse .navbar-nav>li>a:hover{
-  color:white !important;
-  background-color:54a120 !important;
-}
-.navbar-inverse .navbar-nav>.open>a:hover{
-  color:white !important;
-  background-color:54a120 !important;
-}
-
 .roybutton {
     display: inline-block;
     text-align: center;
@@ -215,12 +202,14 @@ footer li img {
   
 .navbar-custom .navbar-nav > li > a {
   	color:#fff;
-  	padding-left:20px;
-  	padding-right:20px;
 	margin-right: 20px;
 	font-size: 20px;
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+  background-color: #33aa33;
+}
+
+.navbar-custom .navbar-brand .active {
   background-color: #33aa33;
 }
 
