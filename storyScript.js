@@ -17,6 +17,12 @@ function getItem(){
         }
     }
     past.push(i);
+	document.getElementById("button-and-text").innerHTML = `<a class="btn btn-success btn-xl rtl" onclick="getItem()" role="button">
+ <span class="my-activity-button-text">
+		  המשיכו - كملو!
+		  </span>
+		  <span class="glyphicon glyphicon glyphicon glyphicon-play my-activity-button"></span>
+        </a>`;
 	document.getElementById("hebrewText").innerHTML = data[i].Hebrew;
 	document.getElementById("arabicText").innerHTML = data[i].Arabic;
 	document.getElementById("taatikText").innerHTML = data[i].Taatik;

@@ -18,6 +18,12 @@ function getItem(){
     }
     console.log(i)
     past.push(i);
+	document.getElementById("button-and-text").innerHTML = `<a class="btn btn-success btn-xl rtl" onclick="getItem()" role="button">
+ <span class="my-activity-button-text">
+		  המשיכו - كملو!
+		  </span>
+		  <span class="glyphicon glyphicon glyphicon glyphicon-play my-activity-button"></span>
+        </a>`;
 	document.getElementById("arabicText").innerHTML = data[i].Arabic;
 	document.getElementById("taatikText").innerHTML = data[i].Taatik;
 	document.getElementById("translationText").innerHTML = data[i].Translation;

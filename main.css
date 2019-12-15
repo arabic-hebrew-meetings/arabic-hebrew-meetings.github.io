@@ -6,42 +6,6 @@ body {
   padding-top:50px;
 }
 
-header {
-  background-color: #54a120;
-}
-
-header .row,
-footer .row {
-  display: flex;
-  align-items: center;
-}
-
-header h1 {
-  font-weight: 700;
-  margin: 0;
-}
-
-header nav {
-  display: flex;
-  justify-content: flex-start;
-  font-weight: 700;
-  font-size: 25px;
-}
-
-header li .dropdown-toggle {
-	font-size: 25px;
-}
-
-header li .dropdown-menu {
-	font-size: 40px;
-	align-items: right;
-}
-
-header p {
-  padding: 0 20px;
-  margin: 0;
-}
-
 .jumbotron {
 	padding-top:50px !important;
 }
@@ -49,9 +13,16 @@ header p {
 .jumbotron1 {
   display: flex;
   align-items: center;
-  background-color : #eee ;
+  background-color : white ;
   padding-top:50px;
   padding-bottom:40px;
+}
+
+.jumbotron1 h1 {
+  font-size: 80px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: black;
 }
 
 .jumbotron1 h2 {
@@ -88,6 +59,10 @@ section .row img {
 .btn.btn-primary:hover {
   color: white;
   background-color: black;
+}
+
+.btn.btn-success {
+	margin: 40px;
 }
 
 .btn-secondary {
@@ -306,6 +281,18 @@ footer li img {
   width: 50%;
 }
 
-.oldimg {
-	
+.btn-xl {
+    font-size: 70px;
+    border-radius: 10px;
+    width:20%;
+	height: 50px;
+}
+
+.my-activity-button {
+	font-size:20px;
+	padding-right:10px;
+}
+
+.my-activity-button-text {
+	font-size:25px;
 }
