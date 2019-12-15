@@ -169,6 +169,10 @@ function getSong(lang, i){
 	} else {
 		songStr = arabicTitleStr + arabicLyricsStr + taatikTitleStr + taatikLyricsStr + hebrewTitleStr + hebrewLyricsStr + urlStr;	
 	}
+	document.getElementById("my-text-box").innerHTML = ` <div class="rectangle">
+	<div id="song">
+		</div>
+		</div>`;
 	document.getElementById("song").innerHTML = songStr;
 	console.log("getSong End");
 }

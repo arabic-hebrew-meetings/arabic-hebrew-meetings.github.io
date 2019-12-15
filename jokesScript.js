@@ -23,6 +23,11 @@ function getItem(){
 		  </span>
 		  <span class="glyphicon glyphicon glyphicon glyphicon-play my-activity-button"></span>
         </a>`;
+	document.getElementById("my-text-box").innerHTML = `<div class="rectangle">
+                <h3 class="rtl" id="originalText"></h3>
+		<h3 class="rtl" id="taatikText"></h3>
+        <h3 class="rtl" id="translationText"></h3>
+            </div>`;	
 	document.getElementById("originalText").innerHTML = data[i].Original;
 	document.getElementById("taatikText").innerHTML = data[i].Taatik;
 	document.getElementById("translationText").innerHTML = data[i].Translation;
