@@ -234,11 +234,30 @@ function getSong(lang, i){
 		urlStr = `<h2><a href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
 	}
 	
+	var sections = 0;
+	if (hebrewTitleStr !== ``) {
+		sections++;
+	}
+	if (arabicTitleStr !== ``) {
+		sections++;
+	}
+	if (taatikTitleStr !== ``) {
+		sections++;
+	}
+	var line1 = `<h2 class="my-line">* * * * * * *</h2>`;
+	var line2 = `<h2 class="my-line">* * * * * * *</h2>`;
+	if (sections < 3) {
+		line2 = ``;
+	}
+	if (sections <2) {
+		line1 = ``;
+	}
+	
 	var songStr = ``;
 	if (lang === 1) {
-		songStr = hebrewTitleStr + hebrewLyricsStr + arabicTitleStr + arabicLyricsStr + taatikTitleStr + taatikLyricsStr + urlStr;
+		songStr = hebrewTitleStr + hebrewLyricsStr + line1 + arabicTitleStr + arabicLyricsStr + line2 + taatikTitleStr + taatikLyricsStr + urlStr;
 	} else {
-		songStr = arabicTitleStr + arabicLyricsStr + taatikTitleStr + taatikLyricsStr + hebrewTitleStr + hebrewLyricsStr + urlStr;	
+		songStr = arabicTitleStr + arabicLyricsStr + line1 + taatikTitleStr + taatikLyricsStr + line2 + hebrewTitleStr + hebrewLyricsStr + urlStr;	
 	}
 	document.getElementById("my-text-box").innerHTML = ` <div class="rectangle">
 	<div id="song">

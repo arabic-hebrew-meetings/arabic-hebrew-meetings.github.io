@@ -337,3 +337,8 @@ padding: 20px 20px 20px 20px;
 .activity-content {
 		margin-top: 50px;
 }
+
+.my-line {
+  color: red !important;
+}
+
