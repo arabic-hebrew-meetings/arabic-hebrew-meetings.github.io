@@ -51,3 +51,14 @@ function getFooter(){
     </div>`;
 	console.log("getFooter End");
 }
+
+function getStartActivity() {
+	document.getElementById("start-activity").innerHTML = `<div class="activity-content" id="button-and-text">
+        <a class="btn btn-success btn-xl rtl" onclick="getNext()" role="button">
+ <span class="my-activity-button-text">
+		  התחילו - بلشو!
+		  </span>
+		  <span class="glyphicon glyphicon-play my-activity-button"></span>
+        </a>
+		</div>`;
+}

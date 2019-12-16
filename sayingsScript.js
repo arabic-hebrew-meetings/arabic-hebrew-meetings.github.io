@@ -1,9 +1,9 @@
 var past = [];
-function getItem(){
-    if (past.length == dataJson.length) {
-        past = [];
-    }
-    while (true) {
+var cur = -1;
+function getNext(){
+	cur++;
+	if (cur === past.length) {
+		while (true) {
         var i = Math.floor(Math.random() * dataJson.length);
         var found = false;
         for (j = 0; j < past.length; j++) {
@@ -13,23 +13,65 @@ function getItem(){
             }
         }
         if (!found) {
-            break
+            break;
         }
     }
-    console.log(i)
     past.push(i);
-	document.getElementById("button-and-text").innerHTML = `<a class="btn btn-success btn-xl rtl" onclick="getItem()" role="button">
- <span class="my-activity-button-text">
-		  המשיכו - كملو!
-		  </span>
-		  <span class="glyphicon glyphicon glyphicon glyphicon-play my-activity-button"></span>
+	} else {
+		i = past[cur];
+	}
+	displayContent(cur, i);	
+}
+
+function getPrev(){
+	cur--;
+	i = past[cur];
+	displayContent(cur, i);	
+}
+
+function getNextButton(cur) {
+	nextButton = `<a class="circle-button" onclick="getNext()" role="button">
+		  <span class="glyphicon glyphicon glyphicon-chevron-left my-activity-button-single"></span>
         </a>`;
-	document.getElementById("my-text-box").innerHTML = `<div class="rectangle">
+	if (cur === dataJson.length-1) {
+		nextButton = `<a class="circle-button invisible" onclick="getNext()" role="button">
+		  <span class="glyphicon glyphicon glyphicon-chevron-left my-activity-button-single"></span>
+        </a>`;	
+	}	
+	return nextButton;
+}
+
+function getPrevButton(cur) {
+	prevButton = `<a class="circle-button" onclick="getPrev()" role="button">
+		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
+        </a>`;
+	if (cur === 0) {
+		prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
+		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
+        </a>`;
+	}	
+	return prevButton;
+}
+
+function displayContent(cur, i) {
+	nextButton = getNextButton(cur);
+	prevButton = getPrevButton(cur);
+	content = getContentRectWithSpecificOrder();
+	document.getElementById("button-and-text").innerHTML = nextButton + content + prevButton;
+	displayContentBySpecificOrder(i);
+}
+
+function getContentRectWithSpecificOrder() {
+	content = `<div class="rectangle">
                 <h3 class="rtl" id="arabicText"></h3>
 		<h3 class="rtl" id="taatikText"></h3>
         <h3 class="rtl" id="translationText"></h3>
 		<h3 class="rtl" id="meaningText"></h3>
-            </div>`;	
+            </div>`;
+	return content;		
+}
+
+function displayContentBySpecificOrder(i) {
 	document.getElementById("arabicText").innerHTML = data[i].Arabic;
 	document.getElementById("taatikText").innerHTML = data[i].Taatik;
 	document.getElementById("translationText").innerHTML = data[i].Translation;

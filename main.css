@@ -292,46 +292,12 @@ footer li img {
 	padding-right:10px;
 }
 
+.my-activity-button-single {
+	font-size:20px;
+}
+
 .my-activity-button-text {
 	font-size:25px;
-}
-
-.openings .headline-text:before {
-border-top: 1px solid #1072B8;
-display: block;
-position: relative;
-top: -25px;
-margin: 0 auto;
-width: 50%;
-content: "";
-}
-
-.openings .headline-text {
-text-align: center;
-font-size: 24px;
-color: #1072B8;
-padding-top: 60px;
-font-weight: bold;
-}
-
-.openings .rectangle {
-border-radius: 10px;
-display: inline-block;
-margin-bottom: 30px;
-margin-right: 5px;
-width: 250px;
-height: 100px;
-border: 1px solid #000;
-background-color: white;
-padding: 10px 10px 10px 100px;
-position: relative;
-float: right;
-}
-.section{
-  float:left;
-}
-.openings .job-opening{
-clear:both;
 }
 
 .rectangle {
@@ -343,4 +309,30 @@ padding: 20px 20px 20px 20px;
   justify-content:center;
   align-items: center;
   vertical-align: middle;
+  max-width: 50%;
+}
+
+.circle-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.invisible {
+	visibility: hidden;
+}
+
+.activity-content {
+		margin-top: 30px;
 }
