@@ -63,10 +63,10 @@ function displayContent(cur, i) {
 
 function getContentRectWithSpecificOrder() {
 	content = `<div class="rectangle">
-                <h3 class="rtl" id="arabicText"></h3>
-		<h3 class="rtl" id="taatikText"></h3>
-        <h3 class="rtl" id="translationText"></h3>
-		<h3 class="rtl" id="meaningText"></h3>
+                <h2 class="rtl" id="arabicText"></h2>
+		<h2 class="rtl" id="taatikText"></h2>
+        <h2 class="rtl" id="translationText"></h2>
+		<h2 class="rtl" id="meaningText"></h2>
             </div>`;
 	return content;		
 }

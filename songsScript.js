@@ -67,14 +67,14 @@ function getAllSongs(){
 	var i;
 	for (i = 0; i < Object.keys(hebrewSongs).length; i++) {
 		var title = hebrewSongs[i+1].HebrewTitle
-		hebrew += `<h3><a title="`+title+`" href="#" onclick="getSong(1,`+i+`);return false;">`+title+`</a></h3>`;
+		hebrew += `<h2><a title="`+title+`" href="#" onclick="getSong(1,`+i+`);return false;">`+title+`</a></h2>`;
 	}
 	
 	var arabic = ``;
 	var i;
 	for (i = 0; i < Object.keys(arabicSongs).length; i++) {
 		var title = arabicSongs[i+1].ArabicTitle
-		arabic += `<h3><a title="`+title+`" href="#" onclick="getSong(2,`+i+`);return false;">`+title+`</a></h3>`;
+		arabic += `<h2><a title="`+title+`" href="#" onclick="getSong(2,`+i+`);return false;">`+title+`</a></h2>`;
 	}
 	
 	var start = `<figure class="col-sm-6">
@@ -130,37 +130,37 @@ function getSong(lang, i){
 	
 	var hebrewTitleStr = ``
 	if (hebrewTitle !== ``) {
-		hebrewTitleStr = `<h3 class="rtl" style="text-decoration: underline;">`+hebrewTitle+`</h3>`;
+		hebrewTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+hebrewTitle+`</h2>`;
 	}
 	
 	var arabicTitleStr = ``
 	if (arabicTitle !== ``) {
-		arabicTitleStr = `<h3 class="rtl" style="text-decoration: underline;">`+arabicTitle+`</h3>`;
+		arabicTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+arabicTitle+`</h2>`;
 	}
 	
 	var taatikTitleStr = ``
 	if (taatikTitle !== ``) {
-		taatikTitleStr = `<h3 class="rtl" style="text-decoration: underline;">`+taatikTitle+`</h3>`;
+		taatikTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+taatikTitle+`</h2>`;
 	}
 	
 	var hebrewLyricsStr = ``
 	if (hebrewLyrics !== ``) {
-		hebrewLyricsStr = `<h3 class="rtl">`+hebrewLyrics+`</h3>`;
+		hebrewLyricsStr = `<h2 class="rtl">`+hebrewLyrics+`</h2>`;
 	}
 	
 	var arabicLyricsStr = ``
 	if (arabicLyrics !== ``) {
-		arabicLyricsStr = `<h3 class="rtl">`+arabicLyrics+`</h3>`;
+		arabicLyricsStr = `<h2 class="rtl">`+arabicLyrics+`</h2>`;
 	}
 	
 	var taatikLyricsStr = ``
 	if (taatikLyrics !== ``) {
-		taatikLyricsStr = `<h3 class="rtl">`+taatikLyrics+`</h3>`;
+		taatikLyricsStr = `<h2 class="rtl">`+taatikLyrics+`</h2>`;
 	}
 	
 	var urlStr = ``
 	if (url !== ``) {
-		urlStr = `<h3><a href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h3>`;
+		urlStr = `<h2><a href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
 	}
 	
 	var songStr = ``;
