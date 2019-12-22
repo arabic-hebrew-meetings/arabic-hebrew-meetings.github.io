@@ -65,6 +65,14 @@ section .row img {
 	margin: 40px;
 }
 
+.btn.btn-danger {
+	margin: 40px;
+}
+
+.btn.btn-info {
+	margin: 40px;
+}
+
 .btn-secondary {
   background-color: #E8DFE0;
   color: #ffffff;

@@ -1,7 +1,86 @@
-var past = [];
-var cur = -1;
-function getNext(){
-	cur++;
+
+const categories = Object.freeze({"simple":0, "complex":1})
+
+var pastComplex = [];
+var curComplex = -1;
+var pastSimple = [];
+var curSimple = -1;
+
+function getCurByCategory(category) {
+	if (category === categories.simple) {
+		return curSimple;
+	}
+	if (category === categories.complex) {
+		return curComplex;
+	}
+}
+
+function getPastByCategory(category) {
+	if (category === categories.simple) {
+		return pastSimple;
+	}
+	if (category === categories.complex) {
+		return pastComplex;
+	}
+}
+
+function getDataByCategory(category) {
+	if (category === categories.simple) {
+		return dataSimple;
+	}
+	if (category === categories.complex) {
+		return dataComplex;
+	}
+}
+
+function getDataJsonByCategory(category) {
+	if (category === categories.simple) {
+		return dataJsonSimple;
+	}
+	if (category === categories.complex) {
+		return dataJsonComplex;
+	}
+}
+
+function incrementCurByCategory(category) {
+	if (category === categories.simple) {
+		curSimple++;
+		return curSimple;
+	}
+	if (category === categories.complex) {
+		curComplex++;
+		return curComplex;
+	}
+}
+
+function decrementCurByCategory(category) {
+	if (category === categories.simple) {
+		curSimple--;
+		return curSimple;
+	}
+	if (category === categories.complex) {
+		curComplex--;
+		return curComplex;
+	}
+}
+
+function pushToPastByCategory(category, i) {
+	if (category === categories.simple) {
+		pastSimple.push(i);
+		return pastSimple;
+	}
+	if (category === categories.complex) {
+		pastComplex.push(i);
+		return pastComplex;
+	}
+}
+
+function getNext(category){
+	cur = getCurByCategory(category);
+	console.log(cur)
+	past = getPastByCategory(category);
+	dataJson = getDataJsonByCategory(category);
+	cur = incrementCurByCategory(category);
 	if (cur === past.length) {
 		while (true) {
         var i = Math.floor(Math.random() * dataJson.length);
@@ -16,49 +95,54 @@ function getNext(){
             break;
         }
     }
-    past.push(i);
+	past = pushToPastByCategory(category, i);
 	} else {
 		i = past[cur];
 	}
-	displayContent(cur, i);	
+	displayContent(cur, i, category);	
 }
 
-function getPrev(){
-	cur--;
+function getPrev(category){
+	cur = getCurByCategory(category);
+	console.log(cur)
+	past = getPastByCategory(category);
+	cur = decrementCurByCategory(category);
 	i = past[cur];
-	displayContent(cur, i);	
+	displayContent(cur, i, category);	
 }
 
-function getNextButton(cur) {
-	nextButton = `<a class="circle-button" onclick="getNext()" role="button">
+function getNextButton(cur, category) {
+	dataJson = getDataJsonByCategory(category);
+	nextButton = `<a class="circle-button" onclick="getNext(`+category+`)" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-left my-activity-button-single"></span>
         </a>`;
 	if (cur === dataJson.length-1) {
-		nextButton = `<a class="circle-button invisible" onclick="getNext()" role="button">
+		nextButton = `<a class="circle-button invisible" onclick="getNext(`+category+`)" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-left my-activity-button-single"></span>
         </a>`;	
-	}	
+	}
 	return nextButton;
 }
 
-function getPrevButton(cur) {
-	prevButton = `<a class="circle-button" onclick="getPrev()" role="button">
+function getPrevButton(cur, category) {
+	prevButton = `<a class="circle-button" onclick="getPrev(`+category+`)" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
 	if (cur === 0) {
-		prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
+		prevButton = `<a class="circle-button invisible" onclick="getPrev(`+category+`)" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
-	}	
+	}
 	return prevButton;
 }
 
-function displayContent(cur, i) {
-	nextButton = getNextButton(cur);
-	prevButton = getPrevButton(cur);
+function displayContent(cur, i, category) {
+	console.log("displayContent");
+	nextButton = getNextButton(cur, category);
+	prevButton = getPrevButton(cur, category);
 	content = getContentRectWithSpecificOrder();
-	document.getElementById("button-and-text").innerHTML = nextButton + content + prevButton;
-	displayContentBySpecificOrder(i);
+	document.getElementById("button-and-text").innerHTML =  nextButton + content + prevButton;
+	displayContentBySpecificOrder(i, category);
 }
 
 function getContentRectWithSpecificOrder() {
@@ -70,13 +154,15 @@ function getContentRectWithSpecificOrder() {
 	return content;		
 }
 
-function displayContentBySpecificOrder(i) {
+function displayContentBySpecificOrder(i, category) {
+	data = getDataByCategory(category);
 	document.getElementById("hebrewText").innerHTML = data[i].Hebrew;
 	document.getElementById("arabicText").innerHTML = data[i].Arabic;
 	document.getElementById("taatikText").innerHTML = data[i].Taatik;
+	
 }
 
-const dataJson = [
+const dataJsonComplex = [
   {
     "Hebrew": "מה הספר האחרון שקראת?",
     "Arabic": "شو اخر كتاب قرأته؟",
@@ -383,4 +469,224 @@ const dataJson = [
     "Taatik": "אחכי ען תג'רבה מהמה מרקתהא בחיאתכ?"
   }
 ]
-const data = JSON.parse(JSON.stringify(dataJson))
+const dataComplex = JSON.parse(JSON.stringify(dataJsonComplex))
+
+const dataJsonSimple = [
+  {
+    "Hebrew": "איזה סוג אוכל אתה הכי אוהב? (איטלקי/סיני…)",
+    "Arabic": "شو اكثر نوع أكل بتحبه ؟ (ايطالي/صيني…)",
+    "Taatik": "שו אכת'ר נוע אכל בתחבה ? (איטאלי/ציני…)",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה המאכל האהוב עליך?",
+    "Arabic": "شو هي أكلتك المفضلة ؟",
+    "Taatik": "שו הי אכלתכ אלמפצ'לה ?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "איזה אוכל היית רוצה לנסות?",
+    "Arabic": "أي أكلة او نوع اكل بتحب تجربه ؟",
+    "Taatik": "אי אכלה או נוע אכל בתחב תג'רבה ?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה אתה אוהב לבשל?",
+    "Arabic": "شو بتحب تطبخ؟",
+    "Taatik": "שו בתחב תטבח'?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה היית רוצה לדעת לבשל?",
+    "Arabic": "شو بتحب تتعلم تطبخ؟",
+    "Taatik": "שו בתחב תתעלם תטבח'?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה אתה אוהב יותר- מתוק או מלוח?",
+    "Arabic": "شو بتحب اكثر - حلو ولا مالح؟",
+    "Taatik": "שו בתחב אכת'ר - חלו ולא מאלח?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "קפה או תה?",
+    "Arabic": "قهوة ولا شاي؟",
+    "Taatik": "קהוה ולא שאי?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "איזה אוכל אתה שונא?",
+    "Arabic": "شو في اشي بتكره توكله؟",
+    "Taatik": "שו פי אשי בתכרה תוכלה?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה המשקה האהוב עליך?",
+    "Arabic": "شو هو مشروبك المفضل؟",
+    "Taatik": "שו הו משרובכ אלמפצ'ל?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה אתה אוהב יותר - שוקולד מריר/חלב/לבן?",
+    "Arabic": "شو بتحب اكثر - شوكولاطة مُرّة / حليب / بيضا ؟",
+    "Taatik": "שו בתחב אכת'ר - שוכולאטה מרה / חליב / ביצ'א ?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "אתה אוהב חריף באוכל?",
+    "Arabic": "بتحب الاكل الحارّ (بحرق) ؟",
+    "Taatik": "בתחב אלאכל אלחאר (בחרק) ?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "מה הפרי האהוב עליך?",
+    "Arabic": "شو اكثر فاكهة بتحبها؟",
+    "Taatik": "שו אכת'ר פאכהה בתחבהא?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "פיצה או המבורגר?",
+    "Arabic": "بيتسا ولا هامبرغر؟",
+    "Taatik": "ביתסא ולא האמברע'ר?",
+    "Category": "Food"
+  },
+  {
+    "Hebrew": "איזה מוזיקה אתה אוהב לשמוע?",
+    "Arabic": "أي موسيقى بتحب تسمع؟",
+    "Taatik": "אי מוסיקא בתחב תסמע?",
+    "Category": "Music"
+  },
+  {
+    "Hebrew": "איזה הופעה של זמר/להקה הכי היית רוצה לראות?",
+    "Arabic": "حفلة أي مغني/ة او فرقة بتحب تحضرها ؟",
+    "Taatik": "חפלה אי מע'ני/ה או פרקה בתחב תחצ'רהא ?",
+    "Category": "Music"
+  },
+  {
+    "Hebrew": "על איזה כלי נגינה היית רוצה לנגן? (גיטרה/פסנתר/תופים…)",
+    "Arabic": "على أي آلة عزف جاي على بالك تعزف؟ (چيتارة/ بيانو/ طبول …)",
+    "Taatik": "עלא אי אٓלה עזף ג'אי עלא באלכ תעזפ? (چיתארה/ ביאנו/ טבול …)",
+    "Category": "Music"
+  },
+  {
+    "Hebrew": "מה אתה אוהב לראות בטלוויזיה?",
+    "Arabic": "شو بتحب تحضر في التلفزيون؟",
+    "Taatik": "שו בתחב תחצ'ר פי אלתלפזיונ?",
+    "Category": "Music"
+  },
+  {
+    "Hebrew": "האם יש סדרות זרות שאתה אוהב ובאיזו שפה? (אנגלית/ספרדית/טורקית/קוריאנית/יפנית…)",
+    "Arabic": "في مسلسلات اجنبية معينة بتحبها؟ وبأي لغة؟ (انجليزي, اسباني, تركي, كوري, ياباني..)",
+    "Taatik": "פי מסלסלאת אג'נביה מעינה בתחבהא? ובאי לע'ה? (אנג'ליזי, אסבאני, תרכי, כורי, יאבאני..)",
+    "Category": "Movies & TV"
+  },
+  {
+    "Hebrew": "סרטים או סדרות טלוויזיה?",
+    "Arabic": "أفلام او مسلسلات بالتلفزيون؟",
+    "Taatik": "אפלאם או מסלסלאת באלתלפזיונ?",
+    "Category": "Movies & TV"
+  },
+  {
+    "Hebrew": "איזה סוג סרטים אתה הכי אוהב? (קומדיה,דרמה,אימה,אקשן…)",
+    "Arabic": "شو اكثر نوع أفلام بتحب؟ (كوميدية, دراما, رعب, اكشن..)",
+    "Taatik": "שו אכת'ר נוע אפלאם בתחב? (כומידיה, דראמא, רעב, אכשן..)",
+    "Category": "Movies & TV"
+  },
+  {
+    "Hebrew": "מה הסרט האהוב עליך?",
+    "Arabic": "شو هو فيلمك المفضل؟",
+    "Taatik": "שו הו פילמכ  אלמפצ'ל?",
+    "Category": "Movies & TV"
+  },
+  {
+    "Hebrew": "תן דוגמא של שחקן קולנוע או בטלוויזיה שאתה מאוד אוהב?",
+    "Arabic": "اعطي مثال لممثل سينمائي (بالافلام) او تلفزيوني (بالمسلسلات) كثير بتحبه؟",
+    "Taatik": "אעטי מת'אל לממת'ל סינמאאי (באלאפלאמ) או תלפזיוני (באלמסלסלאת) כת'יר בתחבה?",
+    "Category": "Movies & TV"
+  },
+  {
+    "Hebrew": "תן שם של ספר שמאוד אהבת- מהילדות או מהשנים האחרונות",
+    "Arabic": "اعطي اسم كتاب اللي كثير حبيته بالفترة الاخيرة او بطفولتك",
+    "Taatik": "אעטי אסם כתאב אללי כת'יר חביתה באלפתרה אלאח'ירה או בטפולתכ",
+    "Category": "Books"
+  },
+  {
+    "Hebrew": "כמה אחים ואחיות יש לך?",
+    "Arabic": "كم اخ واخت عندك؟",
+    "Taatik": "כם אח' ואח'ת ענדכ?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "איזה אוכל אתם אוכלים בדרך כלל בארוחות משפחתיות?",
+    "Arabic": "اي اكلات عادة بتوكلوا بالمناسبات العائلية؟",
+    "Taatik": "אי אכלאת עאדה בתוכלוא באלמנאסבאת אלעאאליה?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "אתה בא ממשפחה מסורתית/דתית או לא?",
+    "Arabic": "عيلتك محافظة( بتحافظ على العادات والتقاليد) او متدينة ولا لا؟",
+    "Taatik": "עילתכ מחאפט'ה( בתחאפט' עלא אלעאדאת ואלתקאליד) או מתדינה ולא לא?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "מה גודל המשפחה האידיאלית? (מספר הילדים)",
+    "Arabic": "شو برايك حجم العيلة المثالي؟ (عدد الاولاد)",
+    "Taatik": "שו בראיכ חג'ם אלעילה אלמת'אלי? (עדד אלאולאד)",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "איך היית קורא לילדים שלך?",
+    "Arabic": "شو كنت بتسمي اولادك؟",
+    "Taatik": "שו כנת בתסמי אולאדכ?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "איזה סיפורים סיפרו לך ההורים שלך שהיית קטן?",
+    "Arabic": "شو في قصص اهلك حكولك اياها لما كنت صغير؟",
+    "Taatik": "שו פי קצצ אהלכ חכולכ איאהא למא כנת צע'יר?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "מה אתה אוהב לעשות עם החברים והמשפחה?",
+    "Arabic": "شو بتحب تعمل مع عيلتك واصحابك؟",
+    "Taatik": "שו בתחב תעמל מע עילתכ ואצחאבכ?",
+    "Category": "Family"
+  },
+  {
+    "Hebrew": "אם אתה עובד- מה אתה אוהב בעבודה שלך ומה אתה לא אוהב?",
+    "Arabic": "بتشتغل؟ شو بتحب بشغلك وشو بتحبش؟",
+    "Taatik": "בתשתע'ל? שו בתחב בשע'לכ ושו בתחבש?",
+    "Category": "Work"
+  },
+  {
+    "Hebrew": "באיזה עבודה היית רוצה לעבוד?",
+    "Arabic": "بأي شغل كنت بتحب تشتغل؟",
+    "Taatik": "באי שע'ל כנת בתחב תשתע'ל?",
+    "Category": "Work"
+  },
+  {
+    "Hebrew": "באיזה עבודה לא היית רוצה לעבוד?",
+    "Arabic": "باي شغل مكنتش بتشتغل؟",
+    "Taatik": "באי שע'ל מכנתש בתשתע'ל?",
+    "Category": "Work"
+  },
+  {
+    "Hebrew": "האם יש ספורט שאתה אוהב לעשות? איזה?",
+    "Arabic": "في نوع رياضة بتحب تمارسها؟ اذا اه, اي نوع؟",
+    "Taatik": "פי נוע ריאצ'ה בתחב תמארסהא? אד'א אה, אי נוע?",
+    "Category": "Sport"
+  },
+  {
+    "Hebrew": "איזה ספורט אתה אוהב לראות?",
+    "Arabic": "شو نوع الرياضة اللي بتحب تتابعها؟",
+    "Taatik": "שו נוע אלריאצ'ה אללי בתחב תתאבעהא?",
+    "Category": "Sport"
+  },
+  {
+    "Hebrew": "איזה קבוצה או שחקן ספורט אתה אוהב?",
+    "Arabic": "اي فريق او لاعب بتحب؟",
+    "Taatik": "אי פריק או לאעב בתחב?",
+    "Category": "Sport"
+  }
+]
+const dataSimple = JSON.parse(JSON.stringify(dataJsonSimple))
