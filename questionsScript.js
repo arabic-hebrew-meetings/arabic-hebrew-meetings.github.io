@@ -141,7 +141,7 @@ function displayContent(cur, i, category) {
 	nextButton = getNextButton(cur, category);
 	prevButton = getPrevButton(cur, category);
 	content = getContentRectWithSpecificOrder();
-	document.getElementById("button-and-text").innerHTML =  nextButton + content + prevButton;
+	document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
 	displayContentBySpecificOrder(i, category);
 }
 
