@@ -64,7 +64,8 @@ function displayContent(cur, i) {
 
 function getContentRectWithSpecificOrder() {
 	content = `<div class="rectangle rtl">
-                <h2 class="rtl" id="language"></h2>
+                <h2 class="rtl" id="language1"></h2>
+				<h2 class="rtl" id="language2"></h2>
 		<h1 class="rtl" id="letter"></h1>
 		<h2><br>הקטגוריות - الفئات:</h2>
 		<h2>ארץ - עיר - חי - צומח - דומם - שם - מקצוע - אישיות</h2>
@@ -75,16 +76,20 @@ function getContentRectWithSpecificOrder() {
 
 function displayContentWithSpecificOrder(i) {
 	if (i < hebrewLetters.length) {
-		document.getElementById("language").innerHTML = hebrewLetterText;
+		document.getElementById("language1").innerHTML = hebrewLetterText1;
+		document.getElementById("language2").innerHTML = hebrewLetterText2;
 		document.getElementById("letter").innerHTML = hebrewLetters[i];
 	} else {
 		
-		document.getElementById("language").innerHTML = arabicLetterText;
+		document.getElementById("language1").innerHTML = arabicLetterText1;
+		document.getElementById("language2").innerHTML = arabicLetterText2;
 		document.getElementById("letter").innerHTML = arabicLetters[i-hebrewLetters.length];
 	}
 }
 
-const hebrewLetterText = "קיבלתם את האות בעברית - طلعلكم الحرف بالعبراني:"
-const arabicLetterText = "קיבלתם את האות בערבית - طلعلكم الحرف بالعربي:"
+const hebrewLetterText1 = "קיבלתם את האות בעברית:"
+const hebrewLetterText2 = "طلعلكم الحرف بالعبراني:"
+const arabicLetterText1 = "קיבלתם את האות בערבית:"
+const arabicLetterText2 = "طلعلكم الحرف بالعربي:"
 const hebrewLetters = [`א`,`ב`,`ג`,`ד`,`ה`,`ו`,`ז`,`ח`,`ט`,`י`,`כ`,`ל`,`מ`,`נ`,`ס`,`ע`,`פ`,`צ`,`ק`,`ר`,`ש`,`ת`]
 const arabicLetters = [`أ (א)`,`ب (ב)`,`ت (ת)`,`ث (ת')`,`ج (ג')`,`ح (ח)`,`خ (ח')`,`د (ד)`,`ذ (ד')`,`ر (ר)`,`ز (ז)`,`س (ס)`,`ش (ש)`,`ص (צ)`,`ض (צ')`,`ط (ט)`,`ظ (ט')`,`ع (ע)`,`غ (ע')`,`ف (פ)`,`ق (ק)`,`ك (כ)`,`ل (ל)`,`م (מ)`,`ن (נ)`,`ه (ה)`,`و (ו)`,`ي (י)`]
