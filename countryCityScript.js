@@ -4,7 +4,13 @@ function getNext(){
 	cur++;
 	if (cur === past.length) {
 		while (true) {
-        var i = Math.floor(Math.random() * (hebrewLetters.length+arabicLetters.length));
+		var i = 0;	
+		if 	((cur < (hebrewLetters.length*2)) && ((cur%2) === 0)) {
+			i = Math.floor(Math.random() * hebrewLetters.length);
+		} else {
+			i = Math.floor(Math.random() * arabicLetters.length);
+			i = i + hebrewLetters.length;
+		}			
         var found = false;
         for (j = 0; j < past.length; j++) {
             if (i == past[j]) {
