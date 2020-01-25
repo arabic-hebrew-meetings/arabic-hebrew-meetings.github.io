@@ -231,7 +231,7 @@ function getSong(lang, i){
 	
 	var urlStr = ``
 	if (url !== ``) {
-		urlStr = `<h2><a href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
+		urlStr = `<h2><a target="_blank" href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
 	}
 	
 	var sections = 0;
