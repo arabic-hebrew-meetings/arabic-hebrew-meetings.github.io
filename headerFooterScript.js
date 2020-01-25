@@ -30,6 +30,7 @@ function getHeader(){
 		  <li><a href="sayings.html">פתגמים  -  امثال</a></li>
           <li><a href="fastest.html">הזוג הכי מהיר  -   أسرع اثنين</a></li>
           <li><a href="truth-or-lie.html">אמת או שקר  -  صدق او كذب</a></li>
+		  <li><a href="wind.html">הרוח נושבת  -  تهب الريح</a></li>
           </ul>
         </li>
 		<li><a href="index.html">בית &nbsp بيت</a></li>
