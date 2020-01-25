@@ -265,5 +265,6 @@ function getSong(lang, i){
 		</div>`;
 	document.getElementById("song").innerHTML = songStr;
 	console.log("getSong End");
+	window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
