@@ -380,9 +380,12 @@ padding: 20px 20px 20px 20px;
 /* Medium devices (landscape tablets, 768px and up) */
 @media screen and (min-width: 768px) {
   .my-square {
-		width: 23%;
-		padding-bottom: 23%; /* = width for a 1:1 aspect ratio */
-		margin:1%;
+		width: 30%;
+		/* maybe width: 23%; */
+		padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
+		/* maybe padding-bottom: 23%; */
+		margin:1.66%;
+		/* maybe margin: 1%; */
 	  }
 } 
 
@@ -404,3 +407,8 @@ padding: 20px 20px 20px 20px;
 	  }
 }
 
+@media (min-width: 768px) and (max-width: 1000px) {
+   .collapse {
+       display: none !important;
+   }
+}
