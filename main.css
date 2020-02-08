@@ -11,7 +11,6 @@ body {
 }
 
 .jumbotron1 {
-  display: flex;
   align-items: center;
   background-color : white ;
   padding-top:50px;
@@ -26,9 +25,9 @@ body {
 }
 
 .jumbotron1 h2 {
-  font-size: 60px;
+  font-size: 40px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-right: 20px;
   color: black;
 }
 
@@ -195,8 +194,7 @@ footer li img {
   
 .navbar-custom .navbar-nav > li > a {
   	color:#fff;
-	margin-right: 20px;
-	font-size: 25px;
+	font-size: 30px;
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
   background-color: #33aa33;
@@ -283,10 +281,8 @@ footer li img {
 }
 
 .myimg {
-	max-width: 90%;
-	max-height: 100%;
-	 height: 50%;
-  width: 50%;
+	 height: 100%;
+  width: 100%;
 }
 
 .btn-xl {
@@ -350,3 +346,44 @@ padding: 20px 20px 20px 20px;
   color: #229922 !important;
 }
 
+.row-no-margin {
+   margin-left: 0px !important;
+   margin-right: 0px !important;
+} 
+
+.my-square {
+    float:left;
+	position: relative;
+    width: 18%;
+    padding-bottom: 18%; /* = width for a 1:1 aspect ratio */
+    margin:1%;
+    background-color: #1E1E1E;
+	overflow:hidden;
+}
+
+.my-square-content {
+    position:absolute;
+    height:100%;
+    width:100%;
+}
+
+.empty-square {
+	background-color : white !important;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

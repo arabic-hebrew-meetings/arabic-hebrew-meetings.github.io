@@ -2,17 +2,8 @@ function getHeader(){
 	console.log("getHeader Start");
 	document.getElementById("header").innerHTML = `<div class="container-fluid">
   <ul class="nav navbar-nav navbar-left">
-  <li><a href="phrases.html">שיחון &nbsp عبارات شائعة</a></li>
+  <li><a href="index.html">מפגשי ערבית-עברית &nbsp لقاﺀات عربي-عبري</a></li>
   </ul>
-    <div class="navbar-header pull-right">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand active">מפגשי ערבית עברית</div>
-    </div>
     <div class="collapse navbar-collapse pull-right">
       <ul class="nav navbar-nav pull-right">
         <li class="dropdown rtl">
@@ -33,7 +24,6 @@ function getHeader(){
 		  <li><a href="wind.html">הרוח נושבת  -  تهب الريح</a></li>
           </ul>
         </li>
-		<li><a href="index.html">בית &nbsp بيت</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div>`;
@@ -63,4 +53,130 @@ function getStartActivity() {
 		  <span class="glyphicon glyphicon-play my-activity-button"></span>
         </a>
 		</div>`;
+}
+
+function getActivitiesCarousel() {
+	document.getElementById("activities-carousel").innerHTML = `<div class="fade-in">
+	<div class="my-square">
+	<div class="my-square-content box color1">
+                <div class="img-hover-zoom--brightness">
+ <a href="questions.html">
+  <img class="myimg" src="questions.png">
+  </a>
+</div>
+		</div>
+    </div>
+    <div class="my-square">
+        <div class="my-square-content box color2">
+		<div class="img-hover-zoom--brightness">
+  <a href="discussions.html">
+  <img class="myimg" src="debates.png">
+  </a>
+</div>
+		</div>
+    </div>
+    <div class="my-square ">
+        <div class="my-square-content box color3">
+		<div class="img-hover-zoom--brightness">
+  <a href="21questions.html">
+  <img class="myimg" src="famous.png">
+  </a>
+</div>
+		</div>
+    </div>
+    <div class="my-square ">
+        <div class="my-square-content box color4">
+		<div class="img-hover-zoom--brightness">
+  <a href="story.html">
+  <img class="myimg" src="story.png">
+  </a>
+</div>
+		</div>
+    </div>
+    <div class="my-square">
+        <div class="my-square-content box color5">
+		<div class="img-hover-zoom--brightness">
+  <a href="songs.html">
+  <img class="myimg" src="songs.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color6">
+		<div class="img-hover-zoom--brightness">
+  <a href="countryCity.html">
+  <img class="myimg" src="countryCity.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color1">
+		<div class="img-hover-zoom--brightness">
+  <a href="jokes.html">
+  <img class="myimg" src="jokes.png">
+  </a>
+</div>
+		</div>
+    </div>
+		<div class="my-square">
+        <div class="my-square-content box color2">
+		<div class="img-hover-zoom--brightness">
+  <a href="picture.html">
+  <img class="myimg" src="photos.png">
+  </a>
+</div>
+		</div>
+    </div>
+		<div class="my-square">
+        <div class="my-square-content box color3">
+		<div class="img-hover-zoom--brightness">
+  <a href="slang.html">
+  <img class="myimg" src="slang.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color4">
+		<div class="img-hover-zoom--brightness">
+  <a href="sayings.html">
+  <img class="myimg" src="sayings.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color5">
+		<div class="img-hover-zoom--brightness">
+  <a href="fastest.html">
+  <img class="myimg" src="fastest.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color6">
+		<div class="img-hover-zoom--brightness">
+  <a href="truth-or-lie.html">
+  <img class="myimg" src="truthorlie.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square">
+        <div class="my-square-content box color1">
+		<div class="img-hover-zoom--brightness">
+  <a href="wind.html">
+  <img class="myimg" src="wind.png">
+  </a>
+</div>
+		</div>
+    </div>
+	<div class="my-square empty-square">
+    </div>
+	<div class="my-square empty-square">
+    </div>
+	</div>`;
 }
