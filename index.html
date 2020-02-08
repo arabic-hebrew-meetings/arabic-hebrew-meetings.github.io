@@ -3,147 +3,26 @@
 <head>
   <title>פעילויות למפגשי ערבית-עברית</title>
   <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 <body>
 <script src="headerFooterScript.js"></script>
+<script src="indexScript.js"></script>
 <nav class="navbar navbar-custom navbar-fixed-top" id="header">
 </nav>
 <script> 
 		getHeader();
 </script> 
-  <section class="jumbotron1">
-    <div class="container">
-    	<div class="row text-center">
-		<h1>מפגשי ערבית-עברית</h1>
-		<h1>لقاﺀات عربي-عبري</h1>
-		<h3>בחרו בפעילות עם חברי הקבוצה שלכם  -  اختاروا فعاليات مع مجموعتكم</h3>
-        <h3>לכל פעילות מצורף גם הסבר  -  لكل فعالية في شرح عنها</h3>
-		<h3>(: !אז יאללה כנסו ותהנו! - يلا فوتو عالموقع وانبسطو</h3>
-		<div class="container">
-<div class="row">
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color1">
-		<div class="img-hover-zoom--brightness">
- <a href="questions.html">
-  <img class="myimg" src="questions.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color2">
-		<div class="img-hover-zoom--brightness">
-  <a href="discussions.html">
-  <img class="myimg" src="debates.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color3">
-		<div class="img-hover-zoom--brightness">
-  <a href="21questions.html">
-  <img class="myimg" src="famous.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color4">
-		<div class="img-hover-zoom--brightness">
-  <a href="story.html">
-  <img class="myimg" src="story.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color5">
-		<div class="img-hover-zoom--brightness">
-  <a href="songs.html">
-  <img class="myimg" src="songs.png">
-  </a>
-</div>
-		</div>
-    </div>
-	<div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color6">
-		<div class="img-hover-zoom--brightness">
-  <a href="countryCity.html">
-  <img class="myimg" src="countryCity.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color1">
-		<div class="img-hover-zoom--brightness">
-  <a href="jokes.html">
-  <img class="myimg" src="jokes.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color2">
-		<div class="img-hover-zoom--brightness">
-  <a href="picture.html">
-  <img class="myimg" src="photos.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color3">
-		<div class="img-hover-zoom--brightness">
-  <a href="slang.html">
-  <img class="myimg" src="slang.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color4">
-		<div class="img-hover-zoom--brightness">
-  <a href="sayings.html">
-  <img class="myimg" src="sayings.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color5">
-		<div class="img-hover-zoom--brightness">
-  <a href="fastest.html">
-  <img class="myimg" src="fastest.png">
-  </a>
-</div>
-		</div>
-    </div>
-    <div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color6">
-		<div class="img-hover-zoom--brightness">
-  <a href="truth-or-lie.html">
-  <img class="myimg" src="truthorlie.png">
-  </a>
-</div>
-		</div>
-    </div>
-	<div class="col-lg-3 col-md-3 col-xs-6 ">
-        <div class="box color1">
-		<div class="img-hover-zoom--brightness">
-  <a href="wind.html">
-  <img class="myimg" src="wind.png">
-  </a>
-</div>
-		</div>
-    </div>
-</div></div>
-      </div>
+  <section class="jumbotron1 rtl">
+		<h2>בחרו פעילות - اختاروا فعالية:</h2>
+<div id="activities-carousel">
 	</div>
+	<script> 
+		getActivitiesCarousel();
+</script> 
   </section>
   <footer class="container-fluid" id="footer">
   </footer>
