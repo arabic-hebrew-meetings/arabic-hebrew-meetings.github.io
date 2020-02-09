@@ -38,7 +38,7 @@ function getHeader(){
 
 function getFooter(){
 	console.log("getFooter Start");
-	document.getElementById("footer").innerHTML = `נבנה ע"י רועי נחמיאס  2016-2020 &copy;`;
+	document.getElementById("footer").innerHTML = `נבנה ע"י רועי נחמיאס  2020-2016 &copy;`;
 	console.log("getFooter End");
 }
 
