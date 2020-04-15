@@ -1,5 +1,4 @@
 function getHeader(page){
-	saveAction(page, "open_page");
 	document.getElementById("header").innerHTML = `  <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
