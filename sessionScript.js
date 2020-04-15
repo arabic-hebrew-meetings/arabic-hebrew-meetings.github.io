@@ -27,11 +27,11 @@ function saveAction(sessionId, siteLocation, action){
 
 function createSessionId() {
 	console.log("createSessionId");
-	console.log(readCookie('sessionId'););
+	console.log(readCookie('sessionId'));
 	var sessionId = guid();
 	console.log(sessionId);
 	writeCookie('sessionId',guid(),365);
-	console.log(readCookie('sessionId'););
+	console.log(readCookie('sessionId'));
 	console.log(sessionId);
 }
 
