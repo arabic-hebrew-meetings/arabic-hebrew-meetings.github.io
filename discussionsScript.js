@@ -1,6 +1,7 @@
 var past = [];
 var cur = -1;
 function getNext(){
+	saveAction(getSessionId(), "discussions", "getNext");
 	cur++;
 	if (cur === past.length) {
 		while (true) {
