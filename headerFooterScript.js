@@ -8,26 +8,26 @@ function getHeader(page){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" onclick='openUrl(page, "header", "index.html")'>מפגשי ערבית-עברית &nbsp لقاﺀات عربي-عبري</a>
+      <a class="navbar-brand" onclick='openUrl(`+page+`, "header", "index.html")'>מפגשי ערבית-עברית &nbsp لقاﺀات عربي-عبري</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown rtl">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">פעילויות &nbsp فعاليات <b class="caret"></b></a>
           <ul class="dropdown-menu dropdown-menu-right" style="text-align: right">
-            <li><a onclick='openUrl(page, "header", "questions.html")'>שואלים אחד את השני  -   منسأل بعض</a></li>
-		  <li><a onclick='openUrl(page, "header", "discussions.html")'>מועדון דיבייט  -   نادي النقاش</a></li>
-		  <li><a onclick='openUrl(page, "header", "21questions.html")'>מפורסמים  -  مشاهير</a></li>
-		  <li><a onclick='openUrl(page, "header", "story.html")'>בונים ביחד סיפור  -  نبني مع بعض قصة</a></li>
-		  <li><a onclick='openUrl(page, "header", "songs.html")'>שירים - اغاني</a></li>
-          <li><a onclick='openUrl(page, "header", "countryCity.html")'>ארץ עיר  -   إنسان حيوان نبات</a></li>
-		  <li><a onclick='openUrl(page, "header", "jokes.html")'>בדיחות  -  نكت</a></li>
-		  <li><a onclick='openUrl(page, "header", "picture.html")'>היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
-		  <li><a onclick='openUrl(page, "header", "slang.html")'>סלנג - مصطلحات عامية</a></li>
-		  <li><a onclick='openUrl(page, "header", "sayings.html")'>פתגמים  -  امثال</a></li>
-          <li><a onclick='openUrl(page, "header", "fastest.html")'>הזוג הכי מהיר  -   أسرع اثنين</a></li>
-          <li><a onclick='openUrl(page, "header", "truth-or-lie.html")'>אמת או שקר  -  صدق او كذب</a></li>
-		  <li><a onclick='openUrl(page, "header", "wind.html")'>הרוח נושבת  -  تهب الريح</a></li>
+            <li><a onclick='openUrl(`+page+`, "header", "questions.html")'>שואלים אחד את השני  -   منسأل بعض</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "discussions.html")'>מועדון דיבייט  -   نادي النقاش</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "21questions.html")'>מפורסמים  -  مشاهير</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "story.html")'>בונים ביחד סיפור  -  نبني مع بعض قصة</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "songs.html")'>שירים - اغاني</a></li>
+          <li><a onclick='openUrl(`+page+`, "header", "countryCity.html")'>ארץ עיר  -   إنسان حيوان نبات</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "jokes.html")'>בדיחות  -  نكت</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "picture.html")'>היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "slang.html")'>סלנג - مصطلحات عامية</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "sayings.html")'>פתגמים  -  امثال</a></li>
+          <li><a onclick='openUrl(`+page+`, "header", "fastest.html")'>הזוג הכי מהיר  -   أسرع اثنين</a></li>
+          <li><a onclick='openUrl(`+page+`, "header", "truth-or-lie.html")'>אמת או שקר  -  صدق او كذب</a></li>
+		  <li><a onclick='openUrl(`+page+`, "header", "wind.html")'>הרוח נושבת  -  تهب الريح</a></li>
           </ul>
         </li>
       </ul>
