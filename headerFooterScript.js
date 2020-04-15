@@ -55,7 +55,7 @@ function saveAction(siteLocation, action, params){
 	if (params != null) {
 		paramsStr = JSON.stringify(params);
 	}
-	var sessionId = getSessionId();
+	var sessionId = getSessionId(siteLocation);
             $.ajax({
             url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc80anqYMA0tJUUe6VTZ6AqIWT5METAW_by6iZaw0XrVsCLJQ/formResponse",
             data: {
@@ -77,14 +77,15 @@ function saveAction(siteLocation, action, params){
         });
 }
 
-function createSessionId() {
+function createSessionId(siteLocation) {
 	writeCookie('sessionId',guid(),365);
+	saveAction(siteLocation, "new_user");
 }
 
-function getSessionId() {
+function getSessionId(siteLocation) {
 	var sessionId = readCookie('sessionId');
 	if (sessionId=="") {
-		createSessionId();
+		createSessionId(siteLocation);
 	}
 	sessionId = readCookie('sessionId');
 	return sessionId;
