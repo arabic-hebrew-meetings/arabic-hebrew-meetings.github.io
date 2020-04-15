@@ -193,6 +193,7 @@ footer {
 }
       
 .navbar-custom .navbar-brand {
+	cursor: pointer;
   	color:#eeeeee;
 	font-size: 3vw;
 }
