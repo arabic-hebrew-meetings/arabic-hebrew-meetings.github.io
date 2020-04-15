@@ -47,6 +47,7 @@ function getSessionId() {
 }
 
 function writeCookie(name,value,days) {
+	console.log("writeCookie");
     var date, expires;
     if (days) {
         date = new Date();
@@ -55,21 +56,37 @@ function writeCookie(name,value,days) {
             }else{
         expires = "";
     }
+	console.log(name);
+	console.log(value);
+	console.log(date);
+	console.log(expires);
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
 function readCookie(name) {
+	console.log("readCookie");
     var i, c, ca, nameEQ = name + "=";
     ca = document.cookie.split(';');
+	console.log(nameEQ);
+	console.log(ca);
     for(i=0;i < ca.length;i++) {
         c = ca[i];
+		console.log(i);
+		console.log(c);
         while (c.charAt(0)==' ') {
+			console.log("while");
+			console.log(c.length);
             c = c.substring(1,c.length);
+			console.log(c)
         }
         if (c.indexOf(nameEQ) == 0) {
+			console.log("if")
+			console.log(nameEQ.length)
+			console.log(c.length)
             return c.substring(nameEQ.length,c.length);
         }
     }
+	console.log("finish for")
     return '';
 }
 
