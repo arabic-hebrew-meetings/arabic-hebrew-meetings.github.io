@@ -77,6 +77,7 @@ function pushToPastByCategory(category, i) {
 
 function getNext(category){
 	cur = getCurByCategory(category);
+	saveAction("questions", "getNext", {cur: cur, category: category});
 	console.log(cur)
 	past = getPastByCategory(category);
 	dataJson = getDataJsonByCategory(category);
@@ -104,6 +105,7 @@ function getNext(category){
 
 function getPrev(category){
 	cur = getCurByCategory(category);
+	saveAction("questions", "getPrev", {cur: cur, category: category});
 	console.log(cur)
 	past = getPastByCategory(category);
 	cur = decrementCurByCategory(category);

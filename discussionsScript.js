@@ -1,8 +1,8 @@
 var past = [];
 var cur = -1;
 function getNext(){
-	saveAction(getSessionId(), "discussions", "getNext");
 	cur++;
+	saveAction("discussions", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
         var i = Math.floor(Math.random() * dataJson.length);
@@ -26,6 +26,7 @@ function getNext(){
 
 function getPrev(){
 	cur--;
+	saveAction("discussions", "getPrev", {cur: cur});
 	i = past[cur];
 	displayContent(cur, i);	
 }

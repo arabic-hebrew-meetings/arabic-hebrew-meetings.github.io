@@ -164,6 +164,7 @@ function getAllSongs(){
 }
 
 function getSong(lang, i){
+	saveAction("songs", "getSong", {lang: lang, i: i});
 	console.log("getSong Start");
 	
 	var songs = {};

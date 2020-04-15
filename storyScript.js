@@ -2,6 +2,7 @@ var past = [];
 var cur = -1;
 function getNext(){
 	cur++;
+	saveAction("story", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
         var i = Math.floor(Math.random() * dataJson.length);
@@ -25,6 +26,7 @@ function getNext(){
 
 function getPrev(){
 	cur--;
+	saveAction("story", "getPrev", {cur: cur});
 	i = past[cur];
 	displayContent(cur, i);	
 }

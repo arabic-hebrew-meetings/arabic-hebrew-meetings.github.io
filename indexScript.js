@@ -5,7 +5,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
 	<div class="my-square-content box color1">
                 <div class="img-hover-zoom--brightness">
- <a href="questions.html">
+ <a onclick='openUrl("homepage", "carousel", "questions.html")'>
   <img class="myimg" src="questions.png">
   </a>
 </div>
@@ -14,7 +14,7 @@ function getActivitiesCarousel() {
     <div class="my-square">
         <div class="my-square-content box color2">
 		<div class="img-hover-zoom--brightness">
-  <a href="discussions.html">
+  <a onclick='openUrl("homepage", "carousel", "discussions.html")'>
   <img class="myimg" src="debates.png">
   </a>
 </div>
@@ -23,7 +23,7 @@ function getActivitiesCarousel() {
     <div class="my-square ">
         <div class="my-square-content box color3">
 		<div class="img-hover-zoom--brightness">
-  <a href="21questions.html">
+  <a onclick='openUrl("homepage", "carousel", "21questions.html")'>
   <img class="myimg" src="famous.png">
   </a>
 </div>
@@ -32,7 +32,7 @@ function getActivitiesCarousel() {
     <div class="my-square ">
         <div class="my-square-content box color4">
 		<div class="img-hover-zoom--brightness">
-  <a href="story.html">
+  <a onclick='openUrl("homepage", "carousel", "story.html")'>
   <img class="myimg" src="story-updated.png">
   </a>
 </div>
@@ -41,7 +41,7 @@ function getActivitiesCarousel() {
     <div class="my-square">
         <div class="my-square-content box color5">
 		<div class="img-hover-zoom--brightness">
-  <a href="songs.html">
+  <a onclick='openUrl("homepage", "carousel", "songs.html")'>
   <img class="myimg" src="songs.png">
   </a>
 </div>
@@ -50,7 +50,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color6">
 		<div class="img-hover-zoom--brightness">
-  <a href="countryCity.html">
+  <a onclick='openUrl("homepage", "carousel", "countryCity.html")'>
   <img class="myimg" src="countryCity-new.png">
   </a>
 </div>
@@ -59,7 +59,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color1">
 		<div class="img-hover-zoom--brightness">
-  <a href="jokes.html">
+  <a onclick='openUrl("homepage", "carousel", "jokes.html")'>
   <img class="myimg" src="jokes.png">
   </a>
 </div>
@@ -68,7 +68,7 @@ function getActivitiesCarousel() {
 		<div class="my-square">
         <div class="my-square-content box color2">
 		<div class="img-hover-zoom--brightness">
-  <a href="picture.html">
+  <a onclick='openUrl("homepage", "carousel", "picture.html")'>
   <img class="myimg" src="photos.png">
   </a>
 </div>
@@ -77,7 +77,7 @@ function getActivitiesCarousel() {
 		<div class="my-square">
         <div class="my-square-content box color3">
 		<div class="img-hover-zoom--brightness">
-  <a href="slang.html">
+  <a onclick='openUrl("homepage", "carousel", "slang.html")'>
   <img class="myimg" src="slang.png">
   </a>
 </div>
@@ -86,7 +86,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color4">
 		<div class="img-hover-zoom--brightness">
-  <a href="sayings.html">
+  <a onclick='openUrl("homepage", "carousel", "sayings.html")'>
   <img class="myimg" src="sayings.png">
   </a>
 </div>
@@ -95,7 +95,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color5">
 		<div class="img-hover-zoom--brightness">
-  <a href="fastest.html">
+  <a onclick='openUrl("homepage", "carousel", "fastest.html")'>
   <img class="myimg" src="fastest.png">
   </a>
 </div>
@@ -104,7 +104,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color6">
 		<div class="img-hover-zoom--brightness">
-  <a href="truth-or-lie.html">
+  <a onclick='openUrl("homepage", "carousel", "truth-or-lie.html")'>
   <img class="myimg" src="truthorlie.png">
   </a>
 </div>
@@ -113,7 +113,7 @@ function getActivitiesCarousel() {
 	<div class="my-square">
         <div class="my-square-content box color1">
 		<div class="img-hover-zoom--brightness">
-  <a href="wind.html">
+  <a onclick='openUrl("homepage", "carousel", "wind.html")'>
   <img class="myimg" src="wind-new.png">
   </a>
 </div>

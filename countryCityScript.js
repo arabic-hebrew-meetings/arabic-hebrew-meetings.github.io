@@ -2,6 +2,7 @@ var past = [];
 var cur = -1;
 function getNext(){
 	cur++;
+	saveAction("countryCity", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
 		var i = 0;	
@@ -31,6 +32,7 @@ function getNext(){
 
 function getPrev(){
 	cur--;
+	saveAction("countryCity", "getPrev", {cur: cur});
 	i = past[cur];
 	displayContent(cur, i);	
 }
