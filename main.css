@@ -412,4 +412,98 @@ padding: 20px 20px 20px 20px;
   padding-top:2vw;
 }
 
+.select-ctr {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  font-family: "Roboto";
+  text-align: center;
+}
+.select-ctr > div {
+  padding: 15px 20px;
+  position: absolute;
+  width: 100%;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
 
+.select-ctr .input-6 {
+  top: 108%;
+}
+
+.select-ctr .input-5 {
+  top: 90%;
+}
+.select-ctr .input-4 {
+  top: 72%;
+}
+.select-ctr .input-3 {
+  top: 54%;
+}
+.select-ctr .input-2 {
+  top: 36%;
+}
+.select-ctr .input-1 {
+  top: 18%;
+}
+.select-ctr > div.input {
+  background: white; /* color of options background */
+  color: black; /* color of options text */
+  border-radius: 2px;
+  box-shadow: 0 2px 15px 3px rgba(0, 0, 0, 0.1);
+  font-size: 200%;
+}
+.select-ctr > div.input.active { /* what is this? */
+  color: red;
+}
+.select-ctr > div.input-preview { /* question before clicking on it */
+  color: black;
+  position: relative;
+  transition: .3s all ease;
+  font-size: 200%;
+}
+.select-ctr > div.input-preview.active { /* question after clicking on it */
+  color: black;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+section.content {
+  flex: 1;
+}
+
+.room-url {
+	color: black;
+	text-decoration-line: none !important
+}
+
+.room-url:hover {
+	color: black;
+	text-decoration-line: none !important
+}
+
+.room-url:active {
+	color: black;
+	text-decoration-line: none !important
+}
+
+.room-url:focus {
+	color: black;
+	text-decoration-line: none !important
+}
+
+.room-url:visited {
+	color: black;
+	text-decoration-line: none !important
+}

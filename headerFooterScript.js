@@ -51,11 +51,19 @@ function getStartActivity() {
 }
 
 function saveAction(siteLocation, action, params){
+	doSaveAction(siteLocation, action, params, true, true);
+}
+
+function doSaveAction(siteLocation, action, params, createNewSessionIfNeeded, saveAlsoAnonymous){
 	var paramsStr = "";
 	if (params != null) {
 		paramsStr = JSON.stringify(params);
 	}
-	var sessionId = getSessionId(siteLocation);
+	var sessionId = getSessionId(siteLocation, createNewSessionIfNeeded);
+	if (sessionId == "") {
+		sessionId = "anonymous";
+	}
+	if (sessionId != "anonymous" || saveAlsoAnonymous) {
             $.ajax({
             url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSc80anqYMA0tJUUe6VTZ6AqIWT5METAW_by6iZaw0XrVsCLJQ/formResponse",
             data: {
@@ -75,19 +83,23 @@ function saveAction(siteLocation, action, params){
                 }
             }
         });
+	}
 }
 
 function createSessionId(siteLocation) {
 	writeCookie('sessionId',guid(),365);
-	saveAction(siteLocation, "new_user");
+	doSaveAction(siteLocation, "new_user", null, false, false);
 }
 
-function getSessionId(siteLocation) {
+function getSessionId(siteLocation, createNewSessionIfNeeded) {
 	var sessionId = readCookie('sessionId');
-	if (sessionId=="") {
+	if (createNewSessionIfNeeded && sessionId=="") {
 		createSessionId(siteLocation);
+		sessionId = readCookie('sessionId');
 	}
-	sessionId = readCookie('sessionId');
+	if (sessionId == "") {
+		sessionId = "anonymous";
+	}
 	return sessionId;
 }
 
