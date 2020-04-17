@@ -78,12 +78,9 @@ function doSomething() {
 	  
 	  if (data=="choose-native-language") {
 	  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>
-  <span class="one-line">מה היא שפת האם שלכם? - شو لغة الام تبعتكو؟</span>
-		<span class="two-lines">מה היא שפת האם שלכם?<br>شو لغة الام تبعتكو؟</span>
-  </div>
-  <div class='input input-1' data-val='Hebrew'>אני דובר עברית שפת אם</div>
-  <div class='input input-2' data-val='Arabic'>انا العربي هي لغتي الام</div>
+  <div class='selected-input input-preview'>מה היא שפת האם שלכם?<br>شو لغة الام تبعتكو؟</div>
+  <div class='input input-1' data-val='Hebrew'>עברית</div>
+  <div class='input input-2' data-val='Arabic'>عربي</div>
 </div>`;
 doSomething()
 	  }

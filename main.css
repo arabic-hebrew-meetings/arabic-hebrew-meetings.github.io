@@ -445,6 +445,40 @@ section.content {
 
 .two-lines { display: none; }
 
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row-2-columns {
+	display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+.right-col {
+	order:1;
+	position: relative;
+}
+
+.left-col {
+	order:2;
+	position: relative;
+    width:75%;
+}
+
+
+/* ------------------------------------------------Media Queries Section----------------------------------------------------- */
+
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
 	
@@ -662,6 +696,70 @@ footer {
 		margin:1%;
 	  }
 	  
+	   .select-ctr {
+		height: 0px;
+		margin-top: 0px;
+		width: 60%
+	}		
+	
+	.select-ctr > div.input-preview {
+		font-size: 30px;
+	}
+	
+	.select-ctr > div.input {
+		font-size: 30px;
+	}
+	
+	.select-ctr .input-1 {
+		top: 115px;
+	}
+	
+	.select-ctr .input-2 {
+		top: 200px;
+	}
+	
+	.select-ctr .input-3 {
+		top: 285px;
+	}
+	
+	.select-ctr .input-4 {
+		top: 370px;
+	}
+	
+	.select-ctr .input-5 {
+		top: 455px;
+	}
+	
+	.select-ctr .input-6 {
+		top: 540px;
+	}
+	
+	.headline {
+    font-size: 35px;
+	padding-top: 10px;
+}
+
+.main-div {
+	padding-top: 30px;
+}
+
+.flex-container {
+    min-height: 650px;
+}
+
+footer {
+    font-size: 25px;
+	margin-top: 10px;
+}
+
+	.right-col {
+		order:0;
+	}
+	
+	.left-col {
+		order:0;
+	}
+	  
 	  .two-lines { display: none; }
     .one-line { display: inline-block; }
 } 
@@ -677,3 +775,6 @@ footer {
 	  .two-lines { display: none; }
     .one-line { display: inline-block; }
 }
+
+
+
