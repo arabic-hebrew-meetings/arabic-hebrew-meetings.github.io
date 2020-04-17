@@ -8,7 +8,7 @@ function getHeader(page){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" onclick='openUrl("`+page+`", "header", "index.html")'>מפגשי ערבית-עברית &nbsp لقاﺀات عربي-عبري</a>
+      <a class="navbar-brand" onclick='openUrl("`+page+`", "header", "index.html")'>נפגשים לדבר &nbsp نلتقي لنحكي</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">

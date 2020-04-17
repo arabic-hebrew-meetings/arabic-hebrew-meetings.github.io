@@ -372,7 +372,7 @@ padding: 20px 20px 20px 20px;
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  width: 90%;
+  width: 60%;
   height: 70%;
   font-family: "Roboto";
   text-align: center;
@@ -473,7 +473,7 @@ section.content {
 .left-col {
 	order:2;
 	position: relative;
-    width:75%;
+	width:100%;
 }
 
 
@@ -489,7 +489,7 @@ section.content {
 	  }
 	
 	.navbar-custom .navbar-brand {
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .navbar-custom .navbar-nav > li > a {
@@ -501,12 +501,13 @@ section.content {
 }
 
 .navbar-nav .open .dropdown-menu>li>a {
-    line-height: 25px;
+    line-height: 25px !important;
 }
 	
 	 .select-ctr {
 		height: 0px;
 		margin-top: 10px;
+		width: 99%
 	}		
 	
 	.select-ctr > div.input-preview {
@@ -590,6 +591,7 @@ footer {
 	 .select-ctr {
 		height: 0px;
 		margin-top: 10px;
+		width: 99%
 	}		
 	
 	.select-ctr > div.input-preview {
@@ -660,6 +662,7 @@ footer {
 	  .select-ctr {
 		height: 0px;
 		margin-top: 0px;
+		width: 60%
 	}		
 	
 		.navbar-custom .navbar-brand {
@@ -698,7 +701,7 @@ footer {
 	  
 	   .select-ctr {
 		height: 0px;
-		margin-top: 0px;
+		margin-top: 10px;
 		width: 60%
 	}		
 	
@@ -736,7 +739,7 @@ footer {
 	
 	.headline {
     font-size: 35px;
-	padding-top: 10px;
+	padding-top: 19px;
 }
 
 .main-div {
@@ -758,6 +761,7 @@ footer {
 	
 	.left-col {
 		order:0;
+		width:75%;
 	}
 	  
 	  .two-lines { display: none; }
