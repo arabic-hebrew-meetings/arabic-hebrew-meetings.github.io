@@ -86,7 +86,11 @@ function doSaveAction(siteLocation, action, params, createNewSessionIfNeeded, sa
 	}
 }
 
-function saveMeetingEntry(nativeLanguage, level, roomNumber){
+function saveMeetingEntry(nativeLanguage, level, languageInRoom, roomNumber){
+	console.log(nativeLanguage);
+	console.log(level);
+	console.log(languageInRoom);
+	console.log(roomNumber);
 	var sessionId = getSessionId("meetings", true);
 	if (sessionId == "") {
 		sessionId = "anonymous";
@@ -97,7 +101,8 @@ function saveMeetingEntry(nativeLanguage, level, roomNumber){
 				"entry.354079520": sessionId,
 				"entry.1032780145": nativeLanguage,
 				"entry.1729768685": level,
-				"entry.579761647": roomNumber
+				"entry.579761647": languageInRoom,
+				"entry.1804344661": roomNumber
 				},
             type: "POST",
             dataType: "xml",
@@ -110,7 +115,6 @@ function saveMeetingEntry(nativeLanguage, level, roomNumber){
                 }
             }
         });
-	
 }
 
 function createSessionId(siteLocation) {

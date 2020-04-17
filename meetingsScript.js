@@ -47,14 +47,17 @@ function doSomething() {
 		// save meeting entry
 		
 		var nativeLanguage = "";
+		var otherLanguage = "";
 		var level = "";
 		var roomNumber = "";
 	
 		if (data.includes("A-Native")) {
 			nativeLanguage = "Arabic";
+			otherLanguage = "Hebrew";
 		}
 		if (data.includes("H-Native")) {
 			nativeLanguage = "Hebrew";
+			otherLanguage = "Arabic";
 		}
 		
 		if (data.includes("Beginner")) {
@@ -82,8 +85,23 @@ function doSomething() {
 		if (data.includes("Room-5")) {
 			roomNumber = "5";
 		}
+		if (data.includes("Room-6")) {
+			roomNumber = "6";
+		}
+		if (data.includes("Room-7")) {
+			roomNumber = "7";
+		}
+		if (data.includes("Room-8")) {
+			roomNumber = "8";
+		}
+		if (data.includes("Room-9")) {
+			roomNumber = "9";
+		}
+		
+		var languageLevel = otherLanguage+"-"+level;
+		var languageInRoom = "Room"+roomNumber+"-"+nativeLanguage;
 	
-		saveMeetingEntry(nativeLanguage, level, roomNumber);
+		saveMeetingEntry(nativeLanguage, languageLevel, languageInRoom, "Room-"+roomNumber);
 		
 	}
 	
@@ -109,6 +127,18 @@ function doSomething() {
 			if (data.includes("Room-5")) {
 				choice = "مجموعة رقم 5";
 			}
+			if (data.includes("Room-6")) {
+				choice = "مجموعة رقم 6";
+			}
+			if (data.includes("Room-7")) {
+				choice = "مجموعة رقم 7";
+			}
+			if (data.includes("Room-8")) {
+				choice = "مجموعة رقم 8";
+			}
+			if (data.includes("Room-9")) {
+				choice = "مجموعة رقم 9";
+			}
 		}
 		if (data.includes("H-Native")) {
 			if (data.includes("Room-1")) {
@@ -125,6 +155,18 @@ function doSomething() {
 			}
 			if (data.includes("Room-5")) {
 				choice = "קבוצה מס' 5";
+			}
+			if (data.includes("Room-6")) {
+				choice = "קבוצה מס' 6";
+			}
+			if (data.includes("Room-7")) {
+				choice = "קבוצה מס' 7";
+			}
+			if (data.includes("Room-8")) {
+				choice = "קבוצה מס' 8";
+			}
+			if (data.includes("Room-9")) {
+				choice = "קבוצה מס' 9";
 			}
 		}		
 	}
@@ -202,12 +244,10 @@ doSomething()
 	  if (data=="H-Native-A-Beginner" || data=="H-Native-A-Beginner-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Beginner-Room-1'>קבוצה מס' 1</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Beginner-Room-2'>קבוצה מס' 2</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Beginner-Room-3'>קבוצה מס' 3</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='H-Native-A-Beginner-Room-4'>קבוצה מס' 4</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='H-Native-A-Beginner-Room-5'>קבוצה מס' 5</div>
-  <div class='input input-6' data-val='Hebrew-Back'>Back</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Beginner-Room-7'>קבוצה מס' 7</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Beginner-Room-8'>קבוצה מס' 8</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Beginner-Room-9'>קבוצה מס' 9</div>
+  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
@@ -215,12 +255,10 @@ doSomething()
 	  if (data=="H-Native-A-Intermediate" || data=="H-Native-A-Intermediate-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Intermediate-Room-1'>קבוצה מס' 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Intermediate-Room-2'>קבוצה מס' 2</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Intermediate-Room-3'>קבוצה מס' 3</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='H-Native-A-Intermediate-Room-5'>קבוצה מס' 5</div>
-  <div class='input input-6' data-val='Hebrew-Back'>Back</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Intermediate-Room-5'>קבוצה מס' 5</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Intermediate-Room-6'>קבוצה מס' 6</div>
+  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
@@ -231,9 +269,7 @@ doSomething()
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Advanced-Room-1'>קבוצה מס' 1</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Advanced-Room-2'>קבוצה מס' 2</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Advanced-Room-3'>קבוצה מס' 3</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='H-Native-A-Advanced-Room-4'>קבוצה מס' 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='H-Native-A-Advanced-Room-5'>קבוצה מס' 5</div>
-  <div class='input input-6' data-val='Hebrew-Back'>Back</div>
+  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
@@ -244,9 +280,7 @@ doSomething()
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Beginner-Room-1'>مجموعة رقم 1</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Beginner-Room-2'>مجموعة رقم 2</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Beginner-Room-3'>مجموعة رقم 3</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='A-Native-H-Beginner-Room-4'>مجموعة رقم 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='A-Native-H-Beginner-Room-5'>مجموعة رقم 5</div>
-  <div class='input input-6' data-val='Arabic-Back'>Back</div>
+  <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
@@ -254,12 +288,10 @@ doSomething()
 	  if (data=="A-Native-H-Intermediate" || data=="A-Native-H-Intermediate-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Intermediate-Room-1'>مجموعة رقم 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Intermediate-Room-2'>مجموعة رقم 2</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Intermediate-Room-3'>مجموعة رقم 3</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='A-Native-H-Intermediate-Room-5'>مجموعة رقم 5</div>
-  <div class='input input-6' data-val='Arabic-Back'>Back</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Intermediate-Room-5'>مجموعة رقم 5</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Intermediate-Room-6'>مجموعة رقم 6</div>
+  <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
@@ -267,251 +299,58 @@ doSomething()
 	  if (data=="A-Native-H-Advanced" || data=="A-Native-H-Advanced-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Advanced-Room-1'>مجموعة رقم 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Advanced-Room-2'>مجموعة رقم 2</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Advanced-Room-3'>مجموعة رقم 3</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-4' data-val='A-Native-H-Advanced-Room-4'>مجموعة رقم 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-5' data-val='A-Native-H-Advanced-Room-5'>مجموعة رقم 5</div>
-  <div class='input input-6' data-val='Arabic-Back'>Back</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Advanced-Room-7'>مجموعة رقم 7</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Advanced-Room-8'>مجموعة رقم 8</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Advanced-Room-9'>مجموعة رقم 9</div>
+  <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="H-Native-A-Beginner-Room-1") {
+	  if (data.includes("H-Native-A-Beginner-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 1 תיפתח לכם כעת</div>
+  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
   <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="H-Native-A-Beginner-Room-2") {
+	  if (data.includes("H-Native-A-Intermediate-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 2 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Beginner-Room-3") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 3 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Beginner-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 4 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Beginner-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 5 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Intermediate-Room-1") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 1 תיפתח לכם כעת</div>
+  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
   <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="H-Native-A-Intermediate-Room-2") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 2 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
 	  
-	  if (data=="H-Native-A-Intermediate-Room-3") {
+	  if (data.includes("H-Native-A-Advanced-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 3 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Intermediate-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 4 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Intermediate-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 5 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Advanced-Room-1") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 1 תיפתח לכם כעת</div>
+  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
   <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="H-Native-A-Advanced-Room-2") {
+	  if (data.includes("A-Native-H-Beginner-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 2 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Advanced-Room-3") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 3 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Advanced-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 4 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Advanced-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>קבוצה מס' 5 תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Beginner-Room-1") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 1 رح تفتتح الآن</div>
+  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
   <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="A-Native-H-Beginner-Room-2") {
+	  if (data.includes("A-Native-H-Intermediate-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 2 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Beginner-Room-3") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 3 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Beginner-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 4 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Beginner-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 5 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Intermediate-Room-1") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 1 رح تفتتح الآن</div>
+  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
   <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
 </div>`;
 doSomething()
 	  }
 	  
-	  if (data=="A-Native-H-Intermediate-Room-2") {
+	  if (data.includes("A-Native-H-Advanced-Room")) {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 2 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Intermediate-Room-3") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 3 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Intermediate-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 4 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Intermediate-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 5 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced-Room-1") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 1 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced-Room-2") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 2 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced-Room-3") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 3 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced-Room-4") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 4 رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced-Room-5") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>مجموعة رقم 5 رح تفتتح الآن</div>
+  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
   <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
 </div>`;
 doSomething()
