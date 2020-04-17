@@ -86,6 +86,33 @@ function doSaveAction(siteLocation, action, params, createNewSessionIfNeeded, sa
 	}
 }
 
+function saveMeetingEntry(nativeLanguage, level, roomNumber){
+	var sessionId = getSessionId("meetings", true);
+	if (sessionId == "") {
+		sessionId = "anonymous";
+	}
+            $.ajax({
+            url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfWguAsBgnb3a3s4P7JLzWwXWFZnP82nXbMddmjr_QugOqw8Q/formResponse",
+            data: {
+				"entry.354079520": sessionId,
+				"entry.1032780145": nativeLanguage,
+				"entry.1729768685": level,
+				"entry.579761647": roomNumber
+				},
+            type: "POST",
+            dataType: "xml",
+            statusCode: {
+                0: function() {
+                    //Success message
+                },
+                200: function() {
+                    //Success Message
+                }
+            }
+        });
+	
+}
+
 function createSessionId(siteLocation) {
 	writeCookie('sessionId',guid(),365);
 	doSaveAction(siteLocation, "new_user", null, false, false);
