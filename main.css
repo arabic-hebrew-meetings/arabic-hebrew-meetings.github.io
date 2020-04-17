@@ -435,7 +435,13 @@ section.content {
 }
 
 .headline {
-	font-size: 10px;
+	font-size: 40px;
+	margin-top: 10px;
+}
+
+.subheadline {
+	font-size: 20px;
+	margin-top:10px
 }
 
 .main-div {
@@ -595,11 +601,11 @@ footer {
 	}		
 	
 	.select-ctr > div.input-preview {
-		font-size: 40px;
+		font-size: 30px;
 	}
 	
 	.select-ctr > div.input {
-		font-size: 40px;
+		font-size: 30px;
 	}
 	
 	.select-ctr .input-1 {
@@ -627,7 +633,7 @@ footer {
 	}
 	
 	.headline {
-    font-size: 80px;
+    font-size: 40px;
 }
 
 .main-div {
@@ -738,8 +744,8 @@ footer {
 	}
 	
 	.headline {
-    font-size: 35px;
-	padding-top: 19px;
+    font-size: 40px;
+	margin-top: 19px;
 }
 
 .main-div {
