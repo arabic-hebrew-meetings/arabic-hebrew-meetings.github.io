@@ -360,61 +360,12 @@ padding: 20px 20px 20px 20px;
 	}
 }
 
-/* Extra small devices (phones, 600px and down) */
-@media screen and (max-width: 600px) {
-  .my-square {
-		width: 30%;
-		padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
-		margin:1.66%;
-	  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media screen and (min-width: 600px) {
-  .my-square {
-		width: 30%;
-		padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
-		margin:1.66%;
-	  }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media screen and (min-width: 768px) {
-  .my-square {
-		width: 30%;
-		/* maybe width: 23%; */
-		padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
-		/* maybe padding-bottom: 23%; */
-		margin:1.66%;
-		/* maybe margin: 1%; */
-	  }
-} 
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media screen and (min-width: 992px) {
-  .my-square {
-		width: 18%;
-		padding-bottom: 18%; /* = width for a 1:1 aspect ratio */
-		margin:1%;
-	  }
-} 
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media screen and (min-width: 1200px) {
-  .my-square {
-		width: 18%;
-		padding-bottom: 18%; /* = width for a 1:1 aspect ratio */
-		margin:1%;
-	  }
-}
-
 .ideas {
   padding-top:2vw;
 }
 
 .select-ctr {
   position: absolute;
-  top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
@@ -476,34 +427,256 @@ padding: 20px 20px 20px 20px;
 .flex-container {
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	min-height: 900px;
 }
 
 section.content {
   flex: 1;
 }
 
-.room-url {
-	color: black;
-	text-decoration-line: none !important
+.headline {
+	font-size: 10px;
 }
 
-.room-url:hover {
-	color: black;
-	text-decoration-line: none !important
+.main-div {
+	background-color: #eee;
+	padding-top: 10px;
 }
 
-.room-url:active {
-	color: black;
-	text-decoration-line: none !important
+.two-lines { display: none; }
+
+/* Extra small devices (phones, 600px and down) */
+@media screen and (max-width: 600px) {
+	
+	.my-square {
+		width: 30%;
+		padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+		margin:1.66%;
+	  }
+	
+	.navbar-custom .navbar-brand {
+    font-size: 15px;
 }
 
-.room-url:focus {
-	color: black;
-	text-decoration-line: none !important
+.navbar-custom .navbar-nav > li > a {
+    font-size: 15px;
 }
 
-.room-url:visited {
-	color: black;
-	text-decoration-line: none !important
+.navbar-custom .navbar-nav .dropdown-menu>li>a {
+    font-size: 15px;
+}
+
+.navbar-nav .open .dropdown-menu>li>a {
+    line-height: 25px;
+}
+	
+	 .select-ctr {
+		width: 265px;
+		height: 0px;
+		margin-top: 10px;
+	}		
+	
+	.select-ctr > div.input-preview {
+		font-size: 25px;
+	}
+	
+	.select-ctr > div.input {
+		font-size: 25px;
+	}
+	
+	.select-ctr .input-1 {
+		top: 112px;
+	}
+	
+	.select-ctr .input-2 {
+		top: 196px;
+	}
+	
+	.select-ctr .input-3 {
+		top: 280px;
+	}
+	
+	.select-ctr .input-4 {
+		top: 364px;
+	}
+	
+	.select-ctr .input-5 {
+		top: 448px;
+	}
+	
+	.select-ctr .input-6 {
+		top: 532px;
+	}
+	
+	.headline {
+    font-size: 40px;
+}
+
+.main-div {
+	padding-top: 10px;
+}
+
+.flex-container {
+    min-height: 630px;
+}
+
+footer {
+    font-size: 15px;
+	margin-top: 10px;
+}
+
+.two-lines { display: inline-block; }
+    .one-line { display: none; }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media screen and (min-width: 600px) {
+  .my-square {
+		width: 30%;
+		padding-bottom : 30%; /* = width for a 1:1 aspect ratio */
+		margin:1.66%;
+	  }
+	  
+	.navbar-custom .navbar-brand {
+    font-size: 30px;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    font-size: 30px;
+}
+
+.navbar-custom .navbar-nav .dropdown-menu>li>a {
+    font-size: 30px;
+}
+
+.navbar-nav .open .dropdown-menu>li>a {
+    line-height: 45px;
+}
+	
+	 .select-ctr {
+		width: 530px;
+		height: 0px;
+		margin-top: 10px;
+	}		
+	
+	.select-ctr > div.input-preview {
+		font-size: 40px;
+	}
+	
+	.select-ctr > div.input {
+		font-size: 40px;
+	}
+	
+	.select-ctr .input-1 {
+		top: 140px;
+	}
+	
+	.select-ctr .input-2 {
+		top: 245px;
+	}
+	
+	.select-ctr .input-3 {
+		top: 350px;
+	}
+	
+	.select-ctr .input-4 {
+		top: 455px;
+	}
+	
+	.select-ctr .input-5 {
+		top: 560px;
+	}
+	
+	.select-ctr .input-6 {
+		top: 665px;
+	}
+	
+	.headline {
+    font-size: 80px;
+}
+
+.main-div {
+	padding-top: 30px;
+}
+
+.flex-container {
+    min-height: 790px;
+}
+
+footer {
+    font-size: 30px;
+	margin-top: 10px;
+}
+
+.two-lines { display: inline-block; }
+    .one-line { display: none; }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (min-width: 768px) {
+  .my-square {
+		width: 30%;
+		/* maybe width: 23%; */
+		padding-bottom: 30%; /* = width for a 1:1 aspect ratio */
+		/* maybe padding-bottom: 23%; */
+		margin:1.66%;
+		/* maybe margin: 1%; */
+	  }
+	  
+	  .select-ctr {
+		width: 590px;
+		height: 0px;
+		margin-top: 0px;
+	}		
+	
+		.navbar-custom .navbar-brand {
+    font-size: 30px;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    font-size: 30px;
+}
+
+.navbar-custom .navbar-nav .dropdown-menu>li>a {
+    font-size: 30px;
+}
+
+.navbar-nav .open .dropdown-menu>li>a {
+    line-height: 55px;
+}
+
+footer {
+    font-size: 30px;
+	margin-top: 10px;
+}
+
+.two-lines { display: inline-block; }
+    .one-line { display: none; }
+
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media screen and (min-width: 992px) {
+  .my-square {
+		width: 18%;
+		padding-bottom: 18%; /* = width for a 1:1 aspect ratio */
+		margin:1%;
+	  }
+	  
+	  .two-lines { display: none; }
+    .one-line { display: inline-block; }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media screen and (min-width: 1200px) {
+  .my-square {
+		width: 18%;
+		padding-bottom: 18%; /* = width for a 1:1 aspect ratio */
+		margin:1%;
+	  }
+	  
+	  .two-lines { display: none; }
+    .one-line { display: inline-block; }
 }
