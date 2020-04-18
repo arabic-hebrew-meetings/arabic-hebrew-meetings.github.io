@@ -161,6 +161,10 @@ function readCookie(name) {
     return '';
 }
 
+function eraseCookie(name) {
+    writeCookie(name,"",-1);
+}
+
 //generates random id;
 let guid = () => {
     let s4 = () => {

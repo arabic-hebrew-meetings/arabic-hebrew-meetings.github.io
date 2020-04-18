@@ -244,9 +244,9 @@ doSomething()
 	  if (data=="H-Native-A-Beginner" || data=="H-Native-A-Beginner-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Beginner-Room-7'>קבוצה מס' 7</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Beginner-Room-8'>קבוצה מס' 8</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Beginner-Room-9'>קבוצה מס' 9</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/2790215335');" class='input input-1' data-val='H-Native-A-Beginner-Room-7'>קבוצה מס' 7</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/3702285739');" class='input input-2' data-val='H-Native-A-Beginner-Room-8'>קבוצה מס' 8</div>
+  <div onclick="window.open('https://us04web.zoom.us/j/7159479823');" class='input input-3' data-val='H-Native-A-Beginner-Room-9'>קבוצה מס' 9</div>
   <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
 doSomething()
@@ -255,9 +255,9 @@ doSomething()
 	  if (data=="H-Native-A-Intermediate" || data=="H-Native-A-Intermediate-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Intermediate-Room-5'>קבוצה מס' 5</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Intermediate-Room-6'>קבוצה מס' 6</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/2833579229');" class='input input-1' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/8289107034');" class='input input-2' data-val='H-Native-A-Intermediate-Room-5'>קבוצה מס' 5</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/8320809110');" class='input input-3' data-val='H-Native-A-Intermediate-Room-6'>קבוצה מס' 6</div>
   <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
 doSomething()
@@ -266,8 +266,8 @@ doSomething()
 	  if (data=="H-Native-A-Advanced" || data=="H-Native-A-Advanced-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='H-Native-A-Advanced-Room-1'>קבוצה מס' 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='H-Native-A-Advanced-Room-2'>קבוצה מס' 2</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/2366037891');" class='input input-1' data-val='H-Native-A-Advanced-Room-1'>קבוצה מס' 1</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9686106973');" class='input input-2' data-val='H-Native-A-Advanced-Room-2'>קבוצה מס' 2</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Advanced-Room-3'>קבוצה מס' 3</div>
   <div class='input input-4' data-val='Hebrew-Back'>Back</div>
 </div>`;
@@ -277,8 +277,8 @@ doSomething()
 	  if (data=="A-Native-H-Beginner" || data=="A-Native-H-Beginner-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Beginner-Room-1'>مجموعة رقم 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Beginner-Room-2'>مجموعة رقم 2</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/2366037891');" class='input input-1' data-val='A-Native-H-Beginner-Room-1'>مجموعة رقم 1</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/9686106973');" class='input input-2' data-val='A-Native-H-Beginner-Room-2'>مجموعة رقم 2</div>
   <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Beginner-Room-3'>مجموعة رقم 3</div>
   <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
@@ -288,9 +288,9 @@ doSomething()
 	  if (data=="A-Native-H-Intermediate" || data=="A-Native-H-Intermediate-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Intermediate-Room-5'>مجموعة رقم 5</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Intermediate-Room-6'>مجموعة رقم 6</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/2833579229');" class='input input-1' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/8289107034');" class='input input-2' data-val='A-Native-H-Intermediate-Room-5'>مجموعة رقم 5</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/8320809110');" class='input input-3' data-val='A-Native-H-Intermediate-Room-6'>مجموعة رقم 6</div>
   <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
 doSomething()
@@ -299,9 +299,9 @@ doSomething()
 	  if (data=="A-Native-H-Advanced" || data=="A-Native-H-Advanced-Back") {
 		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
   <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-1' data-val='A-Native-H-Advanced-Room-7'>مجموعة رقم 7</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-2' data-val='A-Native-H-Advanced-Room-8'>مجموعة رقم 8</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Advanced-Room-9'>مجموعة رقم 9</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/2790215335');" class='input input-1' data-val='A-Native-H-Advanced-Room-7'>مجموعة رقم 7</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/3702285739');" class='input input-2' data-val='A-Native-H-Advanced-Room-8'>مجموعة رقم 8</div>
+  <div  onclick="window.open('https://us04web.zoom.us/j/7159479823');" class='input input-3' data-val='A-Native-H-Advanced-Room-9'>مجموعة رقم 9</div>
   <div class='input input-4' data-val='Arabic-Back'>Back</div>
 </div>`;
 doSomething()
