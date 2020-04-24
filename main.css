@@ -741,8 +741,24 @@ footer {
 }
 
 .cntr {
-	padding: 0px 20px 0px 20px;
+	padding: 0px 0px 0px 0px;
 }
+
+	.option-1-hebrew {
+		margin-right: -8px;
+	}
+	
+	.option-2-hebrew {
+		margin-right: -3px;
+	}
+	
+	.option-1-arabic {
+		margin-right: -40px;
+	}
+	
+	.option-2-arabic {
+		margin-right: -5px;
+	}
 
 }
 
