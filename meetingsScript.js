@@ -193,7 +193,7 @@ function displayLevelOptions(userLang) {
 		document.getElementById("subheadline").innerHTML = ``
 		document.getElementById("question-area").innerHTML = `
 			<div class='select-ctr'>
-		  <div class='selected-input input-preview'>اختاروا مستواكم بالعبري<br>وبعدين مجموعة تنضموا لالها:</div>
+		  <div class='selected-input input-preview'>اختاروا مستواكم في اللغة العبرية<br>واختاروا مجموعة تنضموا لالها:</div>
 		  
 		  <div class="cntr rtl">
 			<label for="rdo-1" class="btn-radio order-three level-label">
