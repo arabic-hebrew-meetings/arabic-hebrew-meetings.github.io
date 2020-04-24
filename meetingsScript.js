@@ -153,8 +153,8 @@ function displayLevelOptions(userLang) {
 			<div class='select-ctr'>
 		  <div class='selected-input input-preview'>סמנו את הרמה שלכם בערבית<br>ובחרו קבוצה להצטרף אליה:</div>
 		  
-		  <div class="cntr rtl">
-			<label for="rdo-1" class="btn-radio order-three level-label">
+		  <div class="cntr rtl display-above-600px">
+			<label for="rdo-1" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Hebrew','Advanced')" id="rdo-1" name="radio-grp">
 			  <svg class="option-1-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -163,7 +163,7 @@ function displayLevelOptions(userLang) {
 			  </svg>
 			  <span>רמה מתקדמת</span>
 			</label>
-			<label for="rdo-2" class="btn-radio order-two level-label">
+			<label for="rdo-2" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Hebrew','Intermediate')" id="rdo-2" name="radio-grp">
 			  <svg class="option-2-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -172,7 +172,7 @@ function displayLevelOptions(userLang) {
 			  </svg>
 			  <span>רמה בינונית</span>
 			</label>
-			<label for="rdo-3" class="btn-radio order-one level-label">
+			<label for="rdo-3" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Hebrew','Beginner')" id="rdo-3" name="radio-grp">
 			  <svg class="option-3-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -180,6 +180,36 @@ function displayLevelOptions(userLang) {
 				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
 			  </svg>
 			  <span>רמה בסיסית</span>
+			</label>
+		  </div>
+		  
+		  <div class="cntr rtl display-under-600px">
+			<label for="rdo-4" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Beginner')" id="rdo-4" name="radio-grp">
+			  <svg class="option-1-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה בסיסית</span>
+			</label>
+			<label for="rdo-5" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Intermediate')" id="rdo-5" name="radio-grp">
+			  <svg class="option-2-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה בינונית</span>
+			</label>
+			<label for="rdo-6" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Advanced')" id="rdo-6" name="radio-grp">
+			  <svg class="option-3-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה מתקדמת</span>
 			</label>
 		  </div>
 		  
@@ -195,8 +225,8 @@ function displayLevelOptions(userLang) {
 			<div class='select-ctr'>
 		  <div class='selected-input input-preview'>اختاروا مستواكم في اللغة العبرية<br>واختاروا مجموعة تنضموا لالها:</div>
 		  
-		  <div class="cntr rtl">
-			<label for="rdo-1" class="btn-radio order-three level-label">
+		  <div class="cntr rtl display-above-600px">
+			<label for="rdo-1" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Arabic','Advanced')" id="rdo-1" name="radio-grp">
 			  <svg class="option-1-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -205,7 +235,7 @@ function displayLevelOptions(userLang) {
 			  </svg>
 			  <span>مستوى متقدم</span>
 			</label>
-			<label for="rdo-2" class="btn-radio order-two level-label">
+			<label for="rdo-2" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Arabic','Intermediate')" id="rdo-2" name="radio-grp">
 			  <svg class="option-2-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -214,7 +244,7 @@ function displayLevelOptions(userLang) {
 			  </svg>
 			  <span>مستوى متوسط</span>
 			</label>
-			<label for="rdo-3" class="btn-radio order-one level-label">
+			<label for="rdo-3" class="btn-radio level-label">
 			  <input type="radio" onclick="doSomething('Arabic','Beginner')" id="rdo-3" name="radio-grp">
 			  <svg class="option-3-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
@@ -222,6 +252,36 @@ function displayLevelOptions(userLang) {
 				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
 			  </svg>
 			  <span>مستوى منخفض</span>
+			</label>
+		  </div>
+		  
+		  <div class="cntr rtl display-under-600px">
+			<label for="rdo-4" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Beginner')" id="rdo-4" name="radio-grp">
+			  <svg class="option-1-arabic" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى منخفض</span>
+			</label>
+			<label for="rdo-5" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Intermediate')" id="rdo-5" name="radio-grp">
+			  <svg class="option-2-arabic" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى متوسط</span>
+			</label>
+			<label for="rdo-6" class="btn-radio level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Advanced')" id="rdo-6" name="radio-grp">
+			  <svg class="option-3-arabic" width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى متقدم</span>
 			</label>
 		  </div>
 		  

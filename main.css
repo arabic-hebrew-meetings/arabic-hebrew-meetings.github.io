@@ -596,18 +596,6 @@ section.content {
 	vertical-align: middle;
 }
 
-.order-one {
-	order: 1;
-}
-
-.order-two {
-	order: 2;
-}
-
-.order-three {
-	order: 3;
-}
-
 .level-label {
 	font-size: 21px;
 }
@@ -624,6 +612,10 @@ section.content {
 .options {
 	margin-top: 30px;
 }
+
+
+.display-under-600px { display: none !important; }
+.display-above-600px { display: inline-block !important; }
 
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
@@ -745,20 +737,31 @@ footer {
 }
 
 	.option-1-hebrew {
-		margin-right: -8px;
+		margin-right: -19px;
 	}
 	
 	.option-2-hebrew {
-		margin-right: -3px;
+		margin-right: 0px;
+	}
+	
+	.option-3-hebrew {
+		margin-right: 17px;
 	}
 	
 	.option-1-arabic {
-		margin-right: -40px;
+		margin-right: -6px;
 	}
 	
 	.option-2-arabic {
-		margin-right: -5px;
+		margin-right: 12px;
 	}
+	
+	.option-3-arabic {
+		margin-right: 0px;
+	}
+	
+	.display-under-600px { display: inline-block !important; }
+    .display-above-600px { display: none !important; }
 
 }
 
