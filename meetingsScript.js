@@ -1,31 +1,31 @@
-function doSomething() {
+
+$(document).ready(
+doSomething("", "", "")
+);
+
+function doSomething(userLang, userLevel, userChoice, chosenData) {
+	handleChoice(userLang, userLevel, userChoice, chosenData);
+	
 		  var inputPreview = $(".input-preview"),
       input = $(".input");
 
-  TweenMax.set(input, {
-    scale: 1.2,
-    alpha: 0
-  });
-
+	if (userChoice != "Room") {
+	  TweenMax.set(input, {
+		scale: 1.2,
+		alpha: 0
+	  });
+	}
     
     inputPreview.toggleClass("active");
     
-    if(inputPreview.hasClass("active")){
+
       
       TweenMax.staggerTo(input, 1.25, {
         scale: 1,
         alpha: 1,
         ease: Elastic.easeOut
       }, .1);   
-    }
-    else {
-      TweenMax.staggerTo(input, 1, {
-        scale: 1.2,
-        alpha: 0,
-        ease: Elastic.easeOut
-      }, .1);
-    }
-  
+	  
 
   input.on("click", function() {
 
@@ -40,35 +40,284 @@ function doSomething() {
 
     siblings.removeClass("active");
 	
-	saveAction("meetings", "select_choice", {choice: data});
+
+    tlInput.to(siblings, .25, {
+        alpha: 0
+      })
+	  .to(that, .25, {
+        scale: 1.2
+      })
+      .to(that, .25, {
+        scale: 1,
+      })
+      
+
+    function done() {
+      inputPreview.removeClass("active");
+      that.css("top", top).addClass("active");
+
+      TweenMax.set(input, {
+        scale: 1.2,
+        alpha: 0,
+        backgroundColor: "#fff"
+      });
+	  
+	  
+	  if (data=="Choose-Native-Language-Back") {
+		  doSomething("", "", "Back", data);
+	  }
+	  
+	  if (data=="Arabic") {
+		  doSomething("Arabic", "", "", data);
+	  }
+	  
+	  if (data=="Hebrew") {
+		  doSomething("Hebrew", "", "", data);
+	  }
+	  
+	  if (data.includes("H-Native-A-Beginner-Room")) {
+		  doSomething("Hebrew","Beginner","Room", data);
+	  }
+	  
+	  if (data.includes("H-Native-A-Intermediate-Room")) {
+		  doSomething("Hebrew","Intermediate","Room", data);
+	  }
+	  
+	  
+	  if (data.includes("H-Native-A-Advanced-Room")) {
+		  doSomething("Hebrew","Advanced","Room", data);
+	  }
+	  
+	  if (data.includes("A-Native-H-Beginner-Room")) {
+		  doSomething("Arabic","Beginner","Room", data);
+	  }
+	  
+	  if (data.includes("A-Native-H-Intermediate-Room")) {
+		  doSomething("Arabic","Intermediate","Room", data);
+	  }
+	  
+	  if (data.includes("A-Native-H-Advanced-Room")) {
+		  doSomething("Arabic","Advanced","Room", data);
+	  }
+    
+	}
+
+  });
+}
+
+function handleChoice(userLang, userLevel, userChoice, chosenData) {
+	saveMeetingsActions(userLang, userLevel, userChoice, chosenData);
+	if (userLang != null && userLang != "") {
+		if (userLevel != null && userLevel != "") {
+			displayOptions(userLang, userLevel, userChoice);
+		} else {
+			displayLevelOptions(userLang);
+		}
+	} else {
+		displayChooseNativeLanguage();
+	}
+}
+
+function displayChooseNativeLanguage() {
+	document.getElementById("subheadline").innerHTML = `
+	<div class="subheadline">
+		ענו על השאלות הבאות
+		<br>
+		כדי להצטרף למפגש
+		<br>
+		جاوبوا على الاسئلة التالية
+		<br>
+		عشان تنضموا للقاء
+	</div>
+		`
+	document.getElementById("question-area").innerHTML =  `
+		<div class='select-ctr'>
+		  <div class='selected-input input-preview'>מה היא שפת האם שלכם?<br>شو لغة الام تبعتكم؟</div>
+		  
+		  <div class="cntr rtl">
+			
+		  </div>
+		  
+		  <div class="options" id="options">
+		  <div class='input input-1' data-val='Hebrew'>עברית</div>
+		  <div class='input input-2' data-val='Arabic'>عربي</div>
+		  </div>
+		</div>
+		`;
+}
+
+function displayLevelOptions(userLang) {
+	if (userLang=="Hebrew") {
+		document.getElementById("subheadline").innerHTML = ``
+		document.getElementById("question-area").innerHTML = `
+			<div class='select-ctr'>
+		  <div class='selected-input input-preview'>סמנו את הרמה שלכם בערבית<br>ובחרו קבוצה להצטרף אליה:</div>
+		  
+		  <div class="cntr rtl">
+			<label for="rdo-1" class="btn-radio order-three level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Advanced')" id="rdo-1" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה מתקדמת</span>
+			</label>
+			<label for="rdo-2" class="btn-radio order-two level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Intermediate')" id="rdo-2" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה בינונית</span>
+			</label>
+			<label for="rdo-3" class="btn-radio order-one level-label">
+			  <input type="radio" onclick="doSomething('Hebrew','Beginner')" id="rdo-3" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>רמה בסיסית</span>
+			</label>
+		  </div>
+		  
+		  <div class="options" id="options">
+		  <div class='input input-1-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+		  </div>
+		</div>
+		`
+	}
+	if (userLang=="Arabic") {
+		document.getElementById("subheadline").innerHTML = ``
+		document.getElementById("question-area").innerHTML = `
+			<div class='select-ctr'>
+		  <div class='selected-input input-preview'>اختاروا مستواكم بالعبري<br>وبعدين مجموعة تنضموا لالها:</div>
+		  
+		  <div class="cntr rtl">
+			<label for="rdo-1" class="btn-radio order-three level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Advanced')" id="rdo-1" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى متقدم</span>
+			</label>
+			<label for="rdo-2" class="btn-radio order-two level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Intermediate')" id="rdo-2" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى متوسط</span>
+			</label>
+			<label for="rdo-3" class="btn-radio order-one level-label">
+			  <input type="radio" onclick="doSomething('Arabic','Beginner')" id="rdo-3" name="radio-grp">
+			  <svg width="20px" height="20px" viewBox="0 0 20 20">
+				<circle cx="10" cy="10" r="9"></circle>
+				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+				<path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+			  </svg>
+			  <span>مستوى منخفض</span>
+			</label>
+		  </div>
+		  
+		  <div class="options" id="options">
+		  <div class='input input-1-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+		  </div>
+		</div>
+		`
+	}
+}
+
+function displayOptions(userLang, userLevel, userChoice) {
+	if (userLang=="Hebrew") {
+		if (userLevel=="Beginner") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/99912994947?pwd=UXRNbWxiNk5SaVBmZ21kTWpCejZHZz09');" class='input input-1-after-radio-buttons' data-val='H-Native-A-Beginner-Room-5'>קבוצה מס' 5</div>
+			<div onclick="window.open('https://zoom.us/j/91520797765?pwd=MzVvYlZ6Q3lNM3diZzBPRTFWQjlsdz09');" class='input input-2-after-radio-buttons' data-val='H-Native-A-Beginner-Room-6'>קבוצה מס' 6</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+		  
+		  
+		if (userLevel=="Intermediate") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09');" class='input input-1-after-radio-buttons' data-val='H-Native-A-Intermediate-Room-3'>קבוצה מס' 3</div>
+			<div onclick="window.open('https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09');" class='input input-2-after-radio-buttons' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+		
+		if (userLevel=="Advanced") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09');" class='input input-1-after-radio-buttons' data-val='H-Native-A-Advanced-Room-1'>קבוצה מס' 1</div>
+			<div onclick="window.open('https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09');" class='input input-2-after-radio-buttons' data-val='H-Native-A-Advanced-Room-2'>קבוצה מס' 2</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+	}
+	if (userLang=="Arabic") {
+		if (userLevel=="Beginner") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09');" class='input input-1-after-radio-buttons' data-val='A-Native-H-Beginner-Room-1'>مجموعة رقم 1</div>
+			<div onclick="window.open('https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09');" class='input input-2-after-radio-buttons' data-val='A-Native-H-Beginner-Room-2'>مجموعة رقم 2</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+		  
+		  
+		if (userLevel=="Intermediate") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09');" class='input input-1-after-radio-buttons' data-val='A-Native-H-Intermediate-Room-3'>مجموعة رقم 3</div>
+			<div onclick="window.open('https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09');" class='input input-2-after-radio-buttons' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+		
+		if (userLevel=="Advanced") {
+			document.getElementById("options").innerHTML =  `
+			<div onclick="window.open('https://zoom.us/j/99912994947?pwd=UXRNbWxiNk5SaVBmZ21kTWpCejZHZz09');" class='input input-1-after-radio-buttons' data-val='A-Native-H-Advanced-Room-5'>مجموعة رقم 5</div>
+			<div onclick="window.open('https://zoom.us/j/91520797765?pwd=MzVvYlZ6Q3lNM3diZzBPRTFWQjlsdz09');" class='input input-2-after-radio-buttons' data-val='A-Native-H-Advanced-Room-6'>مجموعة رقم 6</div>
+			<div class='input input-3-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
+			`;
+		}
+	}
+}
+
+function saveMeetingsActions(userLang, userLevel, userChoice, data) {
 	
-	if (data.includes("Room")) {
+	if (data != null && data != "") {
+		saveAction("meetings", "select_choice", {choice: data});
+	} else {
+		if (userLevel != null && userLevel != "" && userLang != null && userLang != "") {
+			var levelChoice = "";
+			if (userLang == "Hebrew") {
+				levelChoice = "H-Native-A-"+userLevel;
+			} else {
+				levelChoice = "A-Native-H-"+userLevel;
+			}
+			saveAction("meetings", "select_choice", {choice: levelChoice});
+		}			
+	}
+	
+	if (userChoice == "Room") {
 		
 		// save meeting entry
 		
-		var nativeLanguage = "";
+		var nativeLanguage = userLang;
+		var level = userLevel;
 		var otherLanguage = "";
-		var level = "";
-		var roomNumber = "";
-	
-		if (data.includes("A-Native")) {
-			nativeLanguage = "Arabic";
+		if (userLang == "Hebrew") {
+			otherLanguage = "Arabic";
+		} else {
 			otherLanguage = "Hebrew";
 		}
-		if (data.includes("H-Native")) {
-			nativeLanguage = "Hebrew";
-			otherLanguage = "Arabic";
-		}
 		
-		if (data.includes("Beginner")) {
-			level = "Beginner";
-		}
-		if (data.includes("Intermediate")) {
-			level = "Intermediate";
-		}
-		if (data.includes("Advanced")) {
-			level = "Advanced";
-		}
+		var roomNumber = "";
 		
 		if (data.includes("Room-1")) {
 			roomNumber = "1";
@@ -104,276 +353,4 @@ function doSomething() {
 		saveMeetingEntry(nativeLanguage, languageLevel, languageInRoom, "Room-"+roomNumber);
 		
 	}
-	
-	//get the chosen answer from the data value
-	var choice = "";
-	if (data.includes("Back")) {
-		choice = "Back";
-	}
-	if (data.includes("Room")) {
-		if (data.includes("A-Native")) {
-			if (data.includes("Room-1")) {
-				choice = "مجموعة رقم 1";
-			}
-			if (data.includes("Room-2")) {
-				choice = "مجموعة رقم 2";
-			}
-			if (data.includes("Room-3")) {
-				choice = "مجموعة رقم 3";
-			}
-			if (data.includes("Room-4")) {
-				choice = "مجموعة رقم 4";
-			}
-			if (data.includes("Room-5")) {
-				choice = "مجموعة رقم 5";
-			}
-			if (data.includes("Room-6")) {
-				choice = "مجموعة رقم 6";
-			}
-			if (data.includes("Room-7")) {
-				choice = "مجموعة رقم 7";
-			}
-			if (data.includes("Room-8")) {
-				choice = "مجموعة رقم 8";
-			}
-			if (data.includes("Room-9")) {
-				choice = "مجموعة رقم 9";
-			}
-		}
-		if (data.includes("H-Native")) {
-			if (data.includes("Room-1")) {
-				choice = "קבוצה מס' 1";
-			}
-			if (data.includes("Room-2")) {
-				choice = "קבוצה מס' 2";
-			}
-			if (data.includes("Room-3")) {
-				choice = "קבוצה מס' 3";
-			}
-			if (data.includes("Room-4")) {
-				choice = "קבוצה מס' 4";
-			}
-			if (data.includes("Room-5")) {
-				choice = "קבוצה מס' 5";
-			}
-			if (data.includes("Room-6")) {
-				choice = "קבוצה מס' 6";
-			}
-			if (data.includes("Room-7")) {
-				choice = "קבוצה מס' 7";
-			}
-			if (data.includes("Room-8")) {
-				choice = "קבוצה מס' 8";
-			}
-			if (data.includes("Room-9")) {
-				choice = "קבוצה מס' 9";
-			}
-		}		
-	}
-	if (!data.includes("Back") && !data.includes("Room")) {
-		choice = dictionary[data];
-	}	
-
-    tlInput.to(siblings, .25, {
-        alpha: 0
-      })
-      .to(that, .25, {
-        scale: 1.2
-      })
-      .to(that, .25, {
-        top: 0,
-      })
-      .set(inputPreview, {
-        display: "none"
-      })
-      .to(that, .25, {
-        scale: 1,
-      })
-      .to(that, .5, {
-        backgroundColor: "white"
-      })
-      .set(inputPreview, {
-        text: choice,
-        display: "block"
-      })
-      .to(that, .25, {
-        alpha: 0
-      })
-
-    function done() {
-      inputPreview.removeClass("active");
-      that.css("top", top).addClass("active");
-
-      TweenMax.set(input, {
-        scale: 1.2,
-        alpha: 0,
-        backgroundColor: "#fff"
-      });
-	  
-	  if (data=="Choose-Native-Language" || data=="Choose-Native-Language-Back") {
-	  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>מה היא שפת האם שלכם?<br>شو لغة الام تبعتكم؟</div>
-  <div class='input input-1' data-val='Hebrew'>עברית</div>
-  <div class='input input-2' data-val='Arabic'>عربي</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="Arabic" || data=="Arabic-Back") {
-	  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>شو مستواكم بالعبري؟</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner'>مستوى منخفض</div>
-  <div class='input input-2' data-val='A-Native-H-Intermediate'>مستوى متوسط</div>
-  <div class='input input-3' data-val='A-Native-H-Advanced'>مستوى متقدم</div>
-  <div class='input input-4' data-val='Choose-Native-Language-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="Hebrew" || data=="Hebrew-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>מה הרמה שלכם בערבית?</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner'>רמה בסיסית</div>
-  <div class='input input-2' data-val='H-Native-A-Intermediate'>רמה בינונית</div>
-  <div class='input input-3' data-val='H-Native-A-Advanced'>רמה מתקדמת</div>
-  <div class='input input-4' data-val='Choose-Native-Language-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Beginner" || data=="H-Native-A-Beginner-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/2790215335');" class='input input-1' data-val='H-Native-A-Beginner-Room-7'>קבוצה מס' 7</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/3702285739');" class='input input-2' data-val='H-Native-A-Beginner-Room-8'>קבוצה מס' 8</div>
-  <div onclick="window.open('https://us04web.zoom.us/j/7159479823');" class='input input-3' data-val='H-Native-A-Beginner-Room-9'>קבוצה מס' 9</div>
-  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Intermediate" || data=="H-Native-A-Intermediate-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/2833579229');" class='input input-1' data-val='H-Native-A-Intermediate-Room-4'>קבוצה מס' 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/8289107034');" class='input input-2' data-val='H-Native-A-Intermediate-Room-5'>קבוצה מס' 5</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/8320809110');" class='input input-3' data-val='H-Native-A-Intermediate-Room-6'>קבוצה מס' 6</div>
-  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="H-Native-A-Advanced" || data=="H-Native-A-Advanced-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>בחרו קבוצה להצטרף אליה:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/2366037891');" class='input input-1' data-val='H-Native-A-Advanced-Room-1'>קבוצה מס' 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9686106973');" class='input input-2' data-val='H-Native-A-Advanced-Room-2'>קבוצה מס' 2</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='H-Native-A-Advanced-Room-3'>קבוצה מס' 3</div>
-  <div class='input input-4' data-val='Hebrew-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Beginner" || data=="A-Native-H-Beginner-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/2366037891');" class='input input-1' data-val='A-Native-H-Beginner-Room-1'>مجموعة رقم 1</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9686106973');" class='input input-2' data-val='A-Native-H-Beginner-Room-2'>مجموعة رقم 2</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/9611602166');" class='input input-3' data-val='A-Native-H-Beginner-Room-3'>مجموعة رقم 3</div>
-  <div class='input input-4' data-val='Arabic-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Intermediate" || data=="A-Native-H-Intermediate-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/2833579229');" class='input input-1' data-val='A-Native-H-Intermediate-Room-4'>مجموعة رقم 4</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/8289107034');" class='input input-2' data-val='A-Native-H-Intermediate-Room-5'>مجموعة رقم 5</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/8320809110');" class='input input-3' data-val='A-Native-H-Intermediate-Room-6'>مجموعة رقم 6</div>
-  <div class='input input-4' data-val='Arabic-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data=="A-Native-H-Advanced" || data=="A-Native-H-Advanced-Back") {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>اختاروا مجموعة تنضموا لالها:</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/2790215335');" class='input input-1' data-val='A-Native-H-Advanced-Room-7'>مجموعة رقم 7</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/3702285739');" class='input input-2' data-val='A-Native-H-Advanced-Room-8'>مجموعة رقم 8</div>
-  <div  onclick="window.open('https://us04web.zoom.us/j/7159479823');" class='input input-3' data-val='A-Native-H-Advanced-Room-9'>مجموعة رقم 9</div>
-  <div class='input input-4' data-val='Arabic-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data.includes("H-Native-A-Beginner-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data.includes("H-Native-A-Intermediate-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  
-	  if (data.includes("H-Native-A-Advanced-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>הקבוצה תיפתח לכם כעת</div>
-  <div class='input input-1' data-val='H-Native-A-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data.includes("A-Native-H-Beginner-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Beginner-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data.includes("A-Native-H-Intermediate-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Intermediate-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	  if (data.includes("A-Native-H-Advanced-Room")) {
-		  document.getElementById("question-area").innerHTML =  `<div class='select-ctr'>
-  <div class='selected-input input-preview'>المجموعة رح تفتتح الآن</div>
-  <div class='input input-1' data-val='A-Native-H-Advanced-Back'>Back</div>
-</div>`;
-doSomething()
-	  }
-	  
-	
-    
-	}
-
-  });
 }
-
-$(document).ready(doSomething()
-
-);
-
-const dictionary = {
-	"Arabic": "عربي",
-	"Hebrew": "עברית",
-	"H-Native-A-Beginner": "רמה בסיסית",
-	"H-Native-A-Intermediate": "רמה בינונית",
-	"H-Native-A-Advanced": "רמה מתקדמת",
-	"A-Native-H-Beginner": "مستوى منخفض",
-	"A-Native-H-Intermediate": "مستوى متوسط",
-	"A-Native-H-Advanced": "مستوى متقدم"
-};

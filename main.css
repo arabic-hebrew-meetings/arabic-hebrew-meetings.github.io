@@ -374,10 +374,12 @@ padding: 20px 20px 20px 20px;
   transform: translate(-50%, -50%);
   width: 60%;
   height: 70%;
-  font-family: "Roboto";
   text-align: center;
 }
-.select-ctr > div {
+
+
+
+.select-ctr > div > div {
   padding: 15px 20px;
   position: absolute;
   width: 100%;
@@ -385,33 +387,63 @@ padding: 20px 20px 20px 20px;
   cursor: pointer;
 }
 
-.select-ctr .input-6 {
-  top: 108%;
+.input-1 {
+  margin-top: 18%;
 }
 
-.select-ctr .input-5 {
-  top: 90%;
+.input-2 {
+  margin-top: 36%;
 }
-.select-ctr .input-4 {
-  top: 72%;
+
+.input-3 {
+  margin-top: 54%;
 }
-.select-ctr .input-3 {
-  top: 54%;
+
+.input-4 {
+  margin-top: 72%;
 }
-.select-ctr .input-2 {
-  top: 36%;
+
+.input-5 {
+  margin-top: 90%;
 }
-.select-ctr .input-1 {
-  top: 18%;
+
+.input-6 {
+  margin-top: 108%;
 }
-.select-ctr > div.input {
+
+.input-1-after-radio-buttons {
+  margin-top: 18%;
+}
+
+.input-2-after-radio-buttons {
+  margin-top: 36%;
+}
+
+.input-3-after-radio-buttons {
+  margin-top: 54%;
+}
+
+.input-4-after-radio-buttons {
+  margin-top: 72%;
+}
+
+.input-5-after-radio-buttons {
+  margin-top: 90%;
+}
+
+.input-6-after-radio-buttons {
+  margin-top: 108%;
+}
+
+
+.select-ctr > div > div.input {
   background: white; /* color of options background */
   color: black; /* color of options text */
   border-radius: 2px;
   box-shadow: 0 2px 15px 3px rgba(0, 0, 0, 0.1);
   font-size: 200%;
 }
-.select-ctr > div.input.active { /* what is this? */
+.select-ctr > div > div.input.active { /* what is this? */
   color: red;
 }
 .select-ctr > div.input-preview { /* question before clicking on it */
@@ -419,6 +451,7 @@ padding: 20px 20px 20px 20px;
   position: relative;
   transition: .3s all ease;
   font-size: 200%;
+  padding: 15px 20px;
 }
 .select-ctr > div.input-preview.active { /* question after clicking on it */
   color: black;
@@ -427,6 +460,9 @@ padding: 20px 20px 20px 20px;
 .flex-container {
 	display: flex;
 	flex-direction: column;
+}
+
+.left-col {
 	min-height: 900px;
 }
 
@@ -441,7 +477,8 @@ section.content {
 
 .subheadline {
 	font-size: 20px;
-	margin-top:10px
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .main-div {
@@ -482,6 +519,112 @@ section.content {
 	width:100%;
 }
 
+.cntr {
+	padding: 25px 20px;
+	margin:0 auto;
+}
+
+.btn-radio {
+	cursor: pointer;
+	display: inline-block;
+	float: left;
+	-webkit-user-select: none;
+	user-select: none;
+}
+
+.btn-radio:not(:first-child) {
+	margin-left: 20px;
+}
+
+@media screen and (max-width: 480px) {
+	.btn-radio {
+		display: block;
+		float: none;
+	}
+
+	.btn-radio:not(:first-child) {
+		margin-left: 0;
+		margin-top: 15px;
+	}
+}
+
+.btn-radio svg {
+	fill: none;
+	vertical-align: middle;
+}
+
+.btn-radio svg circle {
+	stroke-width: 2;
+	stroke: #C8CCD4;
+}
+
+.btn-radio svg path {
+	stroke: #008FFF;
+}
+
+.btn-radio svg path.inner {
+	stroke-width: 6;
+	stroke-dasharray: 19;
+	stroke-dashoffset: 19;
+}
+
+.btn-radio svg path.outer {
+	stroke-width: 2;
+	stroke-dasharray: 57;
+	stroke-dashoffset: 57;
+}
+
+.btn-radio input {
+	display: none;
+}
+
+.btn-radio input:checked + svg path {
+	transition: all .4s ease;
+}
+
+.btn-radio input:checked + svg path.inner {
+	stroke-dashoffset: 38;
+	transition-delay: .3s;
+}
+
+.btn-radio input:checked + svg path.outer {
+	stroke-dashoffset: 0;
+}
+
+.btn-radio span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.order-one {
+	order: 1;
+}
+
+.order-two {
+	order: 2;
+}
+
+.order-three {
+	order: 3;
+}
+
+.level-label {
+	font-size: 21px;
+}
+
+.level-label:not(:first-child) {
+    margin-left: 25px;
+}
+
+.question {
+	font-size: 30px;
+	margin-top: 10px;
+}
+
+.options {
+	margin-top: 30px;
+}
+
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
 
@@ -512,40 +655,64 @@ section.content {
 	
 	 .select-ctr {
 		height: 0px;
-		margin-top: 10px;
+		margin-top: -10px;
 		width: 99%
 	}		
 	
 	.select-ctr > div.input-preview {
-		font-size: 25px;
+		font-size: 21px;
 	}
 	
-	.select-ctr > div.input {
-		font-size: 25px;
+	.select-ctr > div > div.input {
+		font-size: 21px;
 	}
 	
-	.select-ctr .input-1 {
-		top: 112px;
+	.input-1 {
+		margin-top: -30px;
 	}
 	
-	.select-ctr .input-2 {
-		top: 196px;
+	.input-2 {
+		margin-top: 45px;
 	}
 	
-	.select-ctr .input-3 {
-		top: 280px;
+	.input-3 {
+		margin-top: 120px;
 	}
 	
-	.select-ctr .input-4 {
-		top: 364px;
+	.input-4 {
+		margin-top: 195px;
 	}
 	
-	.select-ctr .input-5 {
-		top: 448px;
+	.input-5 {
+		margin-top: 270px;
 	}
 	
-	.select-ctr .input-6 {
-		top: 532px;
+	.input-6 {
+		margin-top: 345px;
+	}
+	
+	.input-1-after-radio-buttons {
+		margin-top: -15px;
+	}
+	
+	.input-2-after-radio-buttons {
+		margin-top: 60px;
+	}
+	
+	.input-3-after-radio-buttons {
+		margin-top: 135px;
+	}
+	
+	.input-4-after-radio-buttons {
+		margin-top: 210px;
+	}
+	
+	.input-5-after-radio-buttons {
+		margin-top: 285px;
+	}
+	
+	.input-6-after-radio-buttons {
+		margin-top: 360px;
 	}
 	
 	.headline {
@@ -556,8 +723,8 @@ section.content {
 	padding-top: 10px;
 }
 
-.flex-container {
-    min-height: 630px;
+.left-col {
+	min-height: 630px;
 }
 
 footer {
@@ -567,6 +734,15 @@ footer {
 
 .two-lines { display: inline-block; }
     .one-line { display: none; }
+	
+	.btn-radio {
+    display: block;
+    float: none;
+}
+
+.cntr {
+	padding: 0px 20px 0px 20px;
+}
 
 }
 
@@ -604,32 +780,56 @@ footer {
 		font-size: 30px;
 	}
 	
-	.select-ctr > div.input {
+	.select-ctr > div > div.input {
 		font-size: 30px;
 	}
 	
-	.select-ctr .input-1 {
-		top: 140px;
+		.input-1 {
+		margin-top: -30px;
 	}
 	
-	.select-ctr .input-2 {
-		top: 245px;
+	.input-2 {
+		margin-top: 45px;
 	}
 	
-	.select-ctr .input-3 {
-		top: 350px;
+	.input-3 {
+		margin-top: 120px;
 	}
 	
-	.select-ctr .input-4 {
-		top: 455px;
+	.input-4 {
+		margin-top: 195px;
 	}
 	
-	.select-ctr .input-5 {
-		top: 560px;
+	.input-5 {
+		margin-top: 270px;
 	}
 	
-	.select-ctr .input-6 {
-		top: 665px;
+	.input-6 {
+		margin-top: 345px;
+	}
+	
+	.input-1-after-radio-buttons {
+		margin-top: -15px;
+	}
+	
+	.input-2-after-radio-buttons {
+		margin-top: 60px;
+	}
+	
+	.input-3-after-radio-buttons {
+		margin-top: 135px;
+	}
+	
+	.input-4-after-radio-buttons {
+		margin-top: 210px;
+	}
+	
+	.input-5-after-radio-buttons {
+		margin-top: 285px;
+	}
+	
+	.input-6-after-radio-buttons {
+		margin-top: 360px;
 	}
 	
 	.headline {
@@ -640,8 +840,8 @@ footer {
 	padding-top: 30px;
 }
 
-.flex-container {
-    min-height: 790px;
+.left-col {
+	min-height: 790px;
 }
 
 footer {
@@ -651,6 +851,11 @@ footer {
 
 .two-lines { display: inline-block; }
     .one-line { display: none; }
+	
+	.cntr {
+		display: flex;
+		justify-content: center;
+	}
 
 }
 
@@ -668,7 +873,7 @@ footer {
 	  .select-ctr {
 		height: 0px;
 		margin-top: 0px;
-		width: 60%
+		width: 80%
 	}		
 	
 		.navbar-custom .navbar-brand {
@@ -708,39 +913,63 @@ footer {
 	   .select-ctr {
 		height: 0px;
 		margin-top: 10px;
-		width: 60%
+		width: 80%
 	}		
 	
 	.select-ctr > div.input-preview {
 		font-size: 30px;
 	}
 	
-	.select-ctr > div.input {
+	.select-ctr > div > div.input {
 		font-size: 30px;
 	}
 	
-	.select-ctr .input-1 {
-		top: 115px;
+	.input-1 {
+		margin-top: -55px;
 	}
 	
-	.select-ctr .input-2 {
-		top: 200px;
+	.input-2 {
+		margin-top: 30px;
 	}
 	
-	.select-ctr .input-3 {
-		top: 285px;
+	.input-3 {
+		margin-top: 115px;
 	}
 	
-	.select-ctr .input-4 {
-		top: 370px;
+	.input-4 {
+		margin-top: 200px;
 	}
 	
-	.select-ctr .input-5 {
-		top: 455px;
+	.input-5 {
+		margin-top: 285px;
 	}
 	
-	.select-ctr .input-6 {
-		top: 540px;
+	.input-6 {
+		margin-top: 370px;
+	}
+	
+	.input-1-after-radio-buttons {
+		margin-top: -10px;
+	}
+	
+	.input-2-after-radio-buttons {
+		margin-top: 75px;
+	}
+	
+	.input-3-after-radio-buttons {
+		margin-top: 160px;
+	}
+	
+	.input-4-after-radio-buttons {
+		margin-top: 245px;
+	}
+	
+	.input-5-after-radio-buttons {
+		margin-top: 330px;
+	}
+	
+	.input-6-after-radio-buttons {
+		margin-top: 415px;
 	}
 	
 	.headline {
@@ -752,8 +981,8 @@ footer {
 	padding-top: 30px;
 }
 
-.flex-container {
-    min-height: 650px;
+.left-col {
+	min-height: 650px;
 }
 
 footer {
