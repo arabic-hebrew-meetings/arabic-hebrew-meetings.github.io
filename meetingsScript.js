@@ -39,7 +39,7 @@ function getRecommendedRooms(nativeLanguage, levelRooms) {
 	var levelCounters = [];
 	for (i in levelRooms) {
 		var counter = getCounterByNativeLanguageAndRoom(nativeLanguage, levelRooms[i]);
-		if (isNaN(counter)) {
+		if (counter == "" || isNaN(counter)) {
 			validCounters = false;
 		} else {
 			levelCounters.push(counter);
@@ -434,7 +434,7 @@ function displayRecommendedOptions(userLang, userLevel) {
 		}
 		
 		// build cur option
-		curOption = `<div onclick="openMeeting('`+url+`','`+data+`')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
+		curOption = `<div onclick="openMeeting('`+url+`','`+data+`','Recommended')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
 		options += curOption;
 	}
 	
@@ -490,7 +490,7 @@ function displayMoreOptions(userLang, userLevel, chosenData) {
 		}
 		
 		// build cur option
-		curOption = `<div onclick="openMeeting('`+url+`','`+data+`')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
+		curOption = `<div onclick="openMeeting('`+url+`','`+data+`','Other')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
 		options += curOption;
 	}
 	
@@ -522,7 +522,7 @@ function saveMeetingsActions(userLang, userLevel, userChoice, data) {
 	}
 }
 
-function saveMeetingAction(data) {
+function saveMeetingAction(data, roomType) {
 	
 	var nativeLanguage = "";
 	var otherLanguage = "";
@@ -579,11 +579,11 @@ function saveMeetingAction(data) {
 		var languageLevel = otherLanguage+"-"+level;
 		var languageInRoom = "Room"+roomNumber+"-"+nativeLanguage;
 	
-		saveMeetingEntry(nativeLanguage, languageLevel, languageInRoom, "Room-"+roomNumber);
+		saveMeetingEntry(nativeLanguage, languageLevel, languageInRoom, "Room-"+roomNumber, roomType);
 }
 
-function openMeeting(url, data) {
-	saveMeetingAction(data);
+function openMeeting(url, data, roomType) {
+	saveMeetingAction(data, roomType);
 	window.open(url, '_blank');
 }
 
