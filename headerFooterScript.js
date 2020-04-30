@@ -87,10 +87,6 @@ function doSaveAction(siteLocation, action, params, createNewSessionIfNeeded, sa
 }
 
 function saveMeetingEntry(nativeLanguage, level, languageInRoom, roomNumber){
-	console.log(nativeLanguage);
-	console.log(level);
-	console.log(languageInRoom);
-	console.log(roomNumber);
 	var sessionId = getSessionId("meetings", true);
 	if (sessionId == "") {
 		sessionId = "anonymous";
@@ -177,9 +173,6 @@ let guid = () => {
 }
 
 function openUrl(siteLocation, locationOnPage, url) {
-	console.log("openUrl");
-	console.log(siteLocation)
-	console.log(url)
 	saveAction(siteLocation, "open_url", {url: url, locationOnPage: locationOnPage});
 	location.href= url;
 }

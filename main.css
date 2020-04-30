@@ -443,8 +443,8 @@ padding: 20px 20px 20px 20px;
   box-shadow: 0 2px 15px 3px rgba(0, 0, 0, 0.1);
   font-size: 200%;
 }
-.select-ctr > div > div.input.active { /* what is this? */
-  color: red;
+.select-ctr > div > div.input.active { /* color of option text after clicking on it */
+  color: black;
 }
 .select-ctr > div.input-preview { /* question before clicking on it */
   color: black;
@@ -617,6 +617,12 @@ section.content {
 .display-under-600px { display: none !important; }
 .display-above-600px { display: inline-block !important; }
 
+.optionsHeadline {
+	text-align: right;
+	font-size: 25px !important;
+	visibility: hidden;
+}
+
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
 
@@ -657,6 +663,10 @@ section.content {
 	
 	.select-ctr > div > div.input {
 		font-size: 21px;
+	}
+	
+	.optionsHeadline {
+		font-size: 21px !important;
 	}
 	
 	.input-1 {
@@ -733,7 +743,7 @@ footer {
 }
 
 .cntr {
-	padding: 0px 0px 0px 0px;
+	padding: 0px 0px 15px 0px;
 }
 
 	.option-1-hebrew {
