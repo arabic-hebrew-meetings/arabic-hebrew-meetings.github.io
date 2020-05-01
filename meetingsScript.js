@@ -33,31 +33,54 @@ function getCounterByNativeLanguageAndRoom(language, room) {
 }
 
 function getRecommendedRooms(nativeLanguage, levelRooms) {
+	// first we want to recommend rooms with the least number of people with the same language as you
+	var minSameLangRooms = getMinOrMaxRoomsByLanguage(nativeLanguage, levelRooms, true);
+	if (minSameLangRooms.length == 1) {
+		return minSameLangRooms;
+	} else {
+		// if there is a tie between a few rooms, then we try to recommend between these rooms
+		// the room with most people that speak the other language
+		var otherLanguage = "Arabic";
+		if (nativeLanguage == "Arabic") {
+			otherLanguage = "Hebrew";
+		}
+		var maxOtherLangRooms = getMinOrMaxRoomsByLanguage(otherLanguage, minSameLangRooms, false);
+		return maxOtherLangRooms;
+	}
+}
+
+function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 	var result = [];
-	var min = -1; 
+	var bestCount = -1; 
 	var validCounters = true;
 	var levelCounters = [];
-	for (i in levelRooms) {
-		var counter = getCounterByNativeLanguageAndRoom(nativeLanguage, levelRooms[i]);
-		if (counter == "" || isNaN(counter)) {
+	for (i in rooms) {
+		var counter = getCounterByNativeLanguageAndRoom(language, rooms[i]);
+		if (counter == "" || isNaN(counter) || counter < 0) {
 			validCounters = false;
 		} else {
 			levelCounters.push(counter);
-			if (min == -1 || counter < min) {
-				min = counter;
+			if (findMin) {
+				if (bestCount == -1 || counter < bestCount) {
+					bestCount = counter;
+				}
+			} else {
+				if (counter > bestCount) {
+					bestCount = counter;
+				}
 			}
 		}
 	}
 	
 	if (validCounters) {
-		for (i in levelRooms) {
-			if (levelCounters[i] == min) {
-				result.push(levelRooms[i]);
+		for (i in rooms) {
+			if (levelCounters[i] == bestCount) {
+				result.push(rooms[i]);
 			}
 		}
 	} else {
-		for (i in levelRooms) {	
-			result.push(levelRooms[i]);
+		for (i in rooms) {	
+			result.push(rooms[i]);
 		}
 	}
 
