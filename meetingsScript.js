@@ -9,7 +9,7 @@ function initialize() {
 var meetingsCounters = [];
 
 function updateMeetingCounters() {
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/2:2?key=AIzaSyCO7oL3OUci3vbOZ1MXXLoxdTZCLKGPv60";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/2:2?key=AIzaSyCO7oL3OUci3vbOZ1MXXLoxdTZCLKGPv60bla";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
