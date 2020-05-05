@@ -2,22 +2,195 @@
 $(document).ready(initialize);
 
 function initialize() {
-    doSomething("", "", "");
-    updateMeetingCounters();
+	updateNextMeetingInfo(true);
 }
 
+var nextMeetingInfo = ["UTC Meeting time:","May 6, 2020 18:00:00","Meeting time text in Arabic:","يوم الأربعاء","Meeting time text in Hebrew:","יום רביעי","Meeting date hour:","06/05 21:00"];
+var isMeetingStarted = false;
 var meetingsCounters = [];
+var roomsOpenStatus = ["Open","Open","Open"];
+var roomsUrls = [
+"https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
+"https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
+"https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09"
+];
 
-function updateMeetingCounters() {
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/2:2?key=AIzaSyCO7oL3OUci3vbOZ1MXXLoxdTZCLKGPv60bla";                                                             
+function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!3:16?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
-			meetingsCounters = field[0];
+			meetingsCounters = field[1];
+			roomsOpenStatus = field[7];
+			roomsUrls = field[13];
 		}
     });
+  })
+  .fail(function(xhr, status, error) {
+	  console.log("failed to update data");
+	  console.log(xhr.responseText)
+  })
+  .always(function() {
+	  
+//	  setTimeout(function() {
+//		displayRecommendedOptions(userLang, userLevel);
+//		displayMenu(userLang, userLevel, userChoice, chosenData);
+//	}, 10000);
+	  
+	  displayRecommendedOptions(userLang, userLevel);
+	  displayMenu(userLang, userLevel, userChoice, chosenData);
   }); 
-  setTimeout(updateMeetingCounters, 5000);
+}
+
+function updateNextMeetingInfo(isFirstCall) {
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:2?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+  $.getJSON(url, function(result){
+    $.each(result, function(i, field){
+		if (i == "values") {
+			nextMeetingInfo = field[1];
+		}
+    });
+  })
+  .fail(function(xhr, status, error) {
+	  console.log("failed to update meeting start time");
+	  console.log(xhr.responseText)
+  })
+  .always(function() {
+	  if (isFirstCall) {
+		  handleCountdown();
+	  }
+  }); 
+  setTimeout(updateNextMeetingInfo, 600000); // update every 10 minutes
+}
+
+function handleCountdown() {
+	try {
+		// Set the date we're counting down to
+		var meetingStartTime = nextMeetingInfo[1];
+		var countdownDate = new Date(meetingStartTime).getTime();
+		
+		if (isNaN(countdownDate)) {
+			throw "Countdown is NaN";
+		}
+
+		// Get today's date and time
+		var now = new Date();
+		var nowUTC = new Date(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds()).getTime();
+
+		// Find the distance between now and the count down date
+		var distance = countdownDate - nowUTC;
+			
+		// If the count down is finished, write some text
+		if (distance < 0) {
+			if (!isMeetingStarted) {
+				// Starting meeting now
+				isMeetingStarted = true;
+				handleChoice("", "", "");			
+			} else {
+				// Meeting already started, no need to do anything
+			}
+			setTimeout(handleCountdown, 60000); // check every minute if we need to update the count again
+		} else {
+			isMeetingStarted = false;
+			//calculate countdown and display it
+			displayCountdown(distance);
+			setTimeout(handleCountdown, 1000); // Update the count down every 1 second
+		}		
+	}
+	catch(err) {
+		console.log("failed to handle countdown");
+		console.log(err);
+		if (!isMeetingStarted) {
+			// Starting meeting now
+			isMeetingStarted = true;
+			handleChoice("", "", "");				
+		} else {
+			// Meeting already started, no need to do anything
+		}
+		setTimeout(handleCountdown, 60000); // check every minute if we need to update the count again
+	}
+}
+
+function displayCountdown(distance) {
+	// Time calculations for days, hours, minutes and seconds
+	var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+	var countdown = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+	
+	document.getElementById("subheadline").innerHTML = ``
+	document.getElementById("question-area").innerHTML =  `
+		<div class='select-ctr'>
+		  <div class='selected-input input-preview'></div>
+		  
+		  <div id="before-countdown" class="countdown-message before-countdown"></div>
+		  <ul class="countdown ltr">
+			<li>
+				<span id="days" class="days">00</span>
+				<p id="days_ref" class="days_ref">days</p>
+			</li>
+			<li class="seperator">.</li>
+			<li>
+				<span id="hours" class="hours">00</span>
+				<p id="hours_ref" class="hours_ref">hours</p>
+			</li>
+			<li class="seperator">:</li>
+			<li>
+				<span id="minutes" class="minutes">00</span>
+				<p id="minutes_ref" class="minutes_ref">minutes</p>
+			</li>
+			<li class="seperator">:</li>
+			<li>
+				<span id="seconds" class="seconds">00</span>
+				<p id="seconds_ref" class="seconds_ref">seconds</p>
+			</li>
+		  </ul>
+		  <div id="after-countdown" class="countdown-message after-countdown"></div>
+		  
+		</div>
+		`;
+		
+	var stillNotTimeHebrew = "המפגש עדיין לא התחיל!";
+	var stillNotTimeArabic = "اللقاء لسا ما بدا!";
+	var meetingDayHebrew = nextMeetingInfo[5];
+	var meetingDayArabic = nextMeetingInfo[3];
+	var meetingDateHour = nextMeetingInfo[7];	
+		
+	countdowText = stillNotTimeHebrew + "<br>" + stillNotTimeArabic + "<br>"
+		+ "<br>"
+		+ "<span style='color:green;'>" + countdown + "</span>" + "<br>"
+		+ "<br>"
+		+ meetingDayHebrew + "<br>" + meetingDayArabic + "<br>" + meetingDateHour;	
+		
+	var textBeforeCountdown	= stillNotTimeHebrew + "<br>" + stillNotTimeArabic;
+	var textAfterCountdown = meetingDayHebrew + "<br>" + meetingDayArabic + "<br>" + meetingDateHour;
+		
+	// based on the date change the refrence wording
+    var ref_days = (days === 1) ? 'day' : 'days',
+    ref_hours = (hours === 1) ? 'hour' : 'hours',
+    ref_minutes = (minutes === 1) ? 'minute' : 'minutes',
+    ref_seconds = (seconds === 1) ? 'second' : 'seconds';
+	
+	document.getElementById("before-countdown").innerHTML = textBeforeCountdown;
+	
+    document.getElementById("days").innerHTML = days;
+	document.getElementById("hours").innerHTML = hours;
+	document.getElementById("minutes").innerHTML = minutes;
+	document.getElementById("seconds").innerHTML = seconds;
+	
+	document.getElementById("days_ref").innerHTML = ref_days;
+	document.getElementById("hours_ref").innerHTML = ref_hours;
+	document.getElementById("minutes_ref").innerHTML = ref_minutes;
+	document.getElementById("seconds_ref").innerHTML = ref_seconds;
+	
+	document.getElementById("after-countdown").innerHTML = textAfterCountdown;
+		
+	//document.getElementById("countdown").innerHTML = countdowText;
+	
+	var leftColElem = document.getElementById("leftCol")
+	leftColElem.style.minHeight = "500px";
 }
 
 function getCounterByNativeLanguageAndRoom(language, room) {
@@ -33,20 +206,32 @@ function getCounterByNativeLanguageAndRoom(language, room) {
 }
 
 function getRecommendedRooms(nativeLanguage, levelRooms) {
+	var result = [];
+	if (levelRooms.length == 0) {
+		return result;
+	}
 	// first we want to recommend rooms with the least number of people with the same language as you
 	var minSameLangRooms = getMinOrMaxRoomsByLanguage(nativeLanguage, levelRooms, true);
 	if (minSameLangRooms.length == 1) {
 		return minSameLangRooms;
-	} else {
-		// if there is a tie between a few rooms, then we try to recommend between these rooms
-		// the room with most people that speak the other language
-		var otherLanguage = "Arabic";
-		if (nativeLanguage == "Arabic") {
-			otherLanguage = "Hebrew";
-		}
-		var maxOtherLangRooms = getMinOrMaxRoomsByLanguage(otherLanguage, minSameLangRooms, false);
+	}
+	// if there is a tie between a few rooms, then we try to recommend between these rooms
+	// the room with most people that speak the other language
+	var otherLanguage = "Arabic";
+	if (nativeLanguage == "Arabic") {
+		otherLanguage = "Hebrew";
+	}
+	var maxOtherLangRooms = getMinOrMaxRoomsByLanguage(otherLanguage, minSameLangRooms, false);
+	if (maxOtherLangRooms.length == 1) {
 		return maxOtherLangRooms;
 	}
+	// if there is still a tiew between a few rooms,
+	// then we just pick one randomly
+	if (maxOtherLangRooms.length > 0) {
+		var room = maxOtherLangRooms[Math.floor(Math.random() * maxOtherLangRooms.length)];
+		result.push(room);
+	}
+	return result;
 }
 
 function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
@@ -87,8 +272,7 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 	return result;
 }
 
-function doSomething(userLang, userLevel, userChoice, chosenData) {
-	handleChoice(userLang, userLevel, userChoice, chosenData);
+function displayMenu(userLang, userLevel, userChoice, chosenData) {
 	
 		  var inputPreview = $(".input-preview"),
       input = $(".input");
@@ -137,14 +321,6 @@ function doSomething(userLang, userLevel, userChoice, chosenData) {
 		  
 
 		function done() {
-		  inputPreview.removeClass("active");
-		  that.css("top", top).addClass("active");
-
-		  TweenMax.set(input, {
-			scale: 1.2,
-			alpha: 0,
-			backgroundColor: "#fff"
-		  });
 		  
 		  var nativeLanguage = "";
 		  var level = "";
@@ -166,48 +342,48 @@ function doSomething(userLang, userLevel, userChoice, chosenData) {
 		  
 		  
 		  if (data=="Choose-Native-Language-Back") {
-			  return doSomething("", "", "Back", data);
+			  return handleChoice("", "", "Back", data);
 		  }
 		  
 		  if (data=="Arabic") {
-			  return doSomething("Arabic", "", "", data);
+			  return handleChoice("Arabic", "", "", data);
 		  }
 		  
 		  if (data=="Hebrew") {
-			  return doSomething("Hebrew", "", "", data);
+			  return handleChoice("Hebrew", "", "", data);
 		  }
 		  
 		  if (data.includes("H-Native-A-Beginner-Room")) {
-			  return doSomething("Hebrew","Beginner","Room", data);
+			  return handleChoice("Hebrew","Beginner","Room", data);
 		  }
 		  
 		  if (data.includes("H-Native-A-Intermediate-Room")) {
-			  return doSomething("Hebrew","Intermediate","Room", data);
+			  return handleChoice("Hebrew","Intermediate","Room", data);
 		  }
 		  
 		  
 		  if (data.includes("H-Native-A-Advanced-Room")) {
-			  return doSomething("Hebrew","Advanced","Room", data);
+			  return handleChoice("Hebrew","Advanced","Room", data);
 		  }
 		  
 		  if (data.includes("A-Native-H-Beginner-Room")) {
-			  return doSomething("Arabic","Beginner","Room", data);
+			  return handleChoice("Arabic","Beginner","Room", data);
 		  }
 		  
 		  if (data.includes("A-Native-H-Intermediate-Room")) {
-			  return doSomething("Arabic","Intermediate","Room", data);
+			  return handleChoice("Arabic","Intermediate","Room", data);
 		  }
 		  
 		  if (data.includes("A-Native-H-Advanced-Room")) {
-			  return doSomething("Arabic","Advanced","Room", data);
+			  return handleChoice("Arabic","Advanced","Room", data);
 		  }
 		  
 		  if (data.includes("MoreOptions")) {
-			  return doSomething(nativeLanguage,level,"More", data);
+			  return handleChoice(nativeLanguage,level,"More", data);
 		  }
 		  
 		  if (data.includes("-Recommended-Back")) {
-			  return doSomething(nativeLanguage,level);
+			  return handleChoice(nativeLanguage,level);
 		  }
 		
 		}
@@ -216,7 +392,17 @@ function doSomething(userLang, userLevel, userChoice, chosenData) {
 }
 }
 
+function fadeOutMenu() {
+	input = $(".input");
+	TweenMax.set(input, {
+			scale: 1.2,
+			alpha: 0,
+			backgroundColor: "#fff"
+		  });
+}
+
 function handleChoice(userLang, userLevel, userChoice, chosenData) {
+	fadeOutMenu();
 	saveMeetingsActions(userLang, userLevel, userChoice, chosenData);
 	if (userChoice != "Room") {
 		if (userLang != null && userLang != "") {
@@ -224,7 +410,9 @@ function handleChoice(userLang, userLevel, userChoice, chosenData) {
 				if (userChoice == "More") {
 					displayMoreOptions(userLang, userLevel, chosenData);
 				} else {
-					displayRecommendedOptions(userLang, userLevel);
+					updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData);
+					// display menu will happen after trying to update data
+					return;
 				}
 			} else {
 				displayLevelOptions(userLang);
@@ -233,7 +421,9 @@ function handleChoice(userLang, userLevel, userChoice, chosenData) {
 			displayChooseNativeLanguage();
 		}
 	}
+	displayMenu(userLang, userLevel, userChoice, chosenData);
 }
+
 
 function displayChooseNativeLanguage() {
 	document.getElementById("subheadline").innerHTML = `
@@ -261,6 +451,9 @@ function displayChooseNativeLanguage() {
 		  </div>
 		</div>
 		`;
+		
+	var lastOptionClass = '.input-2'
+	tryToFixLeftColMinHeight(lastOptionClass);
 }
 
 function displayLevelOptions(userLang) {
@@ -272,7 +465,7 @@ function displayLevelOptions(userLang) {
 		  
 		  <div class="cntr rtl display-above-600px">
 			<label for="rdo-1" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Advanced')" id="rdo-1" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Advanced')" id="rdo-1" name="radio-grp">
 			  <svg class="option-1-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -281,7 +474,7 @@ function displayLevelOptions(userLang) {
 			  <span>רמה מתקדמת</span>
 			</label>
 			<label for="rdo-2" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Intermediate')" id="rdo-2" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Intermediate')" id="rdo-2" name="radio-grp">
 			  <svg class="option-2-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -290,7 +483,7 @@ function displayLevelOptions(userLang) {
 			  <span>רמה בינונית</span>
 			</label>
 			<label for="rdo-3" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Beginner')" id="rdo-3" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Beginner')" id="rdo-3" name="radio-grp">
 			  <svg class="option-3-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -302,7 +495,7 @@ function displayLevelOptions(userLang) {
 		  
 		  <div class="cntr rtl display-under-600px">
 			<label for="rdo-4" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Beginner')" id="rdo-4" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Beginner')" id="rdo-4" name="radio-grp">
 			  <svg class="option-1-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -311,7 +504,7 @@ function displayLevelOptions(userLang) {
 			  <span>רמה בסיסית</span>
 			</label>
 			<label for="rdo-5" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Intermediate')" id="rdo-5" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Intermediate')" id="rdo-5" name="radio-grp">
 			  <svg class="option-2-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -320,7 +513,7 @@ function displayLevelOptions(userLang) {
 			  <span>רמה בינונית</span>
 			</label>
 			<label for="rdo-6" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Hebrew','Advanced')" id="rdo-6" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Hebrew','Advanced')" id="rdo-6" name="radio-grp">
 			  <svg class="option-3-hebrew" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -330,7 +523,7 @@ function displayLevelOptions(userLang) {
 			</label>
 		  </div>
 		  
-		  <div class="optionsHeadline" id="optionsHeadline">הקבוצות המומלצות לך:</div>
+		  <div class="optionsHeadline" id="optionsHeadline">הקבוצה המומלצת לך:</div>
 		  
 		  <div class="options" id="options">
 		  <div class='input input-1-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
@@ -346,7 +539,7 @@ function displayLevelOptions(userLang) {
 		  
 		  <div class="cntr rtl display-above-600px">
 			<label for="rdo-1" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Advanced')" id="rdo-1" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Advanced')" id="rdo-1" name="radio-grp">
 			  <svg class="option-1-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -355,7 +548,7 @@ function displayLevelOptions(userLang) {
 			  <span>مستوى متقدم</span>
 			</label>
 			<label for="rdo-2" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Intermediate')" id="rdo-2" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Intermediate')" id="rdo-2" name="radio-grp">
 			  <svg class="option-2-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -364,7 +557,7 @@ function displayLevelOptions(userLang) {
 			  <span>مستوى متوسط</span>
 			</label>
 			<label for="rdo-3" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Beginner')" id="rdo-3" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Beginner')" id="rdo-3" name="radio-grp">
 			  <svg class="option-3-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -376,7 +569,7 @@ function displayLevelOptions(userLang) {
 		  
 		  <div class="cntr rtl display-under-600px">
 			<label for="rdo-4" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Beginner')" id="rdo-4" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Beginner')" id="rdo-4" name="radio-grp">
 			  <svg class="option-1-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -385,7 +578,7 @@ function displayLevelOptions(userLang) {
 			  <span>مستوى منخفض</span>
 			</label>
 			<label for="rdo-5" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Intermediate')" id="rdo-5" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Intermediate')" id="rdo-5" name="radio-grp">
 			  <svg class="option-2-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -394,7 +587,7 @@ function displayLevelOptions(userLang) {
 			  <span>مستوى متوسط</span>
 			</label>
 			<label for="rdo-6" class="btn-radio level-label">
-			  <input type="radio" onclick="doSomething('Arabic','Advanced')" id="rdo-6" name="radio-grp">
+			  <input type="radio" onclick="handleChoice('Arabic','Advanced')" id="rdo-6" name="radio-grp">
 			  <svg class="option-3-arabic" width="20px" height="20px" viewBox="0 0 20 20">
 				<circle cx="10" cy="10" r="9"></circle>
 				<path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
@@ -404,7 +597,7 @@ function displayLevelOptions(userLang) {
 			</label>
 		  </div>
 		  
-		  <div class="optionsHeadline" id="optionsHeadline">المجموعات المقترحة لك:</div>
+		  <div class="optionsHeadline" id="optionsHeadline">المجموعة المقترحة لك:</div>
 		  
 		  <div class="options" id="options">
 		  <div class='input input-1-after-radio-buttons' data-val='Choose-Native-Language-Back'>Back</div>
@@ -412,49 +605,33 @@ function displayLevelOptions(userLang) {
 		</div>
 		`
 	}
+	var lastOptionClass = '.input-1-after-radio-buttons'
+	tryToFixLeftColMinHeight(lastOptionClass);
 }
 
 function displayRecommendedOptions(userLang, userLevel) {
 	
-	// get possible rooms
-	possibleRooms = [];
-	levelMeetings = meetings[userLang][userLevel];
-	for (meeting of levelMeetings) {
-		room = meeting["room"];
-		possibleRooms.push(room);
-	}
+	// get all possible open rooms
+	var openRooms = getAllOpenRoomsByLangLevel(userLang, userLevel);
 	
 	// get recommended rooms
-	recommendedRooms = getRecommendedRooms(userLang, possibleRooms);
+	recommendedRooms = getRecommendedRooms(userLang, openRooms);
 	
 	// get other rooms
 	otherRooms = [];
-	for (meeting of levelMeetings) {
-		room = meeting["room"];
-		isRecRoom = false;
-		for (recRoom of recommendedRooms) {
-			if (room == recRoom) {
-					isRecRoom = true;
-			}
+	for (openRoom of openRooms) {
+		if (!recommendedRooms.includes(openRoom)) {
+			otherRooms.push(openRoom);
 		}
-		if (!isRecRoom) {
-			otherRooms.push(room);
-		}	
 	}
 	
 	options = ``;
 	for (i = 0; i < recommendedRooms.length; i++) {
 		
 		// get url and data
-		url = "";
-		data = "";
  		roomNumber = recommendedRooms[i]
-		for (meeting of levelMeetings) {
-			if (roomNumber == meeting["room"]) {
-				url = meeting["url"];
-				data = meeting["data"];
-			}
-		}
+		var data = buildDataString(userLang, userLevel, roomNumber);
+		var url = getRoomUrl(roomNumber);
 		
 		// build cur option
 		curOption = `<div onclick="openMeeting('`+url+`','`+data+`','Recommended')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
@@ -488,6 +665,9 @@ function displayRecommendedOptions(userLang, userLevel) {
 	optionsHeadline.style.visibility="visible";
 	
 	document.getElementById("options").innerHTML = options;
+	
+	var lastOptionClass = '.input-'+backOptionOrder+'-after-radio-buttons'
+	tryToFixLeftColMinHeight(lastOptionClass);
 }
 
 function displayMoreOptions(userLang, userLevel, chosenData) {
@@ -498,19 +678,12 @@ function displayMoreOptions(userLang, userLevel, chosenData) {
 	otherRooms = otherRoomsStr.split("_");
 	
 	// build other rooms options
-	levelMeetings = meetings[userLang][userLevel];
 	for (i = 0; i < otherRooms.length; i++) {
 		
 		// get url and data
-		url = "";
-		data = "";
  		roomNumber = otherRooms[i]
-		for (meeting of levelMeetings) {
-			if (roomNumber == meeting["room"]) {
-				url = meeting["url"];
-				data = meeting["data"];
-			}
-		}
+		var data = buildDataString(userLang, userLevel, roomNumber);
+		var url = getRoomUrl(roomNumber);
 		
 		// build cur option
 		curOption = `<div onclick="openMeeting('`+url+`','`+data+`','Other')" class='input input-`+(i+1)+`-after-radio-buttons' data-val='`+data+`'>`+getGroupTextByLang(userLang)+``+roomNumber+`</div>`;
@@ -520,13 +693,35 @@ function displayMoreOptions(userLang, userLevel, chosenData) {
 	// build back option
 	var backOptionOrder = otherRooms.length+1;
 	var backData = userLang+"-"+userLevel+"-Recommended-Back";
-	backOption = `<div class='input input-`+backOptionOrder+`-after-radio-buttons' data-val='`+backData+`k'>Back</div>`;
+	backOption = `<div id="back-button" class='input input-`+backOptionOrder+`-after-radio-buttons' data-val='`+backData+`k'>Back</div>`;
 	options += backOption;
 	
 	document.getElementById("optionsHeadline").innerHTML = getMoreGroupsTextByLang(userLang)+":";
 	
 	document.getElementById("options").innerHTML = options;
+	
+	var lastOptionClass = '.input-'+backOptionOrder+'-after-radio-buttons'
+	tryToFixLeftColMinHeight(lastOptionClass);
 }	
+
+function tryToFixLeftColMinHeight(lastOptionClass) {
+	try {
+		var classElem = document.querySelector(lastOptionClass);
+		var classStyle = getComputedStyle(classElem);
+		var lastElemMarginTop = classStyle.marginTop
+		var leftColMinHeight = "";
+		if (lastElemMarginTop.includes("px")) {
+			leftColMinHeight = (parseInt(lastElemMarginTop.split("px")[0]) + 400).toString() + "px";
+		}
+		var leftColElem = document.getElementById("leftCol")
+		leftColElem.style.minHeight = leftColMinHeight;
+	}
+	catch(err) {
+		console.log(err);
+		console.log("failed to fix left col min height");
+		//we ignore and just don't fix left col min height
+	}
+}
 
 function saveMeetingsActions(userLang, userLevel, userChoice, data) {
 	
@@ -610,85 +805,6 @@ function openMeeting(url, data, roomType) {
 	window.open(url, '_blank');
 }
 
-var meetings = {
-  Arabic: {
-	  Beginner: [
-	  {
-		  room: 1,
-		  url: "https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
-		  data: "A-Native-H-Beginner-Room-1"
-	  },
-	  {
-		  room: 2,
-		  url: "https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
-		  data: "A-Native-H-Beginner-Room-2"
-	  }
-	  ],
-	  Intermediate: [
-	  {
-		  room: 3,
-		  url: "https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09",
-		  data: "A-Native-H-Intermediate-Room-3"
-	  },
-	  {
-		  room: 4,
-		  url: "https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09",
-		  data: "A-Native-H-Intermediate-Room-4"
-	  }
-	  ],
-	  Advanced: [
-	  {
-		  room: 5,
-		  url: "https://zoom.us/j/99912994947?pwd=UXRNbWxiNk5SaVBmZ21kTWpCejZHZz09",
-		  data: "A-Native-H-Advanced-Room-5"
-	  },
-	  {
-		  room: 6,
-		  url: "https://zoom.us/j/91520797765?pwd=MzVvYlZ6Q3lNM3diZzBPRTFWQjlsdz09",
-		  data: "A-Native-H-Advanced-Room-6"
-	  }
-	  ]
-  },
-  Hebrew: {
-	  Beginner: [
-	  {
-		  room: 5,
-		  url: "https://zoom.us/j/99912994947?pwd=UXRNbWxiNk5SaVBmZ21kTWpCejZHZz09",
-		  data: "H-Native-A-Beginner-Room-5"
-	  },
-	  {
-		  room: 6,
-		  url: "https://zoom.us/j/91520797765?pwd=MzVvYlZ6Q3lNM3diZzBPRTFWQjlsdz09",
-		  data: "H-Native-A-Beginner-Room-6"
-	  }
-	  ],
-	  Intermediate: [
-	  {
-		  room: 3,
-		  url: "https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09",
-		  data: "H-Native-A-Intermediate-Room-3"
-	  },
-	  {
-		  room: 4,
-		  url: "https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09",
-		  data: "H-Native-A-Intermediate-Room-4"
-	  }
-	  ],
-	  Advanced: [
-	  {
-		  room: 1,
-		  url: "https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
-		  data: "H-Native-A-Advanced-Room-1"
-	  },
-	  {
-		  room: 2,
-		  url: "https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
-		  data: "H-Native-A-Advanced-Room-2"
-	  }
-	  ]
-  }
-};
-
 function getGroupTextByLang(language) {
 	if (language == "Hebrew") {
 		return "קבוצה מס' ";
@@ -707,10 +823,57 @@ function getMoreGroupsTextByLang(language) {
 
 function getRecommendedHeadlineByLang(language) {
 	if (language == "Hebrew") {
-		return "הקבוצות המומלצות לך:";
+		return "הקבוצה המומלצת לך:";
 	} else {
-		return "المجموعات المقترحة لك:";
+		return "المجموعة المقترحة لك:";
 	}
 }
+
+function buildDataString(nativeLanguage, level, roomNumber) {
+	result = "A-Native-H";
+	if (nativeLanguage == "Hebrew") {
+		result = "H-Native-A";
+	}
+	result += "-" + level + "-Room-" + roomNumber;
+	return result;
+}
+
+function getRoomUrl(roomNumber) {
+	if (roomsUrls.length >= roomNumber) {
+		return roomsUrls[roomNumber-1];
+	}
+	return "";
+}
+
+function isRoomOpen(roomNumber) {
+	if (roomsOpenStatus.length >= roomNumber) {
+		return roomsOpenStatus[roomNumber-1] == "Open";
+	}
+	return false;
+}
+
+function getAllOpenRoomsByLangLevel(nativeLanguage, level) {
+	allOpenRooms = [];
+	var allPossible = possibleRoomsByLangLevel[nativeLanguage][level]
+	for (roomNumber of allPossible) {
+		if (isRoomOpen(roomNumber)) {
+			allOpenRooms.push(roomNumber);
+		}
+	}
+	return allOpenRooms;
+}
+
+var possibleRoomsByLangLevel = {
+  Arabic: {
+	  Beginner: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+	  Advanced: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+  },
+  Hebrew: {
+	  Beginner: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+	  Advanced: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+  }
+};
 
 	

@@ -115,6 +115,10 @@ footer {
      Padding-left:10px;
 }
 
+.ltr {
+   direction: ltr;
+} 
+
 .rtl {
    direction: rtl;
 } 
@@ -387,55 +391,6 @@ padding: 20px 20px 20px 20px;
   cursor: pointer;
 }
 
-.input-1 {
-  margin-top: 18%;
-}
-
-.input-2 {
-  margin-top: 36%;
-}
-
-.input-3 {
-  margin-top: 54%;
-}
-
-.input-4 {
-  margin-top: 72%;
-}
-
-.input-5 {
-  margin-top: 90%;
-}
-
-.input-6 {
-  margin-top: 108%;
-}
-
-.input-1-after-radio-buttons {
-  margin-top: 18%;
-}
-
-.input-2-after-radio-buttons {
-  margin-top: 36%;
-}
-
-.input-3-after-radio-buttons {
-  margin-top: 54%;
-}
-
-.input-4-after-radio-buttons {
-  margin-top: 72%;
-}
-
-.input-5-after-radio-buttons {
-  margin-top: 90%;
-}
-
-.input-6-after-radio-buttons {
-  margin-top: 108%;
-}
-
-
 .select-ctr > div > div.input {
   background: white; /* color of options background */
   color: black; /* color of options text */
@@ -623,6 +578,45 @@ section.content {
 	visibility: hidden;
 }
 
+ul.countdown {
+	color: #229922;
+	list-style: none;
+	margin: 75px 0;
+	padding: 0;
+	display: block;
+	text-align: center;
+}
+
+ul.countdown li {
+	display: inline-block;
+}
+
+ul.countdown li span {
+	font-size: 80px;
+	font-weight: 300;
+	line-height: 80px;
+}
+
+ul.countdown li.seperator {
+	font-size: 80px;
+	line-height: 70px;
+	vertical-align: top;
+}
+
+ul.countdown li p {
+	color: #229922;
+	font-size: 14px;
+}
+
+.before-countdown {
+	margin-top: -14px;
+    margin-bottom: -50px;
+}
+
+.after-countdown {
+    margin-top: -50px;
+}
+
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
 
@@ -669,6 +663,14 @@ section.content {
 		font-size: 21px !important;
 	}
 	
+		.headline {
+    font-size: 40px;
+}
+	
+	.countdown-message {
+		font-size: 28px;
+	}
+	
 	.input-1 {
 		margin-top: -30px;
 	}
@@ -693,33 +695,46 @@ section.content {
 		margin-top: 345px;
 	}
 	
-	.input-1-after-radio-buttons {
-		margin-top: -15px;
-	}
+	.input-1-after-radio-buttons {		margin-top: -15px;	}
 	
-	.input-2-after-radio-buttons {
-		margin-top: 60px;
-	}
+	.input-2-after-radio-buttons {		margin-top: 60px;	}
 	
-	.input-3-after-radio-buttons {
-		margin-top: 135px;
-	}
+	.input-3-after-radio-buttons {		margin-top: 135px;	}
 	
-	.input-4-after-radio-buttons {
-		margin-top: 210px;
-	}
+	.input-4-after-radio-buttons {		margin-top: 210px;	}
 	
-	.input-5-after-radio-buttons {
-		margin-top: 285px;
-	}
+	.input-5-after-radio-buttons {		margin-top: 285px;	}
 	
-	.input-6-after-radio-buttons {
-		margin-top: 360px;
-	}
+	.input-6-after-radio-buttons {		margin-top: 360px;	}
 	
-	.headline {
-    font-size: 40px;
-}
+	.input-7-after-radio-buttons {		margin-top: 435px;	}
+	
+	.input-8-after-radio-buttons {		margin-top: 510px;	}
+	
+	.input-9-after-radio-buttons {		margin-top: 585px;	}
+	
+	.input-10-after-radio-buttons {		margin-top: 660px;	}
+	
+	.input-11-after-radio-buttons {		margin-top: 735px;	}
+	
+	.input-12-after-radio-buttons {		margin-top: 810px;	}
+	
+	.input-13-after-radio-buttons {		margin-top: 885px;	}
+	
+	.input-14-after-radio-buttons {		margin-top: 960px;	}
+	
+	.input-15-after-radio-buttons {		margin-top: 1035px;	}
+	
+	.input-16-after-radio-buttons {		margin-top: 1110px;	}
+	
+	.input-17-after-radio-buttons {		margin-top: 1185px;	}
+	
+	.input-18-after-radio-buttons {		margin-top: 1260px;	}
+	
+	.input-19-after-radio-buttons {		margin-top: 1335px;	}
+	
+	.input-20-after-radio-buttons {		margin-top: 1410px;	}
+	
 
 .main-div {
 	padding-top: 10px;
@@ -772,6 +787,20 @@ footer {
 	
 	.display-under-600px { display: inline-block !important; }
     .display-above-600px { display: none !important; }
+	
+	ul.countdown li span {
+		font-size: 50px;
+		line-height: 50px;
+	}
+
+	ul.countdown li.seperator {
+		font-size: 50px;
+		line-height: 44px;
+	}
+
+	ul.countdown li p {
+		font-size: 14px;
+	}
 
 }
 
@@ -813,6 +842,14 @@ footer {
 		font-size: 30px;
 	}
 	
+		.headline {
+    font-size: 40px;
+}
+	
+	.countdown-message {
+		font-size: 30px;
+	}
+	
 		.input-1 {
 		margin-top: -30px;
 	}
@@ -837,33 +874,46 @@ footer {
 		margin-top: 345px;
 	}
 	
-	.input-1-after-radio-buttons {
-		margin-top: -15px;
-	}
+	.input-1-after-radio-buttons {		margin-top: -15px;	}
 	
-	.input-2-after-radio-buttons {
-		margin-top: 60px;
-	}
+	.input-2-after-radio-buttons {		margin-top: 60px;	}
 	
-	.input-3-after-radio-buttons {
-		margin-top: 135px;
-	}
+	.input-3-after-radio-buttons {		margin-top: 135px;	}
 	
-	.input-4-after-radio-buttons {
-		margin-top: 210px;
-	}
+	.input-4-after-radio-buttons {		margin-top: 210px;	}
 	
-	.input-5-after-radio-buttons {
-		margin-top: 285px;
-	}
+	.input-5-after-radio-buttons {		margin-top: 285px;	}
 	
-	.input-6-after-radio-buttons {
-		margin-top: 360px;
-	}
+	.input-6-after-radio-buttons {		margin-top: 360px;	}
 	
-	.headline {
-    font-size: 40px;
-}
+	.input-7-after-radio-buttons {		margin-top: 435px;	}
+	
+	.input-8-after-radio-buttons {		margin-top: 510px;	}
+	
+	.input-9-after-radio-buttons {		margin-top: 585px;	}
+	
+	.input-10-after-radio-buttons {		margin-top: 660px;	}
+	
+	.input-11-after-radio-buttons {		margin-top: 735px;	}
+	
+	.input-12-after-radio-buttons {		margin-top: 810px;	}
+	
+	.input-13-after-radio-buttons {		margin-top: 885px;	}
+	
+	.input-14-after-radio-buttons {		margin-top: 960px;	}
+	
+	.input-15-after-radio-buttons {		margin-top: 1035px;	}
+	
+	.input-16-after-radio-buttons {		margin-top: 1110px;	}
+	
+	.input-17-after-radio-buttons {		margin-top: 1185px;	}
+	
+	.input-18-after-radio-buttons {		margin-top: 1260px;	}
+	
+	.input-19-after-radio-buttons {		margin-top: 1335px;	}
+	
+	.input-20-after-radio-buttons {		margin-top: 1410px;	}
+	
 
 .main-div {
 	padding-top: 30px;
@@ -953,6 +1003,15 @@ footer {
 		font-size: 30px;
 	}
 	
+		.headline {
+    font-size: 40px;
+	margin-top: 19px;
+}
+
+.countdown-message {
+		font-size: 35px;
+	}
+	
 	.input-1 {
 		margin-top: -55px;
 	}
@@ -977,34 +1036,45 @@ footer {
 		margin-top: 370px;
 	}
 	
-	.input-1-after-radio-buttons {
-		margin-top: -10px;
-	}
+	.input-1-after-radio-buttons {		margin-top: -10px;	}
 	
-	.input-2-after-radio-buttons {
-		margin-top: 75px;
-	}
+	.input-2-after-radio-buttons {		margin-top: 75px;	}
 	
-	.input-3-after-radio-buttons {
-		margin-top: 160px;
-	}
+	.input-3-after-radio-buttons {		margin-top: 160px;	}
 	
-	.input-4-after-radio-buttons {
-		margin-top: 245px;
-	}
+	.input-4-after-radio-buttons {		margin-top: 245px;	}
 	
-	.input-5-after-radio-buttons {
-		margin-top: 330px;
-	}
+	.input-5-after-radio-buttons {		margin-top: 330px;	}
 	
-	.input-6-after-radio-buttons {
-		margin-top: 415px;
-	}
+	.input-6-after-radio-buttons {		margin-top: 415px;	}
 	
-	.headline {
-    font-size: 40px;
-	margin-top: 19px;
-}
+	.input-7-after-radio-buttons {		margin-top: 500px;	}
+	
+	.input-8-after-radio-buttons {		margin-top: 585px;	}
+	
+	.input-9-after-radio-buttons {		margin-top: 670px;	}
+	
+	.input-10-after-radio-buttons {		margin-top: 755px;	}
+	
+	.input-11-after-radio-buttons {		margin-top: 840px;	}
+	
+	.input-12-after-radio-buttons {		margin-top: 925px;	}
+	
+	.input-13-after-radio-buttons {		margin-top: 1010px;	}
+	
+	.input-14-after-radio-buttons {		margin-top: 1095px;	}
+	
+	.input-15-after-radio-buttons {		margin-top: 1180px;	}
+	
+	.input-16-after-radio-buttons {		margin-top: 1265px;	}
+	
+	.input-17-after-radio-buttons {		margin-top: 1350px;	}
+	
+	.input-18-after-radio-buttons {		margin-top: 1435px;	}
+	
+	.input-19-after-radio-buttons {		margin-top: 1520px;	}
+	
+	.input-20-after-radio-buttons {		margin-top: 1605px;	}
 
 .main-div {
 	padding-top: 30px;
