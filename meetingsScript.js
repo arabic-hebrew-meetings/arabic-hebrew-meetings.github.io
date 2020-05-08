@@ -7,6 +7,7 @@ function initialize() {
 
 var nextMeetingInfo = ["UTC Meeting time:","May 6, 2020 18:00:00","Meeting time text in Arabic:","يوم الأربعاء","Meeting time text in Hebrew:","יום רביעי","Meeting date hour:","06/05 21:00"];
 var isMeetingStarted = false;
+var ignoreCountdown = false;
 var meetingsCounters = [];
 var roomsOpenStatus = ["Open","Open","Open"];
 var roomsUrls = [
@@ -14,15 +15,34 @@ var roomsUrls = [
 "https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
 "https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09"
 ];
+var possibleRoomsByLangLevel = {
+  Arabic: {
+	  Beginner: [1,3,5,7,9,11],
+	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12],
+	  Advanced: [2,4,6,8,10,12]
+  },
+  Hebrew: {
+	  Beginner: [2,4,6,8,10,12],
+	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12],
+	  Advanced: [1,3,5,7,9,11]
+  }
+};
 
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!3:16?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
-			meetingsCounters = field[1];
-			roomsOpenStatus = field[7];
-			roomsUrls = field[13];
+			nextMeetingInfo = field[1];
+			meetingsCounters = field[3];
+			roomsOpenStatus = field[9];
+			roomsUrls = field[15];
+			possibleRoomsByLangLevel["Arabic"]["Beginner"] = field[18];
+			possibleRoomsByLangLevel["Arabic"]["Intermediate"] = field[20];
+			possibleRoomsByLangLevel["Arabic"]["Advanced"] = field[22];
+			possibleRoomsByLangLevel["Hebrew"]["Beginner"] = field[24];
+			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
+			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 		}
     });
   })
@@ -81,7 +101,7 @@ function handleCountdown() {
 		var distance = countdownDate - nowUTC;
 			
 		// If the count down is finished, write some text
-		if (distance < 0) {
+		if (distance < 0 || ignoreCountdown) {
 			if (!isMeetingStarted) {
 				// Starting meeting now
 				isMeetingStarted = true;
@@ -863,17 +883,5 @@ function getAllOpenRoomsByLangLevel(nativeLanguage, level) {
 	return allOpenRooms;
 }
 
-var possibleRoomsByLangLevel = {
-  Arabic: {
-	  Beginner: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-	  Advanced: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-  },
-  Hebrew: {
-	  Beginner: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-	  Intermediate: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],
-	  Advanced: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-  }
-};
 
 	
