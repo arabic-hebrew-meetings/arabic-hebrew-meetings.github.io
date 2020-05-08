@@ -5,15 +5,16 @@ function initialize() {
 	updateNextMeetingInfo(true);
 }
 
-var nextMeetingInfo = ["UTC Meeting time:","May 6, 2020 18:00:00","Meeting time text in Arabic:","يوم الأربعاء","Meeting time text in Hebrew:","יום רביעי","Meeting date hour:","06/05 21:00"];
+var nextMeetingInfo = ["UTC Meeting time:","May 9, 2020 18:00:00","Meeting time text in Arabic:","يوم السبت","Meeting time text in Hebrew:","יום שבת","Meeting date hour:","09/05 21:00"];
 var isMeetingStarted = false;
 var ignoreCountdown = false;
 var meetingsCounters = [];
-var roomsOpenStatus = ["Open","Open","Open"];
+var roomsOpenStatus = ["Open","Open","Open","Open"];
 var roomsUrls = [
 "https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
 "https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
-"https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09"
+"https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09",
+"https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09"
 ];
 var possibleRoomsByLangLevel = {
   Arabic: {
@@ -29,6 +30,7 @@ var possibleRoomsByLangLevel = {
 };
 
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
+	startSpinner("my_spinner_groups");
 	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
@@ -53,16 +55,19 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
   .always(function() {
 	  
 //	  setTimeout(function() {
+//		finishSpinner("my_spinner_groups");  
 //		displayRecommendedOptions(userLang, userLevel);
 //		displayMenu(userLang, userLevel, userChoice, chosenData);
 //	}, 10000);
 	  
+	  finishSpinner("my_spinner_groups");  
 	  displayRecommendedOptions(userLang, userLevel);
 	  displayMenu(userLang, userLevel, userChoice, chosenData);
   }); 
 }
 
 function updateNextMeetingInfo(isFirstCall) {
+	startSpinner("my_spinner_countdown");
 	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:2?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
@@ -76,11 +81,39 @@ function updateNextMeetingInfo(isFirstCall) {
 	  console.log(xhr.responseText)
   })
   .always(function() {
+	  finishSpinner("my_spinner_countdown");  
 	  if (isFirstCall) {
 		  handleCountdown();
 	  }
   }); 
   setTimeout(updateNextMeetingInfo, 600000); // update every 10 minutes
+}
+
+function startSpinner(elementId) {
+	if (elementId == "my_spinner_countdown") {
+		document.getElementById(elementId).innerHTML = `
+			<svg class="spinner" viewBox="0 0 50 50">
+				<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+			</svg>
+		`;
+	}
+	if (elementId == "my_spinner_groups") {
+		document.getElementById(elementId).innerHTML = `
+			<svg class="spinner spinner_groups" viewBox="0 0 50 50">
+				<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+			</svg>
+		`;
+		var optionsHeadline = document.getElementById("optionsHeadline");
+		if (optionsHeadline.style.visibility=="visible") {
+			updateSpinnerTop("65%");
+		} else {
+			updateSpinnerTop("70%");
+		}
+	}
+}
+
+function finishSpinner(elementId) {
+	document.getElementById(elementId).innerHTML = ``;
 }
 
 function handleCountdown() {
@@ -480,6 +513,7 @@ function displayLevelOptions(userLang) {
 	if (userLang=="Hebrew") {
 		document.getElementById("subheadline").innerHTML = ``
 		document.getElementById("question-area").innerHTML = `
+		 <div id="my_spinner_groups"></div>
 			<div class='select-ctr'>
 		  <div class='selected-input input-preview'>סמנו את הרמה שלכם בערבית<br>ובחרו קבוצה להצטרף אליה:</div>
 		  
@@ -554,6 +588,7 @@ function displayLevelOptions(userLang) {
 	if (userLang=="Arabic") {
 		document.getElementById("subheadline").innerHTML = ``
 		document.getElementById("question-area").innerHTML = `
+		 <div id="my_spinner_groups"></div>
 			<div class='select-ctr'>
 		  <div class='selected-input input-preview'>اختاروا مستواكم في اللغة العبرية<br>واختاروا مجموعة تنضموا لالها:</div>
 		  
@@ -741,6 +776,10 @@ function tryToFixLeftColMinHeight(lastOptionClass) {
 		console.log("failed to fix left col min height");
 		//we ignore and just don't fix left col min height
 	}
+}
+
+function updateSpinnerTop(topAttribute) {
+	document.querySelector(".spinner").style.top = topAttribute;
 }
 
 function saveMeetingsActions(userLang, userLevel, userChoice, data) {
