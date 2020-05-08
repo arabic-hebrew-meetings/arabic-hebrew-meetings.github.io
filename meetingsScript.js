@@ -29,6 +29,10 @@ var possibleRoomsByLangLevel = {
   }
 };
 
+function countdownIgnore() {
+	ignoreCountdown = true;
+}
+
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
 	startSpinner("my_spinner_groups");
 	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
