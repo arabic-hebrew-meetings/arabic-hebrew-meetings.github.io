@@ -60,11 +60,13 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 	  
 //	  setTimeout(function() {
 //		finishSpinner("my_spinner_groups");  
+//		displayNumberOfOpenRooms(userLang);
 //		displayRecommendedOptions(userLang, userLevel);
 //		displayMenu(userLang, userLevel, userChoice, chosenData);
 //	}, 10000);
 	  
 	  finishSpinner("my_spinner_groups");  
+	  displayNumberOfOpenRooms(userLang);
 	  displayRecommendedOptions(userLang, userLevel);
 	  displayMenu(userLang, userLevel, userChoice, chosenData);
   }); 
@@ -513,9 +515,35 @@ function displayChooseNativeLanguage() {
 	tryToFixLeftColMinHeight(lastOptionClass);
 }
 
-function displayLevelOptions(userLang) {
+function displayNumberOfOpenRooms(userLang) {
+	var openRoomsNumber = getNumberOfOpenRooms();
 	if (userLang=="Hebrew") {
-		document.getElementById("subheadline").innerHTML = ``
+		document.getElementById("subheadline").innerHTML = `
+	<div class="subheadline">
+	<span style='color:green;'>
+	כרגע יש 
+	<b>`+openRoomsNumber+`</b>
+	 קבוצות במפגש
+	</span>
+	</div>
+		`
+	}
+	if (userLang=="Arabic") {
+		document.getElementById("subheadline").innerHTML = `
+	<div class="subheadline">
+	<span style='color:green;'>
+	حاليا فيه 
+	<b>`+openRoomsNumber+`</b>
+	 مجموعات باللقاﺀ
+	</span>
+	</div>
+		`
+	}
+}
+
+function displayLevelOptions(userLang) {
+	displayNumberOfOpenRooms(userLang);
+	if (userLang=="Hebrew") {
 		document.getElementById("question-area").innerHTML = `
 		 <div id="my_spinner_groups"></div>
 			<div class='select-ctr'>
@@ -590,7 +618,6 @@ function displayLevelOptions(userLang) {
 		`
 	}
 	if (userLang=="Arabic") {
-		document.getElementById("subheadline").innerHTML = ``
 		document.getElementById("question-area").innerHTML = `
 		 <div id="my_spinner_groups"></div>
 			<div class='select-ctr'>
@@ -906,6 +933,16 @@ function getRoomUrl(roomNumber) {
 		return roomsUrls[roomNumber-1];
 	}
 	return "";
+}
+
+function getNumberOfOpenRooms() {
+	var result = 0;
+	for (room of roomsOpenStatus) {
+		if (room == "Open") {
+			result++;
+		}
+	}
+	return result;
 }
 
 function isRoomOpen(roomNumber) {
