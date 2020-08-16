@@ -74,11 +74,20 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 
 function updateNextMeetingInfo(isFirstCall) {
 	startSpinner("my_spinner_countdown");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:2?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
 			nextMeetingInfo = field[1];
+			meetingsCounters = field[3];
+			roomsOpenStatus = field[9];
+			roomsUrls = field[15];
+			possibleRoomsByLangLevel["Arabic"]["Beginner"] = field[18];
+			possibleRoomsByLangLevel["Arabic"]["Intermediate"] = field[20];
+			possibleRoomsByLangLevel["Arabic"]["Advanced"] = field[22];
+			possibleRoomsByLangLevel["Hebrew"]["Beginner"] = field[24];
+			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
+			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 		}
     });
   })
@@ -148,7 +157,7 @@ function handleCountdown() {
 			} else {
 				// Meeting already started, no need to do anything
 			}
-			setTimeout(handleCountdown, 60000); // check every minute if we need to update the count again
+			setTimeout(handleCountdown, 60000); // check every minute if we need to start the countdown again
 		} else {
 			isMeetingStarted = false;
 			//calculate countdown and display it
@@ -470,7 +479,7 @@ function handleChoice(userLang, userLevel, userChoice, chosenData) {
 					displayMoreOptions(userLang, userLevel, chosenData);
 				} else {
 					updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData);
-					// display menu will happen after trying to update data
+					// display menu will happen async after trying to update data
 					return;
 				}
 			} else {
