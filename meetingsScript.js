@@ -10,6 +10,7 @@ var isMeetingStarted = false;
 var ignoreCountdown = false;
 var meetingsCounters = [];
 var roomsOpenStatus = ["Open","Open","Open","Open"];
+var roomsRecommendedStatus = ["Normal","Normal","Normal","Normal"];
 var roomsUrls = [
 "https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
 "https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
@@ -35,7 +36,7 @@ function countdownIgnore() {
 
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
 	startSpinner("my_spinner_groups");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:31?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -49,6 +50,7 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 			possibleRoomsByLangLevel["Hebrew"]["Beginner"] = field[24];
 			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
+			roomsRecommendedStatus = field[30];
 		}
     });
   })
@@ -74,7 +76,7 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 
 function updateNextMeetingInfo(isFirstCall) {
 	startSpinner("my_spinner_countdown");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:29?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:31?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -88,6 +90,7 @@ function updateNextMeetingInfo(isFirstCall) {
 			possibleRoomsByLangLevel["Hebrew"]["Beginner"] = field[24];
 			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
+			roomsRecommendedStatus = field[30];
 		}
     });
   })
@@ -709,8 +712,19 @@ function displayRecommendedOptions(userLang, userLevel) {
 	// get all possible open rooms
 	var openRooms = getAllOpenRoomsByLangLevel(userLang, userLevel);
 	
+	// get all not recommended rooms
+	var notRecommendedRooms = getAllNotRecommendedRoomsByLangLevel(userLang, userLevel);
+	
+	// get optional recommended rooms
+	optionalRecommendedRooms = [];
+	for (openRoom of openRooms) {
+		if (!notRecommendedRooms.includes(openRoom)) {
+			optionalRecommendedRooms.push(openRoom);
+		}
+	}
+	
 	// get recommended rooms
-	recommendedRooms = getRecommendedRooms(userLang, openRooms);
+	recommendedRooms = getRecommendedRooms(userLang, optionalRecommendedRooms);
 	
 	// get other rooms
 	otherRooms = [];
@@ -972,5 +986,21 @@ function getAllOpenRoomsByLangLevel(nativeLanguage, level) {
 	return allOpenRooms;
 }
 
+function isRoomNotRecommended(roomNumber) {
+	if (roomsRecommendedStatus.length >= roomNumber) {
+		return roomsRecommendedStatus[roomNumber-1] == "NotRecommended";
+	}
+	return false;
+}
 
+function getAllNotRecommendedRoomsByLangLevel(nativeLanguage, level) {
+	var allNotRecommendedRooms = [];
+	var allPossible = possibleRoomsByLangLevel[nativeLanguage][level]
+	for (roomNumber of allPossible) {
+		if (isRoomNotRecommended(roomNumber)) {
+			allNotRecommendedRooms.push(roomNumber);
+		}
+	}
+	return allNotRecommendedRooms;
+}
 	
