@@ -656,7 +656,11 @@ ul.countdown li p {
 		 stroke-dashoffset: -124;
 	}
 }
- 
+
+.two-options {
+	margin: 30px !important;
+}
+
 
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
@@ -841,6 +845,34 @@ footer {
 
 	ul.countdown li p {
 		font-size: 14px;
+	}
+	
+	.two-options {
+		margin: 10px !important;
+	}
+	
+	.jumbotron {
+		padding-top: 20px !important;
+	}
+	
+	.activityContent {
+		font-size: 22px;
+		margin-top: 15px !important;
+		margin-bottom: 15px !important;
+	}
+	
+	.my-activity-button-single {
+		font-size: 25px;
+	}
+	
+	.circle-button {
+		margin-top: 13px;
+	}
+	
+	.rectangle {
+		padding-top: 5px;
+		padding-bottom: 5px;
+		margin-top: -20px;
 	}
 
 }

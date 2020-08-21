@@ -178,4 +178,24 @@ function openUrl(siteLocation, locationOnPage, url) {
 	location.href= url;
 }
 
+function makeButtonWidthEqual() {
+	let maxWidth = 0;
+
+$('.btn').each(function(){
+ const width = parseFloat($(this).css('width'));
+ if(width > maxWidth) {maxWidth = width}
+})
+
+$('.btn').css('width', maxWidth +'px');
+}
+
+function scrollToDetails() {
+	var btn = document.getElementById("detailsBtn");
+	btn.onclick = function() {
+    $('html,body').animate({
+        scrollTop: $(".details").offset().top-70},
+        'slow');
+};
+}
+
 

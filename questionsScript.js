@@ -6,6 +6,10 @@ var curComplex = -1;
 var pastSimple = [];
 var curSimple = -1;
 
+var caregory;
+var i;
+var x;
+
 function getCurByCategory(category) {
 	if (category === categories.simple) {
 		return curSimple;
@@ -75,16 +79,16 @@ function pushToPastByCategory(category, i) {
 	}
 }
 
-function getNext(category){
+function getNext(ignoredCategory){
+	category = 0;
 	cur = getCurByCategory(category);
 	saveAction("questions", "getNext", {cur: cur, category: category});
-	console.log(cur)
 	past = getPastByCategory(category);
 	dataJson = getDataJsonByCategory(category);
 	cur = incrementCurByCategory(category);
 	if (cur === past.length) {
 		while (true) {
-        var i = Math.floor(Math.random() * dataJson.length);
+        i = Math.floor(Math.random() * dataJson.length);
         var found = false;
         for (j = 0; j < past.length; j++) {
             if (i == past[j]) {
@@ -103,10 +107,10 @@ function getNext(category){
 	displayContent(cur, i, category);	
 }
 
-function getPrev(category){
+function getPrev(ignoredCategory){
+	category = 0;
 	cur = getCurByCategory(category);
 	saveAction("questions", "getPrev", {cur: cur, category: category});
-	console.log(cur)
 	past = getPastByCategory(category);
 	cur = decrementCurByCategory(category);
 	i = past[cur];
@@ -138,20 +142,35 @@ function getPrevButton(cur, category) {
 	return prevButton;
 }
 
+var hasListener = false;
+
 function displayContent(cur, i, category) {
-	console.log("displayContent");
 	nextButton = getNextButton(cur, category);
 	prevButton = getPrevButton(cur, category);
 	content = getContentRectWithSpecificOrder();
-	document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
+	
+	x = window.matchMedia("(max-width: 600px)")
+	displayContentAndButtons() // Call listener function at run time
+	if (!hasListener) {
+		x.addListener(displayContentAndButtons) // Attach listener function on state changes
+		hasListener = true;
+	}
+}
+
+function displayContentAndButtons() {
+	if (x.matches) { // If media query matches
+		document.getElementById("button-and-text").innerHTML = `<div class="row">` + content + `</div><div class="row">` + prevButton + nextButton + `</div>`;
+	} else {
+		document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
+	}
 	displayContentBySpecificOrder(i, category);
 }
 
 function getContentRectWithSpecificOrder() {
 	content = `<div class="rectangle">
-                <h2 class="rtl" id="hebrewText"></h3>
-		<h2 class="rtl" id="arabicText"></h3>
-        <h2 class="rtl" id="taatikText"></h3>
+                <h2 class="rtl activityContent" id="hebrewText"></h3>
+		<h2 class="rtl activityContent" id="arabicText"></h3>
+        <h2 class="rtl activityContent" id="taatikText"></h3>
             </div>`;
 	return content;		
 }
@@ -560,9 +579,9 @@ const dataJsonSimple = [
     "Category": "Music"
   },
   {
-    "Hebrew": "על איזה כלי נגינה היית רוצה לנגן? (גיטרה/פסנתר/תופים…)",
-    "Arabic": "على أي آلة عزف جاي على بالك تعزف؟ (چيتارة/ بيانو/ طبول …)",
-    "Taatik": "עלא אי אٓלה עזף ג'אי עלא באלכ תעזפ? (چיתארה/ ביאנו/ טבול …)",
+    "Hebrew": "על איזה כלי נגינה היית רוצה לנגן? (גיטרה, פסנתר, תופים…)",
+    "Arabic": "على أي آلة عزف جاي على بالك تعزف؟ (چيتارة, بيانو, طبول …)",
+    "Taatik": "עלא אי אٓלה עזף ג'אי עלא באלכ תעזפ? (גיתארה, ביאנו, טבול …) ",
     "Category": "Music"
   },
   {
@@ -572,9 +591,9 @@ const dataJsonSimple = [
     "Category": "Music"
   },
   {
-    "Hebrew": "האם יש סדרות זרות שאתה אוהב ובאיזו שפה? (אנגלית/ספרדית/טורקית/קוריאנית/יפנית…)",
-    "Arabic": "في مسلسلات اجنبية معينة بتحبها؟ وبأي لغة؟ (انجليزي, اسباني, تركي, كوري, ياباني..)",
-    "Taatik": "פי מסלסלאת אג'נביה מעינה בתחבהא? ובאי לע'ה? (אנג'ליזי, אסבאני, תרכי, כורי, יאבאני..)",
+    "Hebrew": "האם יש סדרות זרות שאתה אוהב ובאיזו שפה? (אנגלית, ספרדית, טורקית, קוריאנית…)",
+    "Arabic": "في مسلسلات اجنبية معينة بتحبها؟ وبأي لغة؟ (انجليزي, اسباني, تركي, كوري..)",
+    "Taatik": "פי מסלסלאת אג'נביה מעינה בתחבהא? ובאי לע'ה? (אנג'ליזי, אסבאני, תרכי, כורי..)",
     "Category": "Movies & TV"
   },
   {
@@ -584,7 +603,7 @@ const dataJsonSimple = [
     "Category": "Movies & TV"
   },
   {
-    "Hebrew": "איזה סוג סרטים אתה הכי אוהב? (קומדיה,דרמה,אימה,אקשן…)",
+    "Hebrew": "איזה סוג סרטים אתה הכי אוהב? (קומדיה, דרמה, אימה, אקשן…)",
     "Arabic": "شو اكثر نوع أفلام بتحب؟ (كوميدية, دراما, رعب, اكشن..)",
     "Taatik": "שו אכת'ר נוע אפלאם בתחב? (כומידיה, דראמא, רעב, אכשן..)",
     "Category": "Movies & TV"
@@ -680,9 +699,9 @@ const dataJsonSimple = [
     "Category": "Sport"
   },
   {
-    "Hebrew": "האם אתה עוסק בעצמך באומנות? (מצייר/מצלם/מנגן וכו'...)",
-    "Arabic": "هل تعمل في مجال الفنون؟ (رسّام\\مصوّر\\عازف)",
-    "Taatik": "הל תעמל פי מג'אל אלפנונ? (רסאמ\\מצור\\עאזפ)",
+    "Hebrew": "האם אתה עוסק בעצמך באומנות? (מצייר, מצלם, מנגן וכו'...)",
+    "Arabic": "هل تعمل في مجال الفنون؟ (رسّام, مصوّر, عازف...)",
+    "Taatik": "הל תעמל פי מג'אל אלפנונ? (רסאמ, מצור, עאזפ...)",
     "Category": "Art"
   },
   {
@@ -788,9 +807,9 @@ const dataJsonSimple = [
     "Category": "Home"
   },
   {
-    "Hebrew": "מה אתה אוהב יותר- קיץ/חורף/סתיו/אביב ?",
-    "Arabic": "شو بتحب اكثر اشي (صيف\\شتاء\\خريف\\ربيع؟)",
-    "Taatik": "שו בתחב אכת'ר אשי (ציפ\\שתאא\\ח'ריפ\\רביע?)",
+    "Hebrew": "מה אתה אוהב יותר- קיץ / חורף / סתיו / אביב ?",
+    "Arabic": "شو بتحب اكثر اشي (صيف \ شتاء \ خريف \ ربيع؟)",
+    "Taatik": "שו בתחב אכת'ר אשי (ציפ \ שתאא \ ח'ריפ \ רביע?)",
     "Category": "Seasons"
   },
   {
@@ -842,7 +861,7 @@ const dataJsonSimple = [
     "Category": "Daily"
   },
   {
-    "Hebrew": "מה אתה אוהב יותר- בוקר/צהריים/ערב?",
+    "Hebrew": "מה אתה אוהב יותר- בוקר, צהריים או ערב?",
     "Arabic": "ايش بتحب اكثر- الصبح, الظهر او الليل؟",
     "Taatik": "איש בתחב אכת'ר- אלצבח, אלט'הר או אלליל?",
     "Category": "Daily"
@@ -878,7 +897,7 @@ const dataJsonSimple = [
     "Category": "Imagine"
   },
   {
-    "Hebrew": "אם יכלת להיות מפורסם מכל סוג- במה היית בוחר? (פוליטיקאי/שחקן/מוזיקאי/ספורטאי/אמן...)",
+    "Hebrew": "אם יכלת להיות מפורסם מכל סוג- במה היית בוחר? (פוליטיקאי, שחקן, מוזיקאי, ספורטאי, אמן...)",
     "Arabic": "إذا كنت بتقدر تكون مشهور بأي إشي, شو كنت بتختار؟ (خبير سياسي, ممثّل, موسيقار, رياضيّ, فنّان..)",
     "Taatik": "אד'א כנת בתקדר תכון משהור באי אשי, שו כנת בתח'תאר? (ח'ביר סיאסי, ממת'ל, מוסיקאר, ריאצ'י, פנאן..)",
     "Category": "Imagine"
@@ -950,7 +969,7 @@ const dataJsonSimple = [
     "Category": "Miscellaneous"
   },
   {
-    "Hebrew": "אתה בדרך כלל מקדים או מאחר לדברים (עבודה/לימודים/פגישות…) ?",
+    "Hebrew": "אתה בדרך כלל מקדים או מאחר לדברים (עבודה, לימודים, פגישות…) ?",
     "Arabic": "بالعادة بتتأخّر ولا بتبكّر على المواعيد؟ (شغل, تعليم, لقاءات)",
     "Taatik": "באלעאדה בתתאח'ר ולא בתבכר עלא אלמואעיד? (שע'ל, תעלים, לקאאאת)",
     "Category": "Miscellaneous"
