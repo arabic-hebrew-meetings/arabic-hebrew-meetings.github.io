@@ -139,26 +139,26 @@ function getAllSongs(){
 	var i;
 	for (i = 0; i < Object.keys(hebrewSongs).length; i++) {
 		var title = hebrewSongs[i+1].HebrewTitle
-		hebrew += `<h2><a title="`+title+`" href="#" onclick="getSong(1,`+i+`);return false;">`+title+`</a></h2>`;
+		hebrew += `<h2 class="activityContent"><a title="`+title+`" href="#" onclick="getSong(1,`+i+`);return false;">`+title+`</a></h2>`;
 	}
 	
 	var arabic = ``;
 	var i;
 	for (i = 0; i < Object.keys(arabicSongs).length; i++) {
 		var title = arabicSongs[i+1].ArabicTitle
-		arabic += `<h2><a title="`+title+`" href="#" onclick="getSong(2,`+i+`);return false;">`+title+`</a></h2>`;
+		arabic += `<h2 class="activityContent"><a title="`+title+`" href="#" onclick="getSong(2,`+i+`);return false;">`+title+`</a></h2>`;
 	}
 	
 	var start = `<div class="row text-center">
 	<figure class="col-sm-6">
-        <h2>שירים בעברית</h2>`;
+        <h2 class="details-headline-end">שירים בערבית</h2>`;
 	var middle = `</figure>
 			<figure class="col-sm-6">
     	<div class="row text-center">
-        <h2>שירים בערבית</h2>`;
+        <h2 class="details-headline-end">שירים בעברית</h2>`;
 	var end = `</figure>
 	</div>`;
-	var songsStr = start + hebrew + middle + arabic + end;
+	var songsStr = start + arabic + middle + hebrew + end;
 	document.getElementById("songs").innerHTML = songsStr;
 	console.log("getAllSongs End");
 }
@@ -202,37 +202,37 @@ function getSong(lang, i){
 	
 	var hebrewTitleStr = ``
 	if (hebrewTitle !== ``) {
-		hebrewTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+hebrewTitle+`</h2>`;
+		hebrewTitleStr = `<h2 class="rtl activityContent" style="text-decoration: underline;">`+hebrewTitle+`</h2>`;
 	}
 	
 	var arabicTitleStr = ``
 	if (arabicTitle !== ``) {
-		arabicTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+arabicTitle+`</h2>`;
+		arabicTitleStr = `<h2 class="rtl activityContent" style="text-decoration: underline;">`+arabicTitle+`</h2>`;
 	}
 	
 	var taatikTitleStr = ``
 	if (taatikTitle !== ``) {
-		taatikTitleStr = `<h2 class="rtl" style="text-decoration: underline;">`+taatikTitle+`</h2>`;
+		taatikTitleStr = `<h2 class="rtl activityContent" style="text-decoration: underline;">`+taatikTitle+`</h2>`;
 	}
 	
 	var hebrewLyricsStr = ``
 	if (hebrewLyrics !== ``) {
-		hebrewLyricsStr = `<h2 class="rtl">`+hebrewLyrics+`</h2>`;
+		hebrewLyricsStr = `<h2 class="rtl activityContent">`+hebrewLyrics+`</h2>`;
 	}
 	
 	var arabicLyricsStr = ``
 	if (arabicLyrics !== ``) {
-		arabicLyricsStr = `<h2 class="rtl">`+arabicLyrics+`</h2>`;
+		arabicLyricsStr = `<h2 class="rtl activityContent">`+arabicLyrics+`</h2>`;
 	}
 	
 	var taatikLyricsStr = ``
 	if (taatikLyrics !== ``) {
-		taatikLyricsStr = `<h2 class="rtl">`+taatikLyrics+`</h2>`;
+		taatikLyricsStr = `<h2 class="rtl activityContent">`+taatikLyrics+`</h2>`;
 	}
 	
 	var urlStr = ``
 	if (url !== ``) {
-		urlStr = `<h2><a target="_blank" href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
+		urlStr = `<h2 class="activityContent"><a target="_blank" href="`+url+`">שמעו את השיר - اسمعوا الاغنية</a></h2>`;
 	}
 	
 	var sections = 0;
