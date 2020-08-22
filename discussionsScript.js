@@ -1,3 +1,6 @@
+var i;
+var x;
+
 var past = [];
 var cur = -1;
 function getNext(){
@@ -5,7 +8,7 @@ function getNext(){
 	saveAction("discussions", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
-        var i = Math.floor(Math.random() * dataJson.length);
+        i = Math.floor(Math.random() * dataJson.length);
         var found = false;
         for (j = 0; j < past.length; j++) {
             if (i == past[j]) {
@@ -55,19 +58,34 @@ function getPrevButton(cur) {
 	return prevButton;
 }
 
+var hasListener = false;
+
 function displayContent(cur, i) {
 	nextButton = getNextButton(cur);
 	prevButton = getPrevButton(cur);
 	content = getContentRectWithSpecificOrder();
-	document.getElementById("button-and-text").innerHTML = nextButton + content + prevButton;
+	x = window.matchMedia("(max-width: 600px)")
+	displayContentAndButtons() // Call listener function at run time
+	if (!hasListener) {
+		x.addListener(displayContentAndButtons) // Attach listener function on state changes
+		hasListener = true;
+	}
+}
+
+function displayContentAndButtons() {
+	if (x.matches) { // If media query matches
+		document.getElementById("button-and-text").innerHTML = `<div class="row">` + content + `</div><div class="row">` + prevButton + nextButton + `</div>`;
+	} else {
+		document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
+	}
 	displayContentBySpecificOrder(i);
 }
 
 function getContentRectWithSpecificOrder() {
 	content = `<div class="rectangle">
-                <h2 class="rtl" id="hebrewText"></h2>
-		<h2 class="rtl" id="arabicText"></h2>
-        <h2 class="rtl" id="taatikText"></h2>
+                <h2 class="rtl activityContent" id="hebrewText"></h2>
+		<h2 class="rtl activityContent" id="arabicText"></h2>
+        <h2 class="rtl activityContent" id="taatikText"></h2>
             </div>`;
 	return content;		
 }

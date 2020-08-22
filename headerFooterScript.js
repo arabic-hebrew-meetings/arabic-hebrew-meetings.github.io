@@ -50,6 +50,25 @@ function getStartActivity() {
 		</div>`;
 }
 
+function getNewStartActivity() {
+	document.getElementById("start-activity").innerHTML = `<div class="activity-content rtl" id="button-and-text">
+		<a class="btn btn-info btn-xl rtl two-options" onclick="getNext()" role="button">
+ <span class="my-activity-button-text">
+		  התחילו - بلشو!
+		  </span>
+		  <span class="glyphicon glyphicon-play my-activity-button"></span>
+        </a>
+		<a id="detailsBtn" class="btn btn-danger btn-xl rtl two-options" role="button">
+ <span class="my-activity-button-text">
+		  הסבר - شرح
+		  </span>
+		  <span class="glyphicon glyphicon-info-sign my-activity-button"></span>
+        </a>
+		</div>`;
+	makeButtonWidthEqual();
+	scrollToDetails();
+}
+
 function saveAction(siteLocation, action, params){
 	doSaveAction(siteLocation, action, params, true, true);
 }
