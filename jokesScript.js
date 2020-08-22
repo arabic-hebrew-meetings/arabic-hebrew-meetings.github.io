@@ -52,32 +52,40 @@ function getPrevButton(cur) {
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
 	if (cur === 0) {
-		prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
+		if (x.matches) { // small screen
+			prevButton = ``;
+		} else {
+			prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
-	}	
+		}
+	}		
 	return prevButton;
 }
 
 function displayContent(cur, i) {
-	nextButton = getNextButton(cur);
-	prevButton = getPrevButton(cur);
-	content = getContentRectWithSpecificOrder();
 	x = window.matchMedia("(max-width: 600px)")
-	displayContentAndButtons() // Call listener function at run time
+	displayContentByWidth() // Call listener function at run time
 	if (!hasListener) {
-		x.addListener(displayContentAndButtons) // Attach listener function on state changes
+		x.addListener(displayContentByWidth) // Attach listener function on state changes
 		hasListener = true;
 	}
 }
 
+function displayContentByWidth() {
+	nextButton = getNextButton(cur);
+	prevButton = getPrevButton(cur);
+	content = getContentRectWithSpecificOrder();
+	displayContentAndButtons();
+	displayContentBySpecificOrder(i);
+}
+
 function displayContentAndButtons() {
-	if (x.matches) { // If media query matches
+	if (x.matches) { // small screen
 		document.getElementById("button-and-text").innerHTML = `<div class="row">` + content + `</div><div class="row">` + prevButton + nextButton + `</div>`;
 	} else {
 		document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
 	}
-	displayContentBySpecificOrder(i);
 }
 
 function getContentRectWithSpecificOrder() {

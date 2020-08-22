@@ -1,3 +1,7 @@
+var i;
+var x;
+var hasListener = false;
+
 var past = [];
 var cur = -1;
 function getNext(){
@@ -5,7 +9,7 @@ function getNext(){
 	saveAction("fastest", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
-        var i = Math.floor(Math.random() * dataJson.length);
+        i = Math.floor(Math.random() * dataJson.length);
         var found = false;
         for (j = 0; j < past.length; j++) {
             if (i == past[j]) {
@@ -48,25 +52,46 @@ function getPrevButton(cur) {
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
 	if (cur === 0) {
-		prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
+		if (x.matches) { // small screen
+			prevButton = ``;
+		} else {
+			prevButton = `<a class="circle-button invisible" onclick="getPrev()" role="button">
 		  <span class="glyphicon glyphicon glyphicon-chevron-right my-activity-button-single"></span>
         </a>`;
+		}
 	}	
 	return prevButton;
 }
 
 function displayContent(cur, i) {
+	x = window.matchMedia("(max-width: 600px)")
+	displayContentByWidth() // Call listener function at run time
+	if (!hasListener) {
+		x.addListener(displayContentByWidth) // Attach listener function on state changes
+		hasListener = true;
+	}
+}
+
+function displayContentByWidth() {
 	nextButton = getNextButton(cur);
 	prevButton = getPrevButton(cur);
 	content = getContentRectWithSpecificOrder();
-	document.getElementById("button-and-text").innerHTML = nextButton + content + prevButton;
+	displayContentAndButtons();
 	displayContentBySpecificOrder(i);
+}
+
+function displayContentAndButtons() {
+	if (x.matches) { // small screen
+		document.getElementById("button-and-text").innerHTML = `<div class="row">` + content + `</div><div class="row">` + prevButton + nextButton + `</div>`;
+	} else {
+		document.getElementById("button-and-text").innerHTML =  prevButton + content + nextButton;
+	}
 }
 
 function getContentRectWithSpecificOrder() {
 	content = `<div class="rectangle">
-                <h2 class="rtl" id="hebrewText"></h2>
-		<h2 class="rtl" id="arabicText"></h2>
+                <h2 class="rtl activityContent" id="hebrewText"></h2>
+		<h2 class="rtl activityContent" id="arabicText"></h2>
             </div>`;
 	return content;		
 }
