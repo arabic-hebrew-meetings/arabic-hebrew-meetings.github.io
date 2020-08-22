@@ -83,7 +83,6 @@ section .row img {
 }
 
 .container2 {
-	margin-top: 50px;
 	margin-bottom: 40px;
 	background-color: white;
 }
@@ -92,7 +91,6 @@ section .row img {
   font-size: 40px;
   font-weight: 700;
   margin-top: 15px;
-  margin-bottom: 40px;
   color: black;
 }
 
@@ -661,6 +659,17 @@ ul.countdown li p {
 	margin: 30px !important;
 }
 
+.only-activity-name {
+	margin-bottom: -20px !important;
+}
+
+.details-headline-end {
+	margin-bottom: 40px;
+}
+
+.details-that-are-the-main-activity {
+	padding-top: 20px;
+}
 
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
@@ -1173,6 +1182,10 @@ footer {
 	  
 	  .two-lines { display: none; }
     .one-line { display: inline-block; }
+	
+	.only-activity-name {
+		padding-bottom: 25px !important;
+	}
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

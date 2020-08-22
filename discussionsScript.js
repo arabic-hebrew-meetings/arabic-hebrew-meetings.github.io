@@ -1,5 +1,6 @@
 var i;
 var x;
+var hasListener = false;
 
 var past = [];
 var cur = -1;
@@ -57,8 +58,6 @@ function getPrevButton(cur) {
 	}	
 	return prevButton;
 }
-
-var hasListener = false;
 
 function displayContent(cur, i) {
 	nextButton = getNextButton(cur);

@@ -1,3 +1,7 @@
+var i;
+var x;
+var hasListener = false;
+var caregory;
 
 const categories = Object.freeze({"simple":0, "complex":1})
 
@@ -5,10 +9,6 @@ var pastComplex = [];
 var curComplex = -1;
 var pastSimple = [];
 var curSimple = -1;
-
-var caregory;
-var i;
-var x;
 
 function getCurByCategory(category) {
 	if (category === categories.simple) {
