@@ -1,43 +1,3 @@
-function getHeader(page){
-	saveAction(page, "open_page");
-	document.getElementById("header").innerHTML = `  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" onclick='openUrl("`+page+`", "header", "index.html")'>נפגשים לדבר &nbsp نلتقي لنحكي</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown rtl">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">פעילויות &nbsp فعاليات <b class="caret"></b></a>
-          <ul class="dropdown-menu dropdown-menu-right" style="text-align: right">
-            <li><a onclick='openUrl("`+page+`", "header", "questions.html")'>שואלים אחד את השני  -   منسأل بعض</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "discussions.html")'>מועדון דיבייט  -   نادي النقاش</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "21questions.html")'>מפורסמים  -  مشاهير</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "story.html")'>בונים ביחד סיפור  -  نبني مع بعض قصة</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "songs.html")'>שירים - اغاني</a></li>
-          <li><a onclick='openUrl("`+page+`", "header", "countryCity.html")'>ארץ עיר  -   إنسان حيوان نبات</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "jokes.html")'>בדיחות  -  نكت</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "picture.html")'>היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "slang.html")'>סלנג - مصطلحات عامية</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "sayings.html")'>פתגמים  -  امثال</a></li>
-          <li><a onclick='openUrl("`+page+`", "header", "fastest.html")'>הזוג הכי מהיר  -   أسرع اثنين</a></li>
-          <li><a onclick='openUrl("`+page+`", "header", "truth-or-lie.html")'>אמת או שקר  -  صدق او كذب</a></li>
-		  <li><a onclick='openUrl("`+page+`", "header", "wind.html")'>הרוח נושבת  -  تهب الريح</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div>`;
-}
-
-function getFooter(){
-	document.getElementById("footer").innerHTML = `נבנה ע"י רועי נחמיאס  2020-2016 &copy;`;
-}
 
 function getStartActivity() {
 	document.getElementById("start-activity").innerHTML = `<div class="activity-content" id="button-and-text">
@@ -193,7 +153,7 @@ let guid = () => {
 }
 
 function openUrl(siteLocation, locationOnPage, url) {
-	saveAction(siteLocation, "open_url", {url: url, locationOnPage: locationOnPage});
+	//saveAction(siteLocation, "open_url", {url: url, locationOnPage: locationOnPage});
 	location.href= url;
 }
 

@@ -30,10 +30,40 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="headerFooterScript.js"></script>
 		<nav class="navbar navbar-custom navbar-fixed-top" id="header">
+		<div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="/index.html" class="navbar-brand" onclick='openUrl("", "header", "index.html")'>נפגשים לדבר &nbsp نلتقي لنحكي</a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown rtl">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">פעילויות &nbsp فعاليات <b class="caret"></b></a>
+          <ul class="dropdown-menu dropdown-menu-right" style="text-align: right">
+            <li><a href="/questions.html" onclick='openUrl("", "header", "questions.html")'>שואלים אחד את השני  -   منسأل بعض</a></li>
+		  <li><a href="/discussions.html" onclick='openUrl("", "header", "discussions.html")'>מועדון דיבייט  -   نادي النقاش</a></li>
+		  <li><a href="/21questions.html" onclick='openUrl("", "header", "21questions.html")'>מפורסמים  -  مشاهير</a></li>
+		  <li><a href="/story.html" onclick='openUrl("", "header", "story.html")'>בונים ביחד סיפור  -  نبني مع بعض قصة</a></li>
+		  <li><a href="/songs.html" onclick='openUrl("", "header", "songs.html")'>שירים - اغاني</a></li>
+          <li><a href="/countryCity.html" onclick='openUrl("", "header", "countryCity.html")'>ארץ עיר  -   إنسان حيوان نبات</a></li>
+		  <li><a href="/jokes.html" onclick='openUrl("", "header", "jokes.html")'>בדיחות  -  نكت</a></li>
+		  <li><a href="/picture.html" onclick='openUrl("", "header", "picture.html")'>היכרות בעזרת תמונות - تعارف عن طريق الصور</a></li>
+		  <li><a href="/slang.html" onclick='openUrl("", "header", "slang.html")'>סלנג - مصطلحات عامية</a></li>
+		  <li><a href="/sayings.html" onclick='openUrl("", "header", "sayings.html")'>פתגמים  -  امثال</a></li>
+          <li><a href="/fastest.html" onclick='openUrl("", "header", "fastest.html")'>הזוג הכי מהיר  -   أسرع اثنين</a></li>
+          <li><a href="/truth-or-lie.html" onclick='openUrl("", "header", "truth-or-lie.html")'>אמת או שקר  -  صدق او كذب</a></li>
+		  <li><a href="/wind.html" onclick='openUrl("", "header", "wind.html")'>הרוח נושבת  -  تهب الريح</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div>
 </nav>
-  <script> 
-		getHeader("countryCity");
-</script> 
   <section class="jumbotron">
     <div class="container">
     	<div class="row text-center">
@@ -69,10 +99,8 @@
     </div>
   </section>
   <footer class="container" id="footer">
+  נבנה ע"י רועי נחמיאס  2020-2016 &copy;
   </footer>
-  <script> 
-		getFooter();
-</script> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="countryCityScript.js"></script>
