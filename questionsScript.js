@@ -155,12 +155,19 @@ function displayContent(cur, i, category) {
 	}
 }
 
+var firstTime = true;
 function displayContentByWidth() {
 	nextButton = getNextButton(cur, category);
 	prevButton = getPrevButton(cur, category);
-	content = getContentRectWithSpecificOrder();
+	
+	if (firstTime) {
+		content = getNewContentRectangle();
+	} else {
+		content = getExistingContentRectangle();
+	}
 	displayContentAndButtons();
 	displayContentBySpecificOrder(i, category);
+	
 }
 
 function displayContentAndButtons() {
@@ -171,20 +178,45 @@ function displayContentAndButtons() {
 	}
 }
 
-function getContentRectWithSpecificOrder() {
-	content = `<div class="rectangle">
+function getNewContentRectangle() {
+	content = `<div class="rectangle" id="specialRectangle">
+					<div id="texts">
                 <h2 class="rtl activityContent" id="hebrewText"></h3>
 		<h2 class="rtl activityContent" id="arabicText"></h3>
         <h2 class="rtl activityContent" id="taatikText"></h3>
+					</div>
+            </div>`;
+	return content;		
+}
+
+function getExistingContentRectangle() {
+	content = `<div class="rectangle" id="specialRectangle">
+					<div id="texts">
+                <h2 class="rtl activityContent" id="hebrewText">` + currentHebrew + `</h3>
+		<h2 class="rtl activityContent" id="arabicText">` + currentArabic + `</h3>
+        <h2 class="rtl activityContent" id="taatikText">` + currentTaatik + `</h3>
+					</div>
             </div>`;
 	return content;		
 }
 
 function displayContentBySpecificOrder(i, category) {
 	data = getDataByCategory(category);
+	fadeInTime = 300; // this can be modified. I read about it and also felt that 300 is very good.
+	fadeOutTime = 0; // this can be modified but I felt like 0 fade out is the best
+	if (firstTime) {
+		fadeOutTime = 0; // this must always be 0
+	}
+	jQuery("#texts").fadeOut(fadeOutTime, function() {
+	firstTime=false;	
+	currentHebrew = data[i].Hebrew;
+	currentArabic = data[i].Arabic;
+	currentTaatik = data[i].Taatik;
 	document.getElementById("hebrewText").innerHTML = data[i].Hebrew;
 	document.getElementById("arabicText").innerHTML = data[i].Arabic;
-	document.getElementById("taatikText").innerHTML = data[i].Taatik;
+	document.getElementById("taatikText").innerHTML = data[i].Taatik;	
+	jQuery("#texts").css('visibility','visible').hide().fadeIn(fadeInTime);
+	});
 	
 }
 
