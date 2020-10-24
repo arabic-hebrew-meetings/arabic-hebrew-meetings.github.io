@@ -96,23 +96,23 @@ function getContentRectWithSpecificOrder() {
 }
 
 function displayContentBySpecificOrder(i) {
-	document.getElementById("image").innerHTML = `<img src="`+i+data[i]+`">`
+	document.getElementById("image").innerHTML = `<img src="/describePictures/`+i+data[i]+`">`
 }
 
 const data = [
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
-".png,"
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
+".png",
 ".jpg",
 ".jpg",
 ".jpg",
