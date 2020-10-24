@@ -33,7 +33,7 @@ function getActivitiesCarousel() {
         <div class="my-square-content box color4">
 		<div class="img-hover-zoom--brightness">
   <a onclick='openUrl("homepage", "carousel", "story.html")'>
-  <img class="myimg" src="story-updated.png">
+  <img class="myimg" src="story.png">
   </a>
 </div>
 		</div>
@@ -51,7 +51,7 @@ function getActivitiesCarousel() {
         <div class="my-square-content box color6">
 		<div class="img-hover-zoom--brightness">
   <a onclick='openUrl("homepage", "carousel", "countryCity.html")'>
-  <img class="myimg" src="countryCity-new.png">
+  <img class="myimg" src="countryCity.png">
   </a>
 </div>
 		</div>
@@ -114,7 +114,7 @@ function getActivitiesCarousel() {
         <div class="my-square-content box color1">
 		<div class="img-hover-zoom--brightness">
   <a onclick='openUrl("homepage", "carousel", "wind.html")'>
-  <img class="myimg" src="wind-new.png">
+  <img class="myimg" src="wind.png">
   </a>
 </div>
 		</div>
