@@ -6,7 +6,7 @@ var past = [];
 var cur = -1;
 function getNext(){
 	cur++;
-	saveAction("story", "getNext", {cur: cur});
+	saveAction("describePhoto", "getNext", {cur: cur});
 	if (cur === past.length) {
 		while (true) {
         i = Math.floor(Math.random() * data.length);
@@ -30,7 +30,7 @@ function getNext(){
 
 function getPrev(){
 	cur--;
-	saveAction("story", "getPrev", {cur: cur});
+	saveAction("describePhoto", "getPrev", {cur: cur});
 	i = past[cur];
 	displayContent(cur, i);	
 }
