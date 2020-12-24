@@ -282,24 +282,26 @@ function getRecommendedRooms(nativeLanguage, levelRooms) {
 		return result;
 	}
 	// first we want to recommend rooms with the least number of people with the same language as you
-	var minSameLangRooms = getMinOrMaxRoomsByLanguage(nativeLanguage, levelRooms, true);
-	if (minSameLangRooms.length == 1) {
-		return minSameLangRooms;
+	var roomsRecommended = getMinOrMaxRoomsByLanguage(nativeLanguage, levelRooms, true);
+	if (roomsRecommended.length == 1) {
+		return roomsRecommended;
 	}
-	// if there is a tie between a few rooms, then we try to recommend between these rooms
-	// the room with most people that speak the other language
-	var otherLanguage = "Arabic";
-	if (nativeLanguage == "Arabic") {
-		otherLanguage = "Hebrew";
-	}
-	var maxOtherLangRooms = getMinOrMaxRoomsByLanguage(otherLanguage, minSameLangRooms, false);
-	if (maxOtherLangRooms.length == 1) {
-		return maxOtherLangRooms;
-	}
+	
+	// // if there is a tie between a few rooms, then we try to recommend between these rooms
+	// // the room with most people that speak the other language
+	// var otherLanguage = "Arabic";
+	// if (nativeLanguage == "Arabic") {
+	// 	otherLanguage = "Hebrew";
+	// }
+	// var roomsRecommended = getMinOrMaxRoomsByLanguage(otherLanguage, roomsRecommended, false);
+	// if (roomsRecommended.length == 1) {
+	// 	return roomsRecommended;
+	// }
+
 	// if there is still a tiew between a few rooms,
 	// then we just pick one randomly
-	if (maxOtherLangRooms.length > 0) {
-		var room = maxOtherLangRooms[Math.floor(Math.random() * maxOtherLangRooms.length)];
+	if (roomsRecommended.length > 0) {
+		var room = roomsRecommended[Math.floor(Math.random() * roomsRecommended.length)];
 		result.push(room);
 	}
 	return result;
