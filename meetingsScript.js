@@ -318,7 +318,7 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 	console.log(findMin)
 
 	var result = [];
-	var bestCount = -1; 
+	var bestCount = -1000; 
 	var validCounters = true;
 	var levelCounters = [];
 	for (i in rooms) {
@@ -327,21 +327,26 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 		console.log(i)
 		console.log(counter)
 
-		if (counter == "" || isNaN(counter) || counter < 0) {
+		if (counter == "" || isNaN(counter)) {
 			validCounters = false;
-		} else {
+		} else { 
+			var counterInt = parseInt(counter)
+			var bestCountInt = parseInt(bestCount)
+
 			levelCounters.push(counter);
 			if (findMin) {
 
 				console.log("a")
 
 				console.log(bestCount)
+				console.log(bestCountInt)
 				console.log(counter)
-				console.log(bestCount == -1)
-				console.log(counter < bestCount)
-				console.log(bestCount == -1 || counter < bestCount)
+				console.log(counterInt)
+				console.log(bestCountInt == -1)
+				console.log(counterInt < bestCountInt)
+				console.log(bestCountInt == -1000 || counterInt < bestCountInt)
 
-				if (bestCount == -1 || counter < bestCount) {
+				if (bestCountInt == -1000 || counterInt < bestCountInt) {
 
 					console.log("b")
 					bestCount = counter;
@@ -350,7 +355,7 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 
 				console.log("c")
 
-				if (counter > bestCount) {
+				if (bestCountInt == -1000 || counterInt > bestCountInt) {
 
 					console.log("d")
 					bestCount = counter;
