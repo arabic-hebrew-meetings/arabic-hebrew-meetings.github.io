@@ -340,6 +340,7 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 					bestCount = counter;
 				}
 			}
+			console.log(bestCount)
 		}
 	}
 	
