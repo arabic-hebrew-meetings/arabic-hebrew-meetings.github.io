@@ -270,10 +270,13 @@ function getCounterByNativeLanguageAndRoom(language, room) {
 		index += 1;
 	}
 	if (meetingsCounters.length >= index+1) {
-		return meetingsCounters[index];
-	} else {
-		return 0;
+		var counterStr = meetingsCounters[index]
+		if (counterStr != "" && !isNaN(counterStr)) {
+			return parseInt(counterStr);
+		}	
 	}
+
+	return null;
 }
 
 function getRecommendedRooms(nativeLanguage, levelRooms) {
@@ -315,20 +318,18 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 	var levelCounters = [];
 	for (i in rooms) {
 		var counter = getCounterByNativeLanguageAndRoom(language, rooms[i]);
-
-		if (counter == "" || isNaN(counter)) {
+		
+		if (counter == null) {
+			console.log("counter of room " + i + " is invalid");
 			validCounters = false;
 		} else { 
-			var counterInt = parseInt(counter)
-			var bestCountInt = parseInt(bestCount)
-
 			levelCounters.push(counter);
 			if (findMin) {
-				if (bestCountInt == -1000 || counterInt < bestCountInt) {
+				if (bestCount == -1000 || counter < bestCount) {
 					bestCount = counter;
 				}
 			} else {
-				if (bestCountInt == -1000 || counterInt > bestCountInt) {
+				if (bestCount == -1000 || counter > bestCount) {
 					bestCount = counter;
 				}
 			}
