@@ -318,9 +318,9 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 	var levelCounters = [];
 	for (i in rooms) {
 		var counter = getCounterByNativeLanguageAndRoom(language, rooms[i]);
-		
+
 		if (counter == null) {
-			console.log("counter of room " + i + " is invalid");
+			console.log("counter of room " + (i+1) + " is invalid");
 			validCounters = false;
 		} else { 
 			levelCounters.push(counter);
