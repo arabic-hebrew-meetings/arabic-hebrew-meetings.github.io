@@ -283,6 +283,10 @@ function getRecommendedRooms(nativeLanguage, levelRooms) {
 	}
 	// first we want to recommend rooms with the least number of people with the same language as you
 	var roomsRecommended = getMinOrMaxRoomsByLanguage(nativeLanguage, levelRooms, true);
+
+	console.log(roomsRecommended)
+	console.log(roomsRecommended.length)
+	
 	if (roomsRecommended.length == 1) {
 		return roomsRecommended;
 	}
@@ -308,12 +312,21 @@ function getRecommendedRooms(nativeLanguage, levelRooms) {
 }
 
 function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
+
+	console.log(language)
+	console.log(rooms)
+	console.log(findMin)
+
 	var result = [];
 	var bestCount = -1; 
 	var validCounters = true;
 	var levelCounters = [];
 	for (i in rooms) {
 		var counter = getCounterByNativeLanguageAndRoom(language, rooms[i]);
+
+		console.log(i)
+		console.log(counter)
+
 		if (counter == "" || isNaN(counter) || counter < 0) {
 			validCounters = false;
 		} else {
@@ -330,6 +343,8 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 		}
 	}
 	
+	console.log(validCounters)
+
 	if (validCounters) {
 		for (i in rooms) {
 			if (levelCounters[i] == bestCount) {
@@ -341,6 +356,8 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 			result.push(rooms[i]);
 		}
 	}
+
+	console.log(result)
 
 	return result;
 }
