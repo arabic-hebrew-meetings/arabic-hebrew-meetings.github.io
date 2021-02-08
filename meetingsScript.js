@@ -337,7 +337,9 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 
 				console.log(bestCount)
 				console.log(counter)
+				console.log(bestCount == -1)
 				console.log(counter < bestCount)
+				console.log(bestCount == -1 || counter < bestCount)
 
 				if (bestCount == -1 || counter < bestCount) {
 
