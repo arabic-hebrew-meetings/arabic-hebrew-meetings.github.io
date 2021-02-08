@@ -332,11 +332,21 @@ function getMinOrMaxRoomsByLanguage(language, rooms, findMin) {
 		} else {
 			levelCounters.push(counter);
 			if (findMin) {
+
+				console.log("a")
+
 				if (bestCount == -1 || counter < bestCount) {
+
+					console.log("b")
 					bestCount = counter;
 				}
 			} else {
+
+				console.log("c")
+
 				if (counter > bestCount) {
+
+					console.log("d")
 					bestCount = counter;
 				}
 			}
