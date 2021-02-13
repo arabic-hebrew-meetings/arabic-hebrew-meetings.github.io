@@ -671,6 +671,43 @@ ul.countdown li p {
 	padding-top: 20px;
 }
 
+.socialMediaSectionIcon {
+    margin-top: 20px;
+}
+
+.mySocialGroupButtonText {
+	font-size:25px;
+}
+
+.socialGroupButton {
+	height: 89px;
+	width: 239px;
+}
+
+.facebookButton {
+	background-color: #3c6faf !important;
+}
+
+.facebookButton:hover, .facebookButton:focus, .facebookButton:active, .facebookButton.active, .open>.dropdown-toggle.facebookButton {
+    background-color: #2f5a8f !important;
+}
+
+.whatsappButton {
+	background-color: #4fc84f !important;
+}
+
+.whatsappButton:hover, .whatsappButton:focus, .whatsappButton:active, .whatsappButton.active, .open>.dropdown-toggle.whatsappButton {
+    background-color: #3e9b3e !important;
+}
+
+.socialGroupsTop {
+	margin-top: 30px;
+}
+
+.socialGroupsBottom {
+	margin-bottom: 50px !important;
+}
+
 
 /* ------------------------------------------------Media Queries Section----------------------------------------------------- */
 
@@ -883,6 +920,10 @@ footer {
 		padding-bottom: 5px;
 		margin-top: -20px;
 	}
+	
+	.socialGroupsBottom {
+		margin-bottom: 50px !important;
+	}
 
 }
 
@@ -1017,6 +1058,10 @@ footer {
 		display: flex;
 		justify-content: center;
 	}
+	
+.socialMediaSectionIcon {
+    margin-bottom: -10px;
+}
 
 }
 

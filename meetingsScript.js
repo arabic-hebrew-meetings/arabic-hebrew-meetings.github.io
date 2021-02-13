@@ -5,17 +5,17 @@ function initialize() {
 	updateNextMeetingInfo(true);
 }
 
-var nextMeetingInfo = ["UTC Meeting time:","May 9, 2020 18:00:00","Meeting time text in Arabic:","يوم السبت","Meeting time text in Hebrew:","יום שבת","Meeting date hour:","09/05 21:00"];
+var nextMeetingInfo = ["UTC Meeting time:","May 9, 2060 18:00:00","Meeting time text in Arabic:","يوم السبت","Meeting time text in Hebrew:","יום שבת","Meeting date hour:","09/05 21:00"];
 var isMeetingStarted = false;
 var ignoreCountdown = false;
 var meetingsCounters = [];
-var roomsOpenStatus = ["Open","Open","Open","Open"];
+var roomsOpenStatus = ["Closed","Closed","Closed","Closed"];
 var roomsRecommendedStatus = ["Normal","Normal","Normal","Normal"];
 var roomsUrls = [
-"https://zoom.us/j/92421521133?pwd=MXFUajUyVlMxaTV1MW1jL3pNWjFZdz09",
-"https://zoom.us/j/98509806634?pwd=Mlo1UTJqZHNJVFNISGRxSTU1L3dCdz09",
-"https://zoom.us/j/91538344978?pwd=aGRZbG91aE1JQkxna2IvVHRNQ2tKUT09",
-"https://zoom.us/j/97617232470?pwd=aEZKVG5sY3pRU2o5THZVL2xpRVBDUT09"
+"https://zoom.us/",
+"https://zoom.us/",
+"https://zoom.us/",
+"https://zoom.us/"
 ];
 var possibleRoomsByLangLevel = {
   Arabic: {
@@ -29,6 +29,8 @@ var possibleRoomsByLangLevel = {
 	  Advanced: [1,3,5,7,9,11]
   }
 };
+var hashedMeetingCode = "blablabla";
+var badPwd = false;
 
 function countdownIgnore() {
 	ignoreCountdown = true;
@@ -36,7 +38,7 @@ function countdownIgnore() {
 
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
 	startSpinner("my_spinner_groups");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:31?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:35?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -51,12 +53,15 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 			roomsRecommendedStatus = field[30];
+			hashedMeetingCode = field[34][0];
 		}
     });
   })
   .fail(function(xhr, status, error) {
 	  console.log("failed to update data");
 	  console.log(xhr.responseText)
+	  console.log(xhr.status)
+	  console.log(xhr.statusText)
   })
   .always(function() {
 	  
@@ -76,7 +81,7 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 
 function updateNextMeetingInfo(isFirstCall) {
 	startSpinner("my_spinner_countdown");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:31?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:35?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -91,20 +96,99 @@ function updateNextMeetingInfo(isFirstCall) {
 			possibleRoomsByLangLevel["Hebrew"]["Intermediate"] = field[26];
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 			roomsRecommendedStatus = field[30];
+			hashedMeetingCode = field[34][0];
 		}
     });
   })
   .fail(function(xhr, status, error) {
 	  console.log("failed to update meeting start time");
 	  console.log(xhr.responseText)
+	  console.log(xhr.status)
+	  console.log(xhr.statusText)
   })
-  .always(function() {
-	  finishSpinner("my_spinner_countdown");  
-	  if (isFirstCall) {
-		  handleCountdown();
+  .done(function() {
+	  finishSpinner("my_spinner_countdown");
+	  if (isApproved()) {
+		if (isFirstCall || badPwd) {
+			badPwd = false; // important that this line will be before handleCountDown but after the if
+			handleCountdown();
+		} else {
+			badPwd = false;
+		}
+	  } else {
+		badPwd = true;
+		isMeetingStarted = false;
+		
+		//window.location.replace("https://arabic-hebrew-meetings.github.io/"); // Simulate an HTTP redirect
+		displayGenericPage();
 	  }
   }); 
   setTimeout(updateNextMeetingInfo, 600000); // update every 10 minutes
+}
+
+function isApproved() {
+	var code = getQueryParamByName("pwd");
+	console.log("Checking code: " + code);
+	if (code == null) {
+		return true; //TODO - Switch this to false when you want the users to start using code
+	}
+	res = SHA256(code);
+	return hashedMeetingCode == res;
+}
+
+function displayGenericPage() {
+	
+	document.getElementById("headline").innerHTML = ``
+	document.getElementById("subheadline").innerHTML = ``
+	document.getElementById("question-area").innerHTML =  `
+		<div id="SocialGroupsDetails" class="text-center rtl">
+
+	<h1 class="socialGroupsTop" id="SocialGroupsHebrewHeadline"></h1>
+	<h1 id="SocialGroupsArabicHeadline"></h1>
+	
+	<div id="facebookSection">
+	
+		<img class="socialMediaSectionIcon" src="socialMedia/facebookIcon.png">
+		
+		<div>
+			<a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://www.facebook.com/groups/Arabic.Hebrew.Meetings', '_blank');" role="button">
+				<span class="mySocialGroupButtonText">
+					ישראלים ופלסטינים<br>إسرائيليين وفلسطينيين
+				</span>
+			</a>
+			<a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://www.facebook.com/groups/Arabic.Hebrew.Meetings', '_blank');" role="button">
+				<span class="mySocialGroupButtonText">
+					משתתפים מכל העולם<br>مشتركين من كل العالم
+				</span>
+			</a>
+		</div>
+	
+	</div>
+
+    <div id="whatsappSection">
+	
+		<img class="socialMediaSectionIcon" src="socialMedia/whatsAppIcon.png">
+		
+		<div>
+			<a class="btn btn-success btn-xl rtl two-options socialGroupButton whatsappButton socialGroupsBottom" onClick="window.open('https://forms.gle/uNcGD9cN7Cfc2SoJ8', '_blank');" role="button">
+				<span class="mySocialGroupButtonText">
+					הרשמה לקבוצות<br>التسجيل للمجموعات
+				</span>
+			</a>
+		</div>
+
+    </div>
+		  
+</div>
+		`;
+		
+	var meetingsHeadlineHebrew = "הצטרפו לקבוצות שלנו כדי לקבל לינק למפגש הקרוב!";
+	var meetingsHeadlineArabic = "انضموا لمجموعاتنا عشان تستقبلوا رابط للقاﺀ القريب!";
+	document.getElementById("SocialGroupsHebrewHeadline").innerHTML = meetingsHeadlineHebrew;
+	document.getElementById("SocialGroupsArabicHeadline").innerHTML = meetingsHeadlineArabic;
+	
+	var leftColElem = document.getElementById("leftCol")
+	leftColElem.style.minHeight = "500px";
 }
 
 function startSpinner(elementId) {
@@ -135,6 +219,9 @@ function finishSpinner(elementId) {
 }
 
 function handleCountdown() {
+	if (badPwd) {
+		return;
+	}
 	try {
 		// Set the date we're counting down to
 		var meetingStartTime = nextMeetingInfo[1];
@@ -1011,4 +1098,5 @@ function getAllNotRecommendedRoomsByLangLevel(nativeLanguage, level) {
 	}
 	return allNotRecommendedRooms;
 }
+
 	
