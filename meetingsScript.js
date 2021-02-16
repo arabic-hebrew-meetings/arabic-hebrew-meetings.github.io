@@ -156,7 +156,7 @@ function displayGenericPage() {
 					ישראלים ופלסטינים<br>إسرائيليين وفلسطينيين
 				</span>
 			</a>
-			<a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://www.facebook.com/groups/Arabic.Hebrew.Meetings', '_blank');" role="button">
+			<a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://www.facebook.com/groups/Arabic.Hebrew.Online', '_blank');" role="button">
 				<span class="mySocialGroupButtonText">
 					משתתפים מכל העולם<br>مشتركين من كل العالم
 				</span>
