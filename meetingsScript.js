@@ -130,7 +130,7 @@ function isApproved() {
 	var code = getQueryParamByName("pwd");
 	console.log("Checking code: " + code);
 	if (code == null) {
-		return true; //TODO - Switch this to false when you want the users to start using code
+		return false;
 	}
 	res = SHA256(code);
 	return hashedMeetingCode == res;
