@@ -1102,12 +1102,12 @@ function getAllNotRecommendedRoomsByLangLevel(nativeLanguage, level) {
 }
 
 function getUserSourceAndMeetingDate() {
-	var sourceKey = "unknown";
-	var meetingDate = "unknown";
+	var sourceKey = "unknown_source";
+	var meetingDate = "unknown_date";
 	var sourceParam = getQueryParamByName("s");
 	if (sourceParam == null || sourceParam == "") {
-		sourceKey = "unknown";
-		meetingDate = "unknown";
+		sourceKey = "unknown_source";
+		meetingDate = "unknown_date";
 	} else if (sourceParam.startsWith("fpa") && sourceParam.includes("_")) {
 		sourceKey = "facebook_palestinian_israeli_announcement";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
@@ -1155,17 +1155,17 @@ function getUserSourceAndMeetingDate() {
 		if (sourceParam.includes("_")) {
 			meetingDate = getMeetingDateFromUserSource(sourceParam);
 		} else {
-			meetingDate = "unknown";
+			meetingDate = "unknown_date";
 		}
 	} else if (sourceParam.startsWith("me")) {
 		sourceKey = "this_is_me";
-		meetingDate = "unknown";
+		meetingDate = "unknown_date";
 	} else if (sourceParam.startsWith("menu")) {
 		sourceKey = "website_menu";
-		meetingDate = "unknown";
+		meetingDate = "unknown_date";
 	} else {
 		sourceKey = sourceParam;
-		meetingDate = "unknown";
+		meetingDate = "unknown_date";
 	}
 	return [sourceKey, meetingDate];
 }
