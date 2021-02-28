@@ -5,7 +5,7 @@ function initialize() {
 	updateNextMeetingInfo(true);
 }
 
-var nextMeetingInfo = ["UTC Meeting time:","May 9, 2060 18:00:00","Meeting time text in Arabic:","يوم السبت","Meeting time text in Hebrew:","יום שבת","Meeting date hour:","09/05 21:00"];
+var nextMeetingInfo = ["UTC Meeting time:","May 9, 2060 18:00:00","Meeting time text in Arabic:","يوم السبت","Meeting time text in Hebrew:","יום שבת","Meeting date hour:","09/05 21:00","Is International:","FALSE"];
 var isMeetingStarted = false;
 var ignoreCountdown = false;
 var meetingsCounters = [];
@@ -317,16 +317,15 @@ function displayCountdown(distance) {
 	var stillNotTimeArabic = "اللقاء لسا ما بدا!";
 	var meetingDayHebrew = nextMeetingInfo[5];
 	var meetingDayArabic = nextMeetingInfo[3];
-	var meetingDateHour = nextMeetingInfo[7];	
-		
-	countdowText = stillNotTimeHebrew + "<br>" + stillNotTimeArabic + "<br>"
-		+ "<br>"
-		+ "<span style='color:green;'>" + countdown + "</span>" + "<br>"
-		+ "<br>"
-		+ meetingDayHebrew + "<br>" + meetingDayArabic + "<br>" + meetingDateHour;	
+	var meetingDateHour = nextMeetingInfo[7];
+	var isInternationalMeeting = nextMeetingInfo[9];	
 		
 	var textBeforeCountdown	= stillNotTimeHebrew + "<br>" + stillNotTimeArabic;
 	var textAfterCountdown = meetingDayHebrew + "<br>" + meetingDayArabic + "<br>" + meetingDateHour;
+
+	if (isInternationalMeeting == "TRUE") {
+		textAfterCountdown += "<br>" + "توقيت القدس - שעון ירושלים";
+	}
 		
 	// based on the date change the refrence wording
     var ref_days = (days === 1) ? 'day' : 'days',
@@ -347,11 +346,9 @@ function displayCountdown(distance) {
 	document.getElementById("seconds_ref").innerHTML = ref_seconds;
 	
 	document.getElementById("after-countdown").innerHTML = textAfterCountdown;
-		
-	//document.getElementById("countdown").innerHTML = countdowText;
 	
 	var leftColElem = document.getElementById("leftCol")
-	leftColElem.style.minHeight = "500px";
+	leftColElem.style.minHeight = "520px";
 }
 
 function getCounterByNativeLanguageAndRoom(language, room) {
