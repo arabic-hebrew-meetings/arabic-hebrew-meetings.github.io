@@ -1108,46 +1108,52 @@ function getUserSourceAndMeetingDate() {
 	if (sourceParam == null || sourceParam == "") {
 		sourceKey = "unknown_source";
 		meetingDate = "unknown_date";
-	} else if (sourceParam.startsWith("fpa") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fpa_")) {
 		sourceKey = "facebook_palestinian_israeli_announcement";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fia") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fia_")) {
 		sourceKey = "facebook_international_announcement";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fpt") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fpt_")) {
 		sourceKey = "facebook_palestinian_israeli_tonight";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fit") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fit_")) {
 		sourceKey = "facebook_international_tonight";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fpn") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fpn_")) {
 		sourceKey = "facebook_palestinian_israeli_now";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fin") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fin_")) {
 		sourceKey = "facebook_international_now";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fpe") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fpe_")) {
 		sourceKey = "facebook_palestinian_israeli_event";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fie") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fie_")) {
 		sourceKey = "facebook_international_event";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wput") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("fpc_")) {
+		sourceKey = "facebook_palestinian_israeli_comment";
+		meetingDate = getMeetingDateFromUserSource(sourceParam);
+	} else if (sourceParam.startsWith("fic_")) {
+		sourceKey = "facebook_international_comment";
+		meetingDate = getMeetingDateFromUserSource(sourceParam);		
+	} else if (sourceParam.startsWith("wput_")) {
 		sourceKey = "whatsapp_palestinian_israeli_updates_tonight";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wiut") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("wiut_")) {
 		sourceKey = "whatsapp_international_updates_tonight";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wpun") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("wpun_")) {
 		sourceKey = "whatsapp_palestinian_israeli_updates_now";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wiun") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("wiun_")) {
 		sourceKey = "whatsapp_international_updates_now";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wppt") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("wppt_")) {
 		sourceKey = "whatsapp_palestinian_israeli_chats_tonight";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("wppn") && sourceParam.includes("_")) {
+	} else if (sourceParam.startsWith("wppn_")) {
 		sourceKey = "whatsapp_palestinian_israeli_chats_now";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
 	} else if (sourceParam.startsWith("dfm")) {
@@ -1157,7 +1163,7 @@ function getUserSourceAndMeetingDate() {
 		} else {
 			meetingDate = "unknown_date";
 		}
-	} else if (sourceParam.startsWith("me")) {
+	} else if (sourceParam.startsWith("thisisme")) {
 		sourceKey = "this_is_me";
 		meetingDate = "unknown_date";
 	} else if (sourceParam.startsWith("menu")) {
