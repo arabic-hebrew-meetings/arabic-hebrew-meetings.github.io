@@ -65,7 +65,7 @@ function doSaveAction(siteLocation, action, params, createNewSessionIfNeeded, sa
 	}
 }
 
-function saveMeetingEntry(nativeLanguage, level, languageInRoom, roomNumber, roomType){
+function saveMeetingEntry(nativeLanguage, level, languageInRoom, roomNumber, roomType, sourceKey, meetingDate){
 	var sessionId = getSessionId("meetings", true);
 	if (sessionId == "") {
 		sessionId = "anonymous";
@@ -78,7 +78,9 @@ function saveMeetingEntry(nativeLanguage, level, languageInRoom, roomNumber, roo
 				"entry.1729768685": level,
 				"entry.579761647": languageInRoom,
 				"entry.1804344661": roomNumber,
-				"entry.358084798": roomType
+				"entry.358084798": roomType,
+                "entry.12017553": sourceKey,
+                "entry.366684760": meetingDate
 				},
             type: "POST",
             dataType: "xml",
