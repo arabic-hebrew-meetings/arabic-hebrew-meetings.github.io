@@ -31,6 +31,7 @@ var possibleRoomsByLangLevel = {
 };
 var hashedMeetingCode = "blablabla";
 var badPwd = false;
+var isFirstPwdCheck = true;
 
 function countdownIgnore() {
 	ignoreCountdown = true;
@@ -129,11 +130,13 @@ function updateNextMeetingInfo(isFirstCall) {
 function isApproved() {
 	var code = getQueryParamByName("pwd");
 	console.log("Checking code: " + code);
-	if (code == null) {
-		return false;
+	var isCodeApproved = false;
+	if (code != null) {
+		res = SHA256(code);
+		isCodeApproved = hashedMeetingCode == res;
 	}
-	res = SHA256(code);
-	return hashedMeetingCode == res;
+	saveOpenMeetingPageDetails(isCodeApproved, code);
+	return isCodeApproved;
 }
 
 function displayGenericPage() {
@@ -1179,6 +1182,16 @@ function getUserSourceAndMeetingDate() {
 function getMeetingDateFromUserSource(sourceParam) {
 	var meetingDate = sourceParam.substring(sourceParam.lastIndexOf('_') + 1);
 	return meetingDate;
+}
+
+function saveOpenMeetingPageDetails(isCodeApproved, codeParam) {
+	if (isFirstPwdCheck) {
+		isFirstPwdCheck = false; // we only want to save the details the first time a user opens this page
+		var sourceAndDate = getUserSourceAndMeetingDate();
+		var sourceKey = sourceAndDate[0];
+		var meetingDate = sourceAndDate[1];
+		saveAction("meetings", "meetings_page_open", {source_key: sourceKey, meeting_date: meetingDate, is_approved: isCodeApproved, user_code: codeParam});
+	}
 }
 
 	
