@@ -11,16 +11,50 @@ function doPost(e) {
   //Name of Sheet to be used.
   var sheetName = "ZoomWebhooks";
 
-  timezone = "GMT+" + new Date().getTimezoneOffset()/60
+  timezone = "GMT+" + new Date().getTimezoneOffset()/60;
   var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
-  
+
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  sheet.appendRow([timeStamp, "webhookJson", e.postData.contents, "Todo"]);
+
+  var lock = LockService.getScriptLock();
   try {
+      lock.waitLock(300000); // wait 5 min (300 seconds) for others' use of the code section and lock to stop and then proceed
+  } catch (e) {
+      Logger.log('Could not obtain lock after 5 min.');
+      sheet.appendRow([timeStamp, "error", 'Could not obtain lock']);
+      return HtmlService.createHtmlOutput("doPost received");
+  }
+
+  //successfully obtained the lock and now we can continue
+  updateSheetInsideLock();
+  lock.releaseLock();
+  return HtmlService.createHtmlOutput("doPost received");
+}
+
+function updateSheetInsideLock() {
+
+  //Name of Sheet to be used.
+  var sheetName = "ZoomWebhooks";
+
+  timezone = "GMT+" + new Date().getTimezoneOffset()/60;
+  var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+  var webhookJson = getNextWebhookToHandle();
+  var rowNumFound = webhookInfo[0];
+  var webhookJson = webhookInfo[1];
+
+  if (rowNumFound == -1) {
+    Logger.log("Didn't find any webhook to handle");
+    sheet.appendRow([timeStamp, "error", "Didn't find any webhook to handle"]);
+    return;
+  }
+
+  try {
+
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
     
-     var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-    
-    // convert payload into js object
-    // webhook events are only for one document so we can just extract the first array object
-    var data = JSON.parse (e.postData.contents);   
+    var data = JSON.parse(webhookJson);   
 
     var meetingId = data["payload"]["object"]["id"];
     var webhookEvent = data["event"];
@@ -50,20 +84,60 @@ function doPost(e) {
     }
 
     // write data to Google sheet
-    sheet.appendRow([timeStamp, comment, roomNumber, userInfo, meetingId, webhookEvent, userId, userName, userEmail]);
+    sheet.appendRow([timeStamp, "webhookFullInfo", comment, roomNumber, userInfo, meetingId, webhookEvent, userId, userName, userEmail]);
     
   } catch (error) {
     // if something goes wrong we will append message to google sheet so it can be easily found
-    addCommentToSheet(error);
+    addCommentToSheet("error", error);
   }
-  return HtmlService.createHtmlOutput("doPost received");
 }
 
-function addCommentToSheet(comment) {
+function getNextWebhookToHandle() {
+  var rowNumFound = -1;
+  var webhookJson = "";
+
+  timezone = "GMT+" + new Date().getTimezoneOffset()/60;
+  var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+  try {
+
+    var numberOfRowsToIgnore = 1;
+    var typeColumn = 1;
+    var webhookJsonColumn = 2;
+    var webhookStatusColumn = 3;
+    var s = SpreadsheetApp.getActiveSpreadsheet();
+    var sht = s.getSheetByName('ZoomWebhooks')
+    var drng = sht.getDataRange();
+    var rng = sht.getRange(numberOfRowsToIgnore+1,1, drng.getLastRow()-numberOfRowsToIgnore,drng.getLastColumn());
+    var table = rng.getValues();//Array of input values
+    for (var i = 0; i < table.length; i++) {
+      if (table[i][typeColumn] == "webhookJson" && table[i][webhookStatusColumn] == "Todo") {
+        rowNumFound = i+numberOfRowsToIgnore+1;
+        webhookJson = table[i][webhookJsonColumn];
+        Logger.log('Found next webhook to handle in row:');
+        Logger.log(i+numberOfRowsToIgnore+1);
+        table[i][webhookStatusColumn] = "Done";
+        break; //finish going over table after founding the first webhook to handle
+      }
+    }
+
+  } catch (error) {
+    // if something goes wrong we will append message to google sheet so it can be easily found
+    addCommentToSheet("error", error);
+    return [-1, ""];
+  }
+
+  if (rowNumFound != -1) {
+    rng.setValues(table) //save update to table
+  }
+  return [rowNumFound, webhookJson];
+}
+
+function addCommentToSheet(commentType, comment) {
   timezone = "GMT+" + new Date().getTimezoneOffset()/60
   var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ZoomWebhooks");
-  sheet.appendRow([timeStamp, comment])
+  sheet.appendRow([timeStamp, commentType, comment])
 }
 
 function handleUserJoined(meetingId, userInfo, numberOfRoom) {
@@ -210,7 +284,7 @@ function updateRoomLiveCount(roomNumber, isJoined) {
     Logger.log(roomNumber);
   } catch (error) {
     // if something goes wrong we will append message to google sheet so it can be easily found
-    addCommentToSheet(error);
+    addCommentToSheet("error", error);
   }
 }
 
