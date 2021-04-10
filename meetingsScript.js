@@ -976,32 +976,41 @@ function saveMeetingAction(data, roomType) {
 		
 		var roomNumber = "";
 		
-		if (data.includes("Room-1")) {
+		if (data.endsWith("Room-1")) {
 			roomNumber = "1";
 		}
-		if (data.includes("Room-2")) {
+		if (data.endsWith("Room-2")) {
 			roomNumber = "2";
 		}
-		if (data.includes("Room-3")) {
+		if (data.endsWith("Room-3")) {
 			roomNumber = "3";
 		}
-		if (data.includes("Room-4")) {
+		if (data.endsWith("Room-4")) {
 			roomNumber = "4";
 		}
-		if (data.includes("Room-5")) {
+		if (data.endsWith("Room-5")) {
 			roomNumber = "5";
 		}
-		if (data.includes("Room-6")) {
+		if (data.endsWith("Room-6")) {
 			roomNumber = "6";
 		}
-		if (data.includes("Room-7")) {
+		if (data.endsWith("Room-7")) {
 			roomNumber = "7";
 		}
-		if (data.includes("Room-8")) {
+		if (data.endsWith("Room-8")) {
 			roomNumber = "8";
 		}
-		if (data.includes("Room-9")) {
+		if (data.endsWith("Room-9")) {
 			roomNumber = "9";
+		}
+		if (data.endsWith("Room-10")) {
+			roomNumber = "10";
+		}
+		if (data.endsWith("Room-11")) {
+			roomNumber = "11";
+		}
+		if (data.endsWith("Room-12")) {
+			roomNumber = "12";
 		}
 		
 		var languageLevel = otherLanguage+"-"+level;
@@ -1129,9 +1138,18 @@ function getUserSourceAndMeetingDate() {
 	} else if (sourceParam.startsWith("fpe_")) {
 		sourceKey = "facebook_palestinian_israeli_event";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
-	} else if (sourceParam.startsWith("fie_")) {
-		sourceKey = "facebook_international_event";
+	} else if (sourceParam.startsWith("fieu_")) {
+		sourceKey = "facebook_international_event_url";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
+	} else if (sourceParam.startsWith("fied_")) {
+		sourceKey = "facebook_international_event_details";
+		meetingDate = getMeetingDateFromUserSource(sourceParam);
+	} else if (sourceParam.startsWith("fiet_")) {
+		sourceKey = "facebook_international_event_tonight";
+		meetingDate = getMeetingDateFromUserSource(sourceParam);
+	} else if (sourceParam.startsWith("fien_")) {
+		sourceKey = "facebook_international_event_now";
+		meetingDate = getMeetingDateFromUserSource(sourceParam);			
 	} else if (sourceParam.startsWith("fpc_")) {
 		sourceKey = "facebook_palestinian_israeli_comment";
 		meetingDate = getMeetingDateFromUserSource(sourceParam);
