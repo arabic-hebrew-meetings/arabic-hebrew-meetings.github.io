@@ -7,7 +7,68 @@ function doGet(e) {
 // Required fucntion for publishing Google script app
 // This fucntion fires when a POST message is recieved
 function doPost(e) {
-  
+
+  if (e.queryString != null && e.queryString.includes("jobUpdate")) {
+    return updateJob(e);
+  }
+
+  timezone = "GMT+" + new Date().getTimezoneOffset()/60;
+  var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+  var originalWebhookJson = e.postData.contents;
+
+  // in order to avoid duplicate webhooks and webhooks with bad structure that I cannot parse
+  uniqueMessageId = getUniqueMessageId(originalWebhookJson);
+
+  lockForWebhhokFirstSave(timeStamp, originalWebhookJson, uniqueMessageId);
+
+  //lockForHandlingSavedWebhook(); // currently commented out
+
+  return HtmlService.createHtmlOutput("doPost received");
+}
+
+function lockForWebhhokFirstSave(timeStamp, originalWebhookJson, uniqueMessageId) {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(300000); // wait 5 min (300 seconds) for others' use of the code section and lock to stop and then proceed
+  } catch (e) {
+    Logger.log('Could not obtain lock after 5 min.');
+    addCommentToSheet("error", 'Could not obtain lock to first save webhook');
+    return HtmlService.createHtmlOutput("doPost received");
+  }
+
+  //successfully obtained the lock and now we can continue
+  firstSaveWebhookInsideLock(timeStamp, originalWebhookJson, uniqueMessageId);
+  lock.releaseLock();
+}
+
+function firstSaveWebhookInsideLock(timeStamp, originalWebhookJson, uniqueMessageId) {
+  //Name of Sheet to be used.
+  var sheetName = "ZoomWebhooks";
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+  if (uniqueMessageId != "bad_id") {
+    sheet.appendRow([timeStamp, "webhookJson", originalWebhookJson, "Todo", uniqueMessageId]);
+  } else {
+    sheet.appendRow([timeStamp, "webhookJson", originalWebhookJson, "Bad Webhook Json"]);
+  }
+}
+
+function lockForHandlingSavedWebhook() {
+  var lock = LockService.getScriptLock();
+  try {
+    lock.waitLock(300000); // wait 5 min (300 seconds) for others' use of the code section and lock to stop and then proceed
+  } catch (e) {
+    Logger.log('Could not obtain lock after 5 min.');
+    addCommentToSheet("error", 'Could not obtain lock for handling saved webhook');
+    return HtmlService.createHtmlOutput("doPost received");
+  }
+
+  //successfully obtained the lock and now we can continue
+  updateSheetInsideLock();
+  lock.releaseLock();
+}
+
+function getUniqueMessageId(webhookJson) {
   //Name of Sheet to be used.
   var sheetName = "ZoomWebhooks";
 
@@ -15,21 +76,169 @@ function doPost(e) {
   var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
-  sheet.appendRow([timeStamp, "webhookJson", e.postData.contents, "Todo"]);
 
-  var lock = LockService.getScriptLock();
   try {
-      lock.waitLock(300000); // wait 5 min (300 seconds) for others' use of the code section and lock to stop and then proceed
-  } catch (e) {
-      Logger.log('Could not obtain lock after 5 min.');
-      sheet.appendRow([timeStamp, "error", 'Could not obtain lock']);
-      return HtmlService.createHtmlOutput("doPost received");
+    
+    var data = JSON.parse(webhookJson);   
+
+    var meetingId = data["payload"]["object"]["id"];
+    var webhookEvent = data["event"];
+    var webhookEventTimestamp = data["event_ts"];
+    var userId = data["payload"]["object"]["participant"]["user_id"];
+    var uniqueMessageId = webhookEvent + "_" + meetingId + "_" + userId + "_" + webhookEventTimestamp;
+
+    return uniqueMessageId;
+    
+  } catch (error) {
+    // if something goes wrong we will append message to google sheet so it can be easily found
+    addCommentToSheet("error", error);
+
+    return "bad_id";
   }
 
-  //successfully obtained the lock and now we can continue
-  updateSheetInsideLock();
-  lock.releaseLock();
-  return HtmlService.createHtmlOutput("doPost received");
+}
+
+function updateJob(e) {
+  if (e.queryString.includes("jobUpdate=start")) {
+    return startJob(e);
+  } else if (e.queryString.includes("jobUpdate=stop")) {
+    return stopJob(e);
+  } 
+}
+
+function startJob(e) {
+  addCommentToSheet("starting job", "");
+
+  // Trigger every 6 hours.
+  ScriptApp.newTrigger("doJobFunction")
+      .timeBased()
+      .everyMinutes(1)
+      .create();
+
+  addCommentToSheet("started job", "");
+}
+
+function stopJob(e) {
+  addCommentToSheet("stopping job", "");
+
+  var foundTrigger = false;
+
+  // Loop over all triggers.
+  var allTriggers = ScriptApp.getProjectTriggers();
+  addCommentToSheet("current number of triggers", allTriggers.length);
+  for (var i = 0; i < allTriggers.length; i++) {
+    // If the current trigger is the correct one, delete it.
+    if (allTriggers[i].getHandlerFunction() === "doJobFunction") {
+      ScriptApp.deleteTrigger(allTriggers[i]);
+      foundTrigger = true;
+      break;
+    }
+  }
+
+  if (foundTrigger) {
+    addCommentToSheet("stopped job", "");
+  } else {
+    addCommentToSheet("error", "Couldn't find the trigger that needed to be stopped");
+  }
+  
+}
+
+function doJobFunction() {
+
+  addCommentToSheet("start execution", "");
+
+  //Name of Sheet to be used.
+  var sheetName = "ZoomWebhooks";
+
+  timezone = "GMT+" + new Date().getTimezoneOffset()/60;
+  var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+
+  var tryToHandleNextWebhook = true;
+  while (tryToHandleNextWebhook) {
+    var webhookInfo = getNextWebhookToHandle(true);
+    var rowNumFound = webhookInfo[0];
+    var webhookJson = webhookInfo[1];
+
+    if (rowNumFound == -1) {
+      tryToHandleNextWebhook = false;
+      Logger.log("Didn't find any webhook to handle");
+      addCommentToSheet("finish execution", "Didn't find any webhook to handle");
+      SpreadsheetApp.flush(); // applies all pending spreadsheet changes
+      return;
+    }
+
+    addCommentToSheet("start handling webhook", webhookJson);
+
+    handleWebhook(webhookInfo);
+
+    addCommentToSheet("finish handling webhook", webhookJson);
+
+    SpreadsheetApp.flush(); // applies all pending spreadsheet changes
+  }
+
+}
+
+function handleWebhook(webhookInfo) {
+
+    //Name of Sheet to be used.
+    var sheetName = "ZoomWebhooks";
+
+    timezone = "GMT+" + new Date().getTimezoneOffset()/60;
+    var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+
+    var rowNumFound = webhookInfo[0];
+    var webhookJson = webhookInfo[1];
+
+    try {
+
+      var data = JSON.parse(webhookJson);   
+
+      var meetingId = data["payload"]["object"]["id"];
+      var webhookEvent = data["event"];
+      var webhookEventTimestamp = data["event_ts"];
+      var userName = data["payload"]["object"]["participant"]["user_name"];
+      var userId = data["payload"]["object"]["participant"]["user_id"];
+      var userEmail = data["payload"]["object"]["participant"]["email"];
+      var userInfo = userEmail + "_" + userName + "_" + userId;
+
+      var comment = "";
+      var type = "";
+
+      var numberOfRoom = getRoomNumberByMeetingId(meetingId);
+      var roomNumber = "Room-"+numberOfRoom;
+      if (numberOfRoom == -1) {
+        var roomNumber = "Unknown room number";
+      }
+
+      var shouldHandleEvent = true;
+      if (userName.includes("Admin") || userName == "Roy Nahmias" || userName == "BBB") {
+        shouldHandleEvent = false;
+        comment = "Didn't count myself"
+        type = "Didn't count myself";
+      }
+
+      if (shouldHandleEvent && webhookEvent == "meeting.participant_joined") {
+        comment = handleUserJoined(meetingId, userInfo, numberOfRoom, true);
+        type = "User Joined";
+      } else if (shouldHandleEvent && webhookEvent == "meeting.participant_left") {
+        comment = handleUserLeft(meetingId, userInfo, numberOfRoom, true);
+        type = "User Left";
+      }
+
+      //addCommentToSheet(type, comment);
+
+      // write data to Google sheet
+      sheet.appendRow([timeStamp, "webhookFullInfo", comment, roomNumber, userInfo, meetingId, webhookEvent, userId, userName, userEmail, webhookEventTimestamp]);
+
+    } catch (error) {
+      // if something goes wrong we will append message to google sheet so it can be easily found
+      addCommentToSheet("error", error);
+    }
+
 }
 
 function updateSheetInsideLock() {
@@ -40,30 +249,32 @@ function updateSheetInsideLock() {
   timezone = "GMT+" + new Date().getTimezoneOffset()/60;
   var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
 
-  var webhookJson = getNextWebhookToHandle();
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
+
+  var webhookInfo = getNextWebhookToHandle(true);
   var rowNumFound = webhookInfo[0];
   var webhookJson = webhookInfo[1];
 
   if (rowNumFound == -1) {
     Logger.log("Didn't find any webhook to handle");
-    sheet.appendRow([timeStamp, "error", "Didn't find any webhook to handle"]);
+    addCommentToSheet("error", "Didn't find any webhook to handle");
     return;
   }
 
   try {
-
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
     
     var data = JSON.parse(webhookJson);   
 
     var meetingId = data["payload"]["object"]["id"];
     var webhookEvent = data["event"];
+    var webhookEventTimestamp = data["event_ts"];
     var userName = data["payload"]["object"]["participant"]["user_name"];
     var userId = data["payload"]["object"]["participant"]["user_id"];
     var userEmail = data["payload"]["object"]["participant"]["email"];
     var userInfo = userEmail + "_" + userName + "_" + userId;
 
     var comment = "";
+    var type = "";
 
     var numberOfRoom = getRoomNumberByMeetingId(meetingId);
     var roomNumber = "Room-"+numberOfRoom;
@@ -75,16 +286,21 @@ function updateSheetInsideLock() {
     if (userName.includes("Admin") || userName == "Roy Nahmias" || userName == "BBB") {
       shouldHandleEvent = false;
       comment = "Didn't count myself"
+      type = "Didn't count myself";
     }
 
     if (shouldHandleEvent && webhookEvent == "meeting.participant_joined") {
-      comment = handleUserJoined(meetingId, userInfo, numberOfRoom);
+      comment = handleUserJoined(meetingId, userInfo, numberOfRoom, true);
+      type = "User Joined";
     } else if (shouldHandleEvent && webhookEvent == "meeting.participant_left") {
-      comment = handleUserLeft(meetingId, userInfo, numberOfRoom);
+      comment = handleUserLeft(meetingId, userInfo, numberOfRoom, true);
+      type = "User Left";
     }
 
+    //addCommentToSheet(type, comment);
+
     // write data to Google sheet
-    sheet.appendRow([timeStamp, "webhookFullInfo", comment, roomNumber, userInfo, meetingId, webhookEvent, userId, userName, userEmail]);
+    sheet.appendRow([timeStamp, "webhookFullInfo", comment, roomNumber, userInfo, meetingId, webhookEvent, userId, userName, userEmail, webhookEventTimestamp]);
     
   } catch (error) {
     // if something goes wrong we will append message to google sheet so it can be easily found
@@ -92,12 +308,16 @@ function updateSheetInsideLock() {
   }
 }
 
-function getNextWebhookToHandle() {
+function getNextWebhookToHandle(saveImmediately) {
   var rowNumFound = -1;
   var webhookJson = "";
+  var duplicateFound = false;
 
   timezone = "GMT+" + new Date().getTimezoneOffset()/60;
   var timeStamp = Utilities.formatDate(new Date(), timezone, "dd/MM/yyyy HH:mm:ss"); // "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
+   var sheetName = "ZoomWebhooks";
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
 
   try {
 
@@ -105,13 +325,34 @@ function getNextWebhookToHandle() {
     var typeColumn = 1;
     var webhookJsonColumn = 2;
     var webhookStatusColumn = 3;
+    var webhookUniqueMessageIdColumn = 4;
     var s = SpreadsheetApp.getActiveSpreadsheet();
     var sht = s.getSheetByName('ZoomWebhooks')
     var drng = sht.getDataRange();
     var rng = sht.getRange(numberOfRowsToIgnore+1,1, drng.getLastRow()-numberOfRowsToIgnore,drng.getLastColumn());
     var table = rng.getValues();//Array of input values
+    var webhookIdSet = new Set(); 
     for (var i = 0; i < table.length; i++) {
+
+      if (table[i][typeColumn] == "webhookJson" && table[i][webhookStatusColumn] == "Done") {
+        webhookIdSet.add(table[i][webhookUniqueMessageIdColumn]);
+      }
+
       if (table[i][typeColumn] == "webhookJson" && table[i][webhookStatusColumn] == "Todo") {
+
+
+        if(webhookIdSet.has(table[i][webhookUniqueMessageIdColumn])) {
+          // found duplicate webhook
+          table[i][webhookStatusColumn] = "Duplicate";
+          var curRow = i+numberOfRowsToIgnore+1;
+          Logger.log('Found next webhook to handle in row:');
+          Logger.log(curRow);
+          addCommentToSheet("duplicate", "found duplicate in row " + curRow);
+          duplicateFound = true;
+          continue; // skip to the next webhook available
+        }
+
+
         rowNumFound = i+numberOfRowsToIgnore+1;
         webhookJson = table[i][webhookJsonColumn];
         Logger.log('Found next webhook to handle in row:');
@@ -127,9 +368,10 @@ function getNextWebhookToHandle() {
     return [-1, ""];
   }
 
-  if (rowNumFound != -1) {
+  if (saveImmediately && (rowNumFound != -1 || duplicateFound)) {
     rng.setValues(table) //save update to table
   }
+
   return [rowNumFound, webhookJson];
 }
 
@@ -140,7 +382,7 @@ function addCommentToSheet(commentType, comment) {
   sheet.appendRow([timeStamp, commentType, comment])
 }
 
-function handleUserJoined(meetingId, userInfo, numberOfRoom) {
+function handleUserJoined(meetingId, userInfo, numberOfRoom, saveImmediately) {
   Logger.log('start handleUserJoined with meetingId and userInfo:');
   Logger.log(meetingId);
   Logger.log(userInfo);
@@ -153,7 +395,7 @@ function handleUserJoined(meetingId, userInfo, numberOfRoom) {
   }
   var roomNumber = "Room-"+numberOfRoom;
 
-  updateRoomLiveCount(numberOfRoom, true);
+  updateRoomLiveCount(numberOfRoom, true, saveImmediately);
 
   if (userInfo == "") {
     Logger.log('failed to finish handleUserJoined because of unknown userInfo, with meetingId:');
@@ -189,7 +431,9 @@ function handleUserJoined(meetingId, userInfo, numberOfRoom) {
   Logger.log(userInfo);
 
   if (foundUser) {
-    rng.setValues(table) //save update to table
+    if (saveImmediately) {
+      rng.setValues(table) //save update to table
+    }
     Logger.log("Joined user found");
     return "Joined user found in row " + foundRow;
   } else {
@@ -199,7 +443,7 @@ function handleUserJoined(meetingId, userInfo, numberOfRoom) {
   }
 }
 
-function handleUserLeft(meetingId, userInfo, numberOfRoom) {
+function handleUserLeft(meetingId, userInfo, numberOfRoom, saveImmediately) {
   Logger.log('start handleUserLeft with meetingId and userInfo:');
   Logger.log(meetingId);
   Logger.log(userInfo);
@@ -212,7 +456,7 @@ function handleUserLeft(meetingId, userInfo, numberOfRoom) {
   }
   var roomNumber = "Room-"+numberOfRoom;
 
-  updateRoomLiveCount(numberOfRoom, false);
+  updateRoomLiveCount(numberOfRoom, false, saveImmediately);
 
   if (userInfo == "") {
     Logger.log('failed to finish handleUserLeft because of unknown userInfo, with meetingId:');
@@ -248,7 +492,9 @@ function handleUserLeft(meetingId, userInfo, numberOfRoom) {
   Logger.log(userInfo);
 
   if (foundUser) {
-    rng.setValues(table) //save update to table
+    if (saveImmediately) {
+      rng.setValues(table) //save update to table
+    }
     Logger.log("Leaving user found");
     return "Leaving user found in row " + foundRow;
   } else {
@@ -258,7 +504,7 @@ function handleUserLeft(meetingId, userInfo, numberOfRoom) {
   }
 }
 
-function updateRoomLiveCount(roomNumber, isJoined) {
+function updateRoomLiveCount(roomNumber, isJoined, saveImmediately) {
   try {
     if (isJoined) {
       Logger.log('start updateRoomLiveCount after user joined, with roomNumber:');
@@ -275,7 +521,9 @@ function updateRoomLiveCount(roomNumber, isJoined) {
     } else {
       table[0][roomNumber-1] = table[0][roomNumber-1] - 1;
     }
-    rng.setValues(table) //save update to table
+    if (saveImmediately) {
+      rng.setValues(table) //save update to table
+    }
     if (isJoined) {
       Logger.log('finish updateRoomLiveCount after user joined, with roomNumber:');
     } else {
