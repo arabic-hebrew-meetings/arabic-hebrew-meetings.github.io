@@ -140,5 +140,6 @@ function getActivitiesCarousel() {
     <!-- you need to fill the last row with empty squares like this <div class="my-square empty-square"> </div> -->
 	</div>
 	<div class="container-fluid"><!-- /just for margin from the footer -->
-	</div>`;
+  </div>`;
+  saveAction("homepage", "homepage_page_open", null);
 }
