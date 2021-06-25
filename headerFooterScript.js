@@ -196,6 +196,9 @@ function handleFeedback(page, action) {
             nameNotEmpty = feedbackName && feedbackName.trim();
             contentNotEmpty = feedbackContent && feedbackContent.trim();
             if (nameNotEmpty && contentNotEmpty && isNotSpam(feedbackContent)) {
+                // convert text from multiline to singe line because google forms support single line for each input
+                var feedbackName = feedbackName.replace(/\r/g, " . ").replace(/\n/g, " . ");
+                var feedbackContent = feedbackContent.replace(/\r/g, " . ").replace(/\n/g, " . ");
                 var sessionId = getSessionId(page, true);
                 if (sessionId == "") {
                     sessionId = "anonymous";
@@ -244,10 +247,8 @@ function handleFeedback(page, action) {
 
 function isNotSpam(content) {
     if (content != null && content.includes("http://bit.ly/") && content.includes("traffic")) {
-        console.log(false)
         return false;
     } else {
-        console.log(true)
         return true;
     }
 }
