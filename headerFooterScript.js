@@ -188,4 +188,67 @@ function getQueryParamByName(name, url = window.location.href) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function handleFeedback(page, action) {
+    if (page == "homepage") {
+        if (action == "send") {
+            feedbackName = document.getElementById('feeback_name').value;
+            feedbackContent = document.getElementById('feedback_content').value;
+            nameNotEmpty = feedbackName && feedbackName.trim();
+            contentNotEmpty = feedbackContent && feedbackContent.trim();
+            if (nameNotEmpty && contentNotEmpty && isNotSpam(feedbackContent)) {
+                var sessionId = getSessionId(page, true);
+                if (sessionId == "") {
+                    sessionId = "anonymous";
+                }
+                $.ajax({
+                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSfy9Cenad7cEtTJ2p9ebx-5Je2yYAPL3OSTmAyH6zXtLJgmEA/formResponse",
+                    data: {
+                        "entry.354079520": feedbackName,
+                        "entry.1032780145": feedbackContent
+                        },
+                    type: "POST",
+                    dataType: "xml",
+                    statusCode: {
+                        0: function() {
+                            //Success message
+                        },
+                        200: function() {
+                            //Success Message
+                        }
+                    }
+                });
+                document.getElementById('form_place').innerHTML = `
+                <h3>תודה! شكرا!</h3>
+                <button type="button" onclick="handleFeedback('homepage', 'displayForm')">Back</button>
+                `;
+            } else if (!nameNotEmpty && !contentNotEmpty) {
+                alert("בבקשה מלאו את שמכם ואת תוכן ההודעה"); 
+            } else if (!contentNotEmpty) {
+                alert("בבקשה מלאו את תוכן ההודעה"); 
+            } else if (!nameNotEmpty) {
+                alert("בבקשה מלאו את שמכם"); 
+            }
+        } else if (action == "displayForm") {
+            document.getElementById('form_place').innerHTML = `
+            <form name="feedback" onsubmit="handleFeedback('homepage', 'send'); return false;">
+		    שם:<br>
+		    <input class="form__email" type="text" placeholder="" name="feeback_name" id="feeback_name" required="" /><br>
+		    תוכן ההודעה:<br>
+		    <textarea class="form__message" cols="30" type="text" placeholder="" name="feedback_content" id="feedback_content" required="" rows="5"></textarea><br>
+		    <button class="form__submit">Submit</button><br>
+		  </form>
+            `;
+        }
+    }
+}
+
+function isNotSpam(content) {
+    if (content != null && content.includes("http://bit.ly/") && content.includes("traffic")) {
+        console.log(false)
+        return false;
+    } else {
+        console.log(true)
+        return true;
+    }
+}
 
