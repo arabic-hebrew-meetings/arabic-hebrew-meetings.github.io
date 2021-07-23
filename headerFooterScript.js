@@ -220,20 +220,24 @@ function handleFeedback(page, action) {
                         }
                     }
                 });
+                saveAction(page, "success_sending_feedback", {name: feedbackName, content: feedbackContent});
                 document.getElementById('form_place').innerHTML = `
                 <h3>תודה! شكرا!</h3>
-                <button type="button" onclick="handleFeedback('homepage', 'displayForm')">Back</button>
+                <button type="button" onclick="handleFeedback('`+page+`', 'displayForm')">Back</button>
                 `;
             } else if (!nameNotEmpty && !contentNotEmpty) {
+                saveAction(page, "error_sending_feedback", {error: "name empty AND content empty"});
                 alert("בבקשה מלאו את שמכם ואת תוכן ההודעה"); 
             } else if (!contentNotEmpty) {
+                saveAction(page, "error_sending_feedback", {error: "content empty", name: feedbackName});
                 alert("בבקשה מלאו את תוכן ההודעה"); 
             } else if (!nameNotEmpty) {
+                saveAction(page, "error_sending_feedback", {error: "name empty", content: feedbackContent});
                 alert("בבקשה מלאו את שמכם"); 
             }
         } else if (action == "displayForm") {
             document.getElementById('form_place').innerHTML = `
-            <form name="feedback" onsubmit="handleFeedback('homepage', 'send'); return false;">
+            <form name="feedback" onsubmit="handleFeedback('`+page+`', 'send'); return false;">
 		    שם:<br>
 		    <input class="form__email" type="text" placeholder="" name="feeback_name" id="feeback_name" required="" /><br>
 		    תוכן ההודעה:<br>
@@ -394,5 +398,7 @@ function getActivitiesCarouselByPage(page) {
 	</div>
 	<div class="container-fluid"><!-- /just for margin from the footer -->
   </div>`;
-  saveAction(page, page+"_page_open", null);
+  if (page != "meetings") {
+    saveAction(page, page+"_page_open", null);
+  }
 }	
