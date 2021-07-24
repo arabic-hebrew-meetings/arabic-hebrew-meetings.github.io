@@ -347,8 +347,8 @@ function displayCountdown(distance) {
 	
 	document.getElementById("after-countdown").innerHTML = textAfterCountdown;
 	
-	var leftColElem = document.getElementById("leftCol")
-	leftColElem.style.minHeight = "520px";
+	var lastChildElemInsideLeftCol = document.getElementById("after-countdown")
+	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 230);
 }
 
 function getCounterByNativeLanguageAndRoom(language, room) {
@@ -619,7 +619,8 @@ function displayChooseNativeLanguage() {
 		`;
 		
 	var lastOptionClass = '.input-2'
-	tryToFixLeftColMinHeight(lastOptionClass);
+	var lastChildElemInsideLeftCol = document.querySelector(lastOptionClass);
+	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 100);
 }
 
 function displayNumberOfOpenRooms(userLang) {
@@ -799,7 +800,8 @@ function displayLevelOptions(userLang) {
 		`
 	}
 	var lastOptionClass = '.input-1-after-radio-buttons'
-	tryToFixLeftColMinHeight(lastOptionClass);
+	var lastChildElemInsideLeftCol = document.querySelector(lastOptionClass);
+	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 100);
 }
 
 function displayRecommendedOptions(userLang, userLevel) {
@@ -871,7 +873,8 @@ function displayRecommendedOptions(userLang, userLevel) {
 	document.getElementById("options").innerHTML = options;
 	
 	var lastOptionClass = '.input-'+backOptionOrder+'-after-radio-buttons'
-	tryToFixLeftColMinHeight(lastOptionClass);
+	var lastChildElemInsideLeftCol = document.querySelector(lastOptionClass);
+	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 100);
 }
 
 function displayMoreOptions(userLang, userLevel, chosenData) {
@@ -905,20 +908,27 @@ function displayMoreOptions(userLang, userLevel, chosenData) {
 	document.getElementById("options").innerHTML = options;
 	
 	var lastOptionClass = '.input-'+backOptionOrder+'-after-radio-buttons'
-	tryToFixLeftColMinHeight(lastOptionClass);
+	var lastChildElemInsideLeftCol = document.querySelector(lastOptionClass);
+	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 100);
 }	
 
-function tryToFixLeftColMinHeight(lastOptionClass) {
+function tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, heightToAdd) {
 	try {
-		var classElem = document.querySelector(lastOptionClass);
-		var classStyle = getComputedStyle(classElem);
-		var lastElemMarginTop = classStyle.marginTop
-		var leftColMinHeight = "";
-		if (lastElemMarginTop.includes("px")) {
-			leftColMinHeight = (parseInt(lastElemMarginTop.split("px")[0]) + 400).toString() + "px";
-		}
+		var lastElemDistanceFromTop = window.pageYOffset + lastChildElemInsideLeftCol.getBoundingClientRect().top
 		var leftColElem = document.getElementById("leftCol")
+		var leftColDistanceFromTop = window.pageYOffset + leftColElem.getBoundingClientRect().top
+		var LastElemDistanceFromLeftCol = lastElemDistanceFromTop - leftColDistanceFromTop;
+		leftColMinHeight = LastElemDistanceFromLeftCol + heightToAdd + "px";
 		leftColElem.style.minHeight = leftColMinHeight;
+
+		// console.log("lastElemDistanceFromTop:");
+		// console.log(lastElemDistanceFromTop);
+		// console.log("leftColDistanceFromTop:");
+		// console.log(leftColDistanceFromTop);
+		// console.log("LastElemDistanceFromLeftCol:");
+		// console.log(LastElemDistanceFromLeftCol);
+		// console.log("leftColMinHeight:");
+		// console.log(leftColMinHeight);
 	}
 	catch(err) {
 		console.log(err);
