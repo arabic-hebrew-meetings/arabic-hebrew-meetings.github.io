@@ -348,7 +348,12 @@ function displayCountdown(distance) {
 	document.getElementById("after-countdown").innerHTML = textAfterCountdown;
 	
 	var lastChildElemInsideLeftCol = document.getElementById("after-countdown")
-	tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 230);
+
+	if (screen.width <= 600) {
+		tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 180);
+	} else {
+		tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, 230);
+	}
 }
 
 function getCounterByNativeLanguageAndRoom(language, room) {
