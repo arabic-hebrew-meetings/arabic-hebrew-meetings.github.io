@@ -347,6 +347,19 @@ function finishMarkedSend(page, userLang) {
         <span class="glyphicon glyphicon-remove-sign marked-error-icon"></span>
         פרטים לא נכונים
     </div>
+    <div>
+        <a class="btn btn-success btn-xl rtl two-options socialGroupButton whatsappButton" onClick="window.open('https://wa.me/972557291206', '_blank');" role="button">
+        <span class="mySocialGroupButtonText">
+            שלחו לנו הודעה<br>דרך וואטסאפ
+        </span>
+        </a>
+        <a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://m.me/nifgashim.ledaber', '_blank');" role="button">
+        <span class="mySocialGroupButtonText">
+            שלחו לנו הודעה<br>דרך פייסבוק
+        </span>
+        </a>
+    </div>
+    <br>
   </form>
     `;
     } else {
@@ -361,6 +374,19 @@ function finishMarkedSend(page, userLang) {
         <span class="glyphicon glyphicon-remove-sign marked-error-icon"></span>
         تفاصيل مش صحيحة
     </div>
+    <div>
+        <a class="btn btn-success btn-xl rtl two-options socialGroupButton whatsappButton" onClick="window.open('https://wa.me/972557291206', '_blank');" role="button">
+        <span class="mySocialGroupButtonText">
+            ابعتولنا رسالة<br>على واتس اب
+        </span>
+        </a>
+        <a class="btn btn-info btn-xl rtl two-options socialGroupButton facebookButton" onClick="window.open('https://m.me/nifgashim.ledaber', '_blank');" role="button">
+        <span class="mySocialGroupButtonText">
+            ابعتولنا رسالة<br>على فيسبوك
+        </span>
+        </a>
+    </div>
+    <br>
   </form>
     `;
     }
