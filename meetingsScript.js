@@ -32,6 +32,7 @@ var possibleRoomsByLangLevel = {
 var hashedMeetingCode = "blablabla";
 var badPwd = false;
 var isFirstPwdCheck = true;
+var markedSessionIds = ["88888888","99999999"];
 
 function countdownIgnore() {
 	ignoreCountdown = true;
@@ -39,7 +40,7 @@ function countdownIgnore() {
 
 function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, chosenData) {
 	startSpinner("my_spinner_groups");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:35?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:54?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -55,6 +56,7 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 			roomsRecommendedStatus = field[30];
 			hashedMeetingCode = field[34][0];
+			markedSessionIds = field[53];
 		}
     });
   })
@@ -75,14 +77,20 @@ function updateDataAndDisplayRecommendations(userLang, userLevel, userChoice, ch
 	  
 	  finishSpinner("my_spinner_groups");  
 	  displayNumberOfOpenRooms(userLang);
-	  displayRecommendedOptions(userLang, userLevel);
-	  displayMenu(userLang, userLevel, userChoice, chosenData);
+	  var sessionId = getSessionId("meetings", false);
+	  if (isMarked(sessionId)) {
+		saveAction("meetings", "marked_session_open_meeting", {session_id: sessionId});
+		handleMarkedSession(userLang);
+	  } else {
+		displayRecommendedOptions(userLang, userLevel);
+		displayMenu(userLang, userLevel, userChoice, chosenData);
+	  }
   }); 
 }
 
 function updateNextMeetingInfo(isFirstCall) {
 	startSpinner("my_spinner_countdown");
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:35?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1Fk1Ojj2D0UB0mopeJpmYR5k3wwjll2OFwLGozEy1hPE/values/Data!1:54?key=AIzaSyDo2RRl54o6M6wy5yCNv9cZW3OW8o7YNgs";                                                             
   $.getJSON(url, function(result){
     $.each(result, function(i, field){
 		if (i == "values") {
@@ -98,6 +106,7 @@ function updateNextMeetingInfo(isFirstCall) {
 			possibleRoomsByLangLevel["Hebrew"]["Advanced"] = field[28];
 			roomsRecommendedStatus = field[30];
 			hashedMeetingCode = field[34][0];
+			markedSessionIds = field[53];
 		}
     });
   })
@@ -137,6 +146,16 @@ function isApproved() {
 	}
 	saveOpenMeetingPageDetails(isCodeApproved, code);
 	return isCodeApproved;
+}
+
+function isMarked(sessionId) {
+	var isMarked = false;
+	for (curId of markedSessionIds) {
+		if (curId == sessionId) {
+			isMarked = true;
+		}
+	}
+	return isMarked;
 }
 
 function displayGenericPage() {
@@ -194,31 +213,37 @@ function displayGenericPage() {
 	leftColElem.style.minHeight = "500px";
 }
 
-function startSpinner(elementId) {
-	if (elementId == "my_spinner_countdown") {
-		document.getElementById(elementId).innerHTML = `
-			<svg class="spinner" viewBox="0 0 50 50">
-				<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-			</svg>
-		`;
-	}
-	if (elementId == "my_spinner_groups") {
-		document.getElementById(elementId).innerHTML = `
-			<svg class="spinner spinner_groups" viewBox="0 0 50 50">
-				<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
-			</svg>
-		`;
-		var optionsHeadline = document.getElementById("optionsHeadline");
-		if (optionsHeadline.style.visibility=="visible") {
-			updateSpinnerTop("65%");
-		} else {
-			updateSpinnerTop("70%");
-		}
-	}
-}
+function handleMarkedSession(userLang) {
+	var optionsHeadline = document.getElementById("optionsHeadline");
+	var options = document.getElementById("options");
+	if (userLang == "Hebrew") {
+		document.getElementById("question-area").innerHTML =  `
+		<div class="rtl text-center">
+			<div class="marked-headline">
+					ענו על השאלות הבאות
+					<br>
+					כדי להצטרף למפגש
+			</div>
 
-function finishSpinner(elementId) {
-	document.getElementById(elementId).innerHTML = ``;
+			<div id="marked_form" class="marked-form"></div>
+		</div>
+		`;
+	} else {
+		document.getElementById("question-area").innerHTML =  `
+		<div class="rtl text-center">
+			<div class="marked-headline">
+					جاوبوا على الاسئلة التالية
+					<br>
+					عشان تنضموا للقاء
+			</div>
+
+			<div id="marked_form" class="marked-form"></div>
+		</div>
+		`;
+	}
+	handleMarkedSessionDetails('meetings', 'displayForm', userLang);
+	optionsHeadline.style.visibility="visible";	
+	options.style.visibility="visible";	
 }
 
 function handleCountdown() {
@@ -940,10 +965,6 @@ function tryToFixLeftColMinHeight(lastChildElemInsideLeftCol, heightToAdd) {
 		console.log("failed to fix left col min height");
 		//we ignore and just don't fix left col min height
 	}
-}
-
-function updateSpinnerTop(topAttribute) {
-	document.querySelector(".spinner").style.top = topAttribute;
 }
 
 function saveMeetingsActions(userLang, userLevel, userChoice, data) {

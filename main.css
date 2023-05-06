@@ -756,6 +756,25 @@ ul.countdown li p {
 	.optionsHeadline {
 		font-size: 21px !important;
 	}
+
+	.marked-headline {
+		font-size:25px;
+	}
+
+	.marked-form {
+		font-size:25px;
+		margin-top: 25px;
+	}
+
+	.marked-form-field {
+		margin-bottom: 20px;
+	}
+
+	.marked-error {
+		color: red;
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
 	
 		.headline {
     font-size: 40px;
@@ -974,6 +993,25 @@ footer {
 	
 		.headline {
     font-size: 40px;
+}
+
+.marked-headline {
+	font-size:30px;
+}
+
+.marked-form {
+	font-size:25px;
+	margin-top: 25px;
+}
+
+.marked-form-field {
+	margin-bottom: 20px;
+}
+
+.marked-error {
+	color: red;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 	
 	.countdown-message {
