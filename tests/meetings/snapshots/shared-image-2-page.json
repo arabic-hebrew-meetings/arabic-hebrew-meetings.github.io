@@ -1,0 +1,15 @@
+{
+  "captures": {
+    "loaded": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>]],<div.right-col.rtl>[<div.row.text-center>[<div.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>]]]],<div.container-fluid>]",
+      "menuButtons": [],
+      "opened": [],
+      "tracking": []
+    }
+  },
+  "sheetRequests": 1,
+  "errors": [
+    "SHA256 is not defined"
+  ],
+  "dialogs": []
+}

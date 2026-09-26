@@ -13,6 +13,13 @@ import { CountdownScreen, GenericScreen, LanguageScreen, LevelsScreen, MarkedScr
 // order of tracking calls follow the legacy functions, which keep their names here (handleChoice,
 // displayMenu, ...). Mounted on .main-div with data-activity="meetings"; data-ignore-countdown skips
 // the countdown (meetingsIgnoreCountdown.html).
+//
+// The experimental share-test pages (sharetryagain*, sharedImageTry*) had two bugs, reproduced on purpose
+// so they behave exactly as before:
+// - data-legacy-bug-no-sha256: they didn't load sha256.js, so checking a ?pwd= threw
+//   "SHA256 is not defined" and the page stopped (nothing shown, nothing tracked).
+// - data-legacy-bug-no-headline-id: their headline had no id="headline", so showing the
+//   "join our groups" page (no password) threw when clearing it, and the page stayed empty.
 
 const FEEDBACK_FORM_URL =
   'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfy9Cenad7cEtTJ2p9ebx-5Je2yYAPL3OSTmAyH6zXtLJgmEA/formResponse';
@@ -38,7 +45,7 @@ const initialView = {
   measure: null, // { version, selector, add } | { version, fixed }: update #leftCol's min-height after this render
 };
 
-export default function Meetings({ ignoreCountdown }) {
+export default function Meetings({ ignoreCountdown, legacyBugNoSha256, legacyBugNoHeadlineId }) {
   const [view, setView] = useState(initialView);
   const update = (changes) => setView((v) => ({ ...v, ...(typeof changes === 'function' ? changes(v) : changes) }));
 
@@ -88,6 +95,9 @@ export default function Meetings({ ignoreCountdown }) {
   async function isApproved() {
     const code = getQueryParam('pwd');
     console.log('Checking code: ' + code);
+    if (code != null && legacyBugNoSha256 != null) {
+      throw new ReferenceError('SHA256 is not defined');
+    }
     const isCodeApproved = code != null && (await sha256Hex(code)) == g.data.hashedMeetingCode;
     saveOpenMeetingPageDetails(isCodeApproved, code);
     return isCodeApproved;
@@ -121,17 +131,23 @@ export default function Meetings({ ignoreCountdown }) {
       return; // like the legacy .done(): nothing else happens, and the spinner stays
     }
     update({ countdownSpinner: false });
-    if (await isApproved()) {
-      if (isFirstCall || g.badPwd) {
-        g.badPwd = false;
-        handleCountdown();
+    try {
+      if (await isApproved()) {
+        if (isFirstCall || g.badPwd) {
+          g.badPwd = false;
+          handleCountdown();
+        } else {
+          g.badPwd = false;
+        }
       } else {
-        g.badPwd = false;
+        g.badPwd = true;
+        g.isMeetingStarted = false;
+        displayGenericPage();
       }
-    } else {
-      g.badPwd = true;
-      g.isMeetingStarted = false;
-      displayGenericPage();
+    } catch (error) {
+      setTimeout(() => {
+        throw error;
+      });
     }
   }
 
@@ -211,6 +227,10 @@ export default function Meetings({ ignoreCountdown }) {
   // --- screens ---
 
   function displayGenericPage() {
+    // (the legacy code started with document.getElementById("headline").innerHTML = ``)
+    if (!document.getElementById('headline')) {
+      throw new TypeError("Cannot set properties of null (setting 'innerHTML')");
+    }
     update({ headlineCleared: true, subheadline: null });
     showScreen({ type: 'generic' });
     measure({ fixed: '500px' });
@@ -476,7 +496,7 @@ export default function Meetings({ ignoreCountdown }) {
           </div>
           <div className="right-col rtl">
             <div className="row text-center">
-              <div id="headline" className="headline">
+              <div id={legacyBugNoHeadlineId != null ? undefined : 'headline'} className="headline">
                 {!view.headlineCleared && (
                   <>
                     כניסה למפגש

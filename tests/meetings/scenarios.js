@@ -104,4 +104,10 @@ export const scenarios = [
   // The share-test pages don't load sha256.js, so the password check throws "SHA256 is not defined".
   { name: 'share-test-page', page: 'sharetryagain', query: pwd, steps: [] },
   { name: 'share-test-page-no-password', page: 'sharetryagain', query: '', steps: [] },
+  { name: 'share-test-page-wrong-password', page: 'sharetryagain', query: '?pwd=wrong', steps: [] },
+  // Copies with two right-to-left marks (U+200F) at the start of their file names
+  { name: 'share-test-page-b-no-password', page: '\u200f\u200fsharetryagainb', query: '', steps: [] },
+  { name: 'shared-image-page', page: 'sharedImageTry', query: pwd, steps: [] },
+  { name: 'shared-image-page-no-password', page: 'sharedImageTry', query: '', steps: [] },
+  { name: 'shared-image-2-page', page: '\u200f\u200fsharedImageTry2', query: pwd, steps: [] },
 ];
