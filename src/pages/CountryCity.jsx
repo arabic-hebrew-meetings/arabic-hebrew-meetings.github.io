@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import StartButtons from '../components/StartButtons.jsx';
-import { useMediaQuery } from '../hooks/useMediaQuery.js';
-import { saveAction } from '../lib/tracking.js';
+import CardActivity from '../components/CardActivity.jsx';
 
 // "ארץ עיר - إنسان حيوان نبات": each click draws a random Hebrew or Arabic letter.
 // Replaces public/countryCityScript.js.
@@ -50,64 +47,13 @@ function LetterCard({ letter }) {
   );
 }
 
-function CircleButton({ direction, onClick, invisible }) {
-  return (
-    <a className={invisible ? 'circle-button invisible' : 'circle-button'} onClick={onClick} role="button">
-      <span className={`glyphicon glyphicon glyphicon-chevron-${direction} my-activity-button-single`}></span>
-    </a>
-  );
-}
-
 export default function CountryCity() {
-  const [turn, setTurn] = useState(-1); // -1: not started yet
-  const [drawn, setDrawn] = useState([]); // letters drawn so far, in order
-  const smallScreen = useMediaQuery('(max-width: 600px)');
-
-  function next() {
-    const nextTurn = turn + 1;
-    saveAction('countryCity', 'getNext', { cur: nextTurn });
-    if (nextTurn === drawn.length) {
-      setDrawn([...drawn, drawLetter(nextTurn, drawn)]);
-    }
-    setTurn(nextTurn);
-  }
-
-  function prev() {
-    const prevTurn = turn - 1;
-    saveAction('countryCity', 'getPrev', { cur: prevTurn });
-    setTurn(prevTurn);
-  }
-
-  if (turn === -1) {
-    return (
-      <div className="activity-content rtl" id="button-and-text">
-        <StartButtons onStart={next} />
-      </div>
-    );
-  }
-
-  const card = <LetterCard letter={drawn[turn]} />;
-  const nextButton = <CircleButton direction="left" onClick={next} invisible={turn === TOTAL_LETTERS - 1} />;
-  // On the first letter there's no "previous": hidden on small screens, an invisible placeholder otherwise.
-  const prevButton = turn === 0 && smallScreen ? null : <CircleButton direction="right" onClick={prev} invisible={turn === 0} />;
-
   return (
-    <div className="activity-content rtl" id="button-and-text">
-      {smallScreen ? (
-        <>
-          <div className="row">{card}</div>
-          <div className="row">
-            {prevButton}
-            {nextButton}
-          </div>
-        </>
-      ) : (
-        <>
-          {prevButton}
-          {card}
-          {nextButton}
-        </>
-      )}
-    </div>
+    <CardActivity
+      trackingName="countryCity"
+      total={TOTAL_LETTERS}
+      drawCard={drawLetter}
+      renderCard={(letter) => <LetterCard letter={letter} />}
+    />
   );
 }
