@@ -5,8 +5,8 @@ import FeedbackForm from './components/FeedbackForm.jsx';
 import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
 import CountryCity from './pages/CountryCity.jsx';
-import Discussions from './pages/Discussions.jsx';
-import Jokes from './pages/Jokes.jsx';
+import DescribePhoto from './pages/DescribePhoto.jsx';
+import { textActivityPages } from './pages/textActivities.jsx';
 
 // React "islands": pages keep placeholder elements (with their page-specific classes) and React
 // renders their contents. Placeholders can pass props through data-* attributes, e.g.
@@ -29,8 +29,8 @@ for (const [elementId, Component] of Object.entries(islands)) {
 // haven't been converted yet keep filling #start-activity with their legacy script.
 const activityPages = {
   countryCity: CountryCity,
-  discussions: Discussions,
-  jokes: Jokes,
+  describePhoto: DescribePhoto,
+  ...textActivityPages,
 };
 
 for (const element of document.querySelectorAll('[data-activity]')) {
