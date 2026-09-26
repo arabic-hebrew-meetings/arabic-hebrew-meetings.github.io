@@ -1,3 +1,7 @@
+function getFooter() {
+	document.getElementById("footer").innerHTML = `נבנה ע"י רועי נחמיאס  ${new Date().getFullYear()}-2016 &copy;`;
+}
+
 
 function getStartActivity() {
 	document.getElementById("start-activity").innerHTML = `<div class="activity-content" id="button-and-text">
