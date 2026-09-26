@@ -6,6 +6,7 @@ import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
 import CountryCity from './pages/CountryCity.jsx';
 import DescribePhoto from './pages/DescribePhoto.jsx';
+import Songs from './pages/Songs.jsx';
 import { textActivityPages } from './pages/textActivities.jsx';
 
 // React "islands": pages keep placeholder elements (with their page-specific classes) and React
@@ -30,6 +31,7 @@ for (const [elementId, Component] of Object.entries(islands)) {
 const activityPages = {
   countryCity: CountryCity,
   describePhoto: DescribePhoto,
+  songs: Songs,
   ...textActivityPages,
 };
 
