@@ -74,6 +74,11 @@ export const scenarios = [
     steps: [],
   },
 
+  // The ?s= source parameter is logged with the page open and each room entry
+  { name: 'source-facebook-announcement', query: `${pwd}&s=fpa_10-01`, steps: [hebrew, level('rdo-3'), firstRoom, { capture: 'opened-room' }] },
+  { name: 'source-direct-message-without-date', query: `${pwd}&s=dfm`, steps: [arabic, level('rdo-1'), firstRoom, { capture: 'opened-room' }] },
+  { name: 'source-unknown-key', query: `${pwd}&s=newsletter`, steps: [] },
+
   // Marked sessions get a details form instead of rooms
   {
     name: 'marked-session',

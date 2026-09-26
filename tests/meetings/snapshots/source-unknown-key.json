@@ -1,0 +1,19 @@
+{
+  "captures": {
+    "loaded": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:335.688px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.select-ctr>[<div.selected-input.input-preview.active>[\"מה היא שפת האם שלכם?\",<br>,\"شو لغة الام تبعتكم؟\"],<div.cntr.rtl>,<div#options.options>[<div.input.input-1{data-val=Hebrew}>[\"עברית\"],<div.input.input-2{data-val=Arabic}>[\"عربي\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\",<br>,\"جاوبوا على الاسئلة التالية\",<br>,\"عشان تنضموا للقاء\"]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "Hebrew: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Arabic: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"new_user\",\"entry.579761647\":\"\"}",
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"meetings_page_open\",\"entry.579761647\":\"{\\\"source_key\\\":\\\"newsletter\\\",\\\"meeting_date\\\":\\\"unknown_date\\\",\\\"is_approved\\\":true,\\\"user_code\\\":\\\"testpwd\\\"}\"}"
+      ]
+    }
+  },
+  "sheetRequests": 1,
+  "errors": [],
+  "dialogs": []
+}
