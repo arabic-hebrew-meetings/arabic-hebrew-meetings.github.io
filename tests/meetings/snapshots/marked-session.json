@@ -1,0 +1,47 @@
+{
+  "captures": {
+    "loaded": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:335.688px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.select-ctr>[<div.selected-input.input-preview.active>[\"מה היא שפת האם שלכם?\",<br>,\"شو لغة الام تبعتكم؟\"],<div.cntr.rtl>,<div#options.options>[<div.input.input-1{data-val=Hebrew}>[\"עברית\"],<div.input.input-2{data-val=Arabic}>[\"عربي\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\",<br>,\"جاوبوا على الاسئلة التالية\",<br>,\"عشان تنضموا للقاء\"]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "Hebrew: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Arabic: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"meetings_page_open\",\"entry.579761647\":\"{\\\"source_key\\\":\\\"unknown_source\\\",\\\"meeting_date\\\":\\\"unknown_date\\\",\\\"is_approved\\\":true,\\\"user_code\\\":\\\"testpwd\\\"}\"}"
+      ]
+    },
+    "form": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:372.969px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.rtl.text-center>[<div.marked-headline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\"],<div#marked_form.marked-form>[<form{name=feedback}>[\"כתבו את השם שלכם בפייסבוק:\",<br>,<input#marked_facebook_name.form__email.marked-form-field{type=text,name=marked_facebook_name,placeholder=,required=}>,<br>,\"כתבו את מספר הטלפון שלכם:\",<br>,<input#marked_phone_number.form__email.marked-form-field{type=text,name=marked_phone_number,placeholder=,required=}>,<br>,<button.form__submit.marked-form-submit>[\"Submit\"],<br>]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"select_choice\",\"entry.579761647\":\"{\\\"choice\\\":\\\"Hebrew\\\"}\"}",
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"select_choice\",\"entry.579761647\":\"{\\\"choice\\\":\\\"H-Native-A-Beginner\\\"}\"}",
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"marked_session_open_meeting\",\"entry.579761647\":\"{\\\"session_id\\\":\\\"marked-session-1\\\"}\"}"
+      ]
+    },
+    "blank-details": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:372.969px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.rtl.text-center>[<div.marked-headline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\"],<div#marked_form.marked-form>[<form{name=feedback}>[\"כתבו את השם שלכם בפייסבוק:\",<br>,<input#marked_facebook_name.form__email.marked-form-field{type=text,name=marked_facebook_name,placeholder=,required=}>,<br>,\"כתבו את מספר הטלפון שלכם:\",<br>,<input#marked_phone_number.form__email.marked-form-field{type=text,name=marked_phone_number,placeholder=,required=}>,<br>,<button.form__submit.marked-form-submit>[\"Submit\"],<br>]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"marked_session_error_send_details\",\"entry.579761647\":\"{\\\"error\\\":\\\"marked facebook empty AND marked phone empty\\\"}\"}"
+      ]
+    },
+    "after-submit": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:372.969px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.rtl.text-center>[<div.marked-headline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\"],<div#marked_form.marked-form>[<form{name=feedback}>[\"כתבו את השם שלכם בפייסבוק:\",<br>,<input#marked_facebook_name.form__email.marked-form-field{type=text,name=marked_facebook_name,placeholder=,required=}>,<br>,\"כתבו את מספר הטלפון שלכם:\",<br>,<input#marked_phone_number.form__email.marked-form-field{type=text,name=marked_phone_number,placeholder=,required=}>,<br>,<button.form__submit.marked-form-submit>[\"Submit\"],<br>,<div.marked-error>[<span.glyphicon.glyphicon-remove-sign.marked-error-icon>,\"פרטים לא נכונים\"],<div>[<a.btn.btn-success.btn-xl.rtl.two-options.socialGroupButton.whatsappButton>[<span.mySocialGroupButtonText>[\"שלחו לנו הודעה\",<br>,\"דרך וואטסאפ\"]],<a.btn.btn-info.btn-xl.rtl.two-options.socialGroupButton.facebookButton>[<span.mySocialGroupButtonText>[\"שלחו לנו הודעה\",<br>,\"דרך פייסבוק\"]]],<br>]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [],
+      "opened": [],
+      "tracking": [
+        "LJgmEA {\"entry.354079520\":\"Test Name\",\"entry.1032780145\":\"0500000000\"}",
+        "VsCLJQ {\"entry.354079520\":\"marked-session-1\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"marked_session_success_send_details\",\"entry.579761647\":\"{\\\"markedFacebookName\\\":\\\"Test Name\\\",\\\"markedPhoneNumber\\\":\\\"0500000000\\\"}\"}"
+      ]
+    }
+  },
+  "sheetRequests": 2,
+  "errors": [],
+  "dialogs": [
+    "כתבו את השם שלכם בפייסבוק ואת מספר הטלפון שלכם"
+  ]
+}

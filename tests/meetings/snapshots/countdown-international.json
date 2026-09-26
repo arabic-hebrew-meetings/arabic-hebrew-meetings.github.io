@@ -1,0 +1,16 @@
+{
+  "captures": {
+    "loaded": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:516px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.select-ctr>[<div.selected-input.input-preview>,<div#before-countdown.countdown-message.before-countdown>[\"המפגש עדיין לא התחיל!\",<br>,\"اللقاء لسا ما بدا!\"],<ul.countdown.ltr>[<li>[<span#days.days>[\"2\"],<p#days_ref.days_ref>[\"days\"]],<li.seperator>[\".\"],<li>[<span#hours.hours>[\"3\"],<p#hours_ref.hours_ref>[\"hours\"]],<li.seperator>[\":\"],<li>[<span#minutes.minutes>[\"4\"],<p#minutes_ref.minutes_ref>[\"minutes\"]],<li.seperator>[\":\"],<li>[<span#seconds.seconds>[\"5\"],<p#seconds_ref.seconds_ref>[\"seconds\"]]],<div#after-countdown.countdown-message.after-countdown>[\"יום שבת\",<br>,\"يوم السبت\",<br>,\"12/01 17:04\",<br>,\"توقيت القدس - שעון ירושלים\"]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>]]]],<div.container-fluid>]",
+      "menuButtons": [],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"new_user\",\"entry.579761647\":\"\"}",
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"meetings_page_open\",\"entry.579761647\":\"{\\\"source_key\\\":\\\"unknown_source\\\",\\\"meeting_date\\\":\\\"unknown_date\\\",\\\"is_approved\\\":true,\\\"user_code\\\":\\\"testpwd\\\"}\"}"
+      ]
+    }
+  },
+  "sheetRequests": 1,
+  "errors": [],
+  "dialogs": []
+}
