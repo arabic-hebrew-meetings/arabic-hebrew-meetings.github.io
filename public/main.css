@@ -161,49 +161,91 @@ footer {
     background: linear-gradient(to bottom, #346332, #346332);
 }
 
+/* header: mint -> blue -> indigo gradient */
 .navbar-custom {
-	background-color:#229922;
+	background-color: #22b573; /* fallback */
+	background-image: linear-gradient(120deg, #22b573 0%, #3a8dde 55%, #5a4fcf 100%);
     color:#ffffff;
+	border: none;
   	border-radius:0;
+	box-shadow: 0 4px 18px rgba(60, 60, 160, 0.25);
 	padding-top: 1vw;
 	padding-bottom: 1vw;
 }
-  
+
 .navbar-custom .navbar-nav > li > a {
   	color:#fff;
 	font-size: 2.5vw;
+	border-radius: 10px;
+	transition: background-color 0.2s ease;
 }
 .navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
-  background-color: #33aa33;
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
-.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-custom .navbar-nav .open>a  { 
-  background-color: #33aa33;
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-custom .navbar-nav .open>a  {
+  background-color: rgba(255, 255, 255, 0.18);
+}
+/* bootstrap.min.css is loaded again after this file, so its ".nav .open>a:focus" (#eee) would otherwise win */
+.navbar-custom .navbar-nav .open>a:hover, .navbar-custom .navbar-nav .open>a:focus {
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
-     
-/* dropdown */
-.navbar-custom .navbar-nav .dropdown-menu  { 
-  background-color: #33aa33;
+.navbar-custom .navbar-collapse {
+  border-color: rgba(255, 255, 255, 0.25);
 }
-.navbar-custom .navbar-nav .dropdown-menu>li>a  { 
-  color: #fff;
+
+/* dropdown: white card */
+.navbar-custom .navbar-nav .dropdown-menu  {
+  background-color: #fff;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(60, 60, 160, 0.25);
+  padding: 6px;
+  margin-top: 6px;
+}
+.navbar-custom .navbar-nav .dropdown-menu>li>a  {
+  color: #2f2a6b;
   font-size: 2vw;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.navbar-custom .navbar-nav .dropdown-menu>li>a:hover,.navbar-custom .navbar-nav .dropdown-menu>li>a:focus  { 
-  color: #33aa33;
+.navbar-custom .navbar-nav .dropdown-menu>li>a:hover,.navbar-custom .navbar-nav .dropdown-menu>li>a:focus  {
+  color: #5a4fcf;
+  background: linear-gradient(120deg, #e4f8ee, #ecebfb);
 }
-      
+/* in the collapsed (mobile) menu bootstrap makes the dropdown transparent, so keep items white on the gradient */
+@media (max-width: 767px) {
+  .navbar-custom .navbar-nav .open .dropdown-menu>li>a {
+    color: #fff;
+  }
+  .navbar-custom .navbar-nav .open .dropdown-menu>li>a:hover, .navbar-custom .navbar-nav .open .dropdown-menu>li>a:focus {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
 .navbar-custom .navbar-brand {
 	cursor: pointer;
-  	color:#eeeeee;
+  	color:#ffffff;
 	font-size: 3vw;
+	font-weight: 700;
+	letter-spacing: 0.3px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.navbar-custom .navbar-brand:hover, .navbar-custom .navbar-brand:focus {
+	color: #ffffff;
 }
 .navbar-custom .navbar-toggle {
-  	background-color:#eeeeee;
+  	background-color: rgba(255, 255, 255, 0.2);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 10px;
+}
+.navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+  	background-color: rgba(255, 255, 255, 0.3);
 }
 .navbar-custom .icon-bar {
-  	background-color:#33aa33;
+  	background-color:#ffffff;
 }
 
 /* Brightness-zoom Container */
