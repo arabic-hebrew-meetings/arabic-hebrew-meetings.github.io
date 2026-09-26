@@ -5,6 +5,7 @@ import FeedbackForm from './components/FeedbackForm.jsx';
 import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
 import CountryCity from './pages/CountryCity.jsx';
+import Meetings from './pages/meetings/Meetings.jsx';
 import DescribePhoto from './pages/DescribePhoto.jsx';
 import Questions from './pages/Questions.jsx';
 import Songs from './pages/Songs.jsx';
@@ -32,6 +33,7 @@ for (const [elementId, Component] of Object.entries(islands)) {
 const activityPages = {
   countryCity: CountryCity,
   describePhoto: DescribePhoto,
+  meetings: Meetings,
   questions: Questions,
   songs: Songs,
   ...textActivityPages,
@@ -39,5 +41,5 @@ const activityPages = {
 
 for (const element of document.querySelectorAll('[data-activity]')) {
   const ActivityPage = activityPages[element.dataset.activity];
-  createRoot(element).render(<ActivityPage />);
+  createRoot(element).render(<ActivityPage {...element.dataset} />);
 }
