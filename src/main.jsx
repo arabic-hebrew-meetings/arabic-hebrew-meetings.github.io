@@ -4,6 +4,7 @@ import Carousel from './components/Carousel.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
 import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
+import CountryCity from './pages/CountryCity.jsx';
 
 // React "islands": pages keep placeholder elements (with their page-specific classes) and React
 // renders their contents. Placeholders can pass props through data-* attributes, e.g.
@@ -20,4 +21,15 @@ for (const [elementId, Component] of Object.entries(islands)) {
   if (element) {
     createRoot(element).render(<Component {...element.dataset} />);
   }
+}
+
+// Converted activity pages opt in with <div id="start-activity" data-activity="...">. Pages that
+// haven't been converted yet keep filling #start-activity with their legacy script.
+const activityPages = {
+  countryCity: CountryCity,
+};
+
+for (const element of document.querySelectorAll('[data-activity]')) {
+  const ActivityPage = activityPages[element.dataset.activity];
+  createRoot(element).render(<ActivityPage />);
 }

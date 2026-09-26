@@ -699,6 +699,10 @@ ul.countdown li p {
 
 .two-options {
 	margin: 30px !important;
+	/* Keeps the start/explanation buttons at the width the legacy makeButtonWidthEqual() ended up with:
+	   it measured them before the second bootstrap.min.css reset .btn-xl's 70px font-size, so the
+	   spaces inside were measured at 70px. */
+	min-width: 210px;
 }
 
 .only-activity-name {
