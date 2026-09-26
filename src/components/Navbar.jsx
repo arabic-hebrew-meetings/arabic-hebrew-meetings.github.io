@@ -1,20 +1,4 @@
-const activities = [
-  { href: 'questions.html', label: 'שואלים אחד את השני  -   منسأل بعض' },
-  { href: 'describePhoto.html', label: 'מה רואים בתמונה?  -   شو شايفين بالصّورة؟' },
-  { href: 'three.html', label: 'שלושה דברים  -   ثلاثة أشياء' },
-  { href: 'discussions.html', label: 'מועדון דיבייט  -   نادي النقاش' },
-  { href: '21questions.html', label: 'מפורסמים  -  مشاهير' },
-  { href: 'story.html', label: 'בונים ביחד סיפור  -  نبني مع بعض قصة' },
-  { href: 'songs.html', label: 'שירים - اغاني' },
-  { href: 'countryCity.html', label: 'ארץ עיר  -   إنسان حيوان نبات' },
-  { href: 'jokes.html', label: 'בדיחות  -  نكت' },
-  { href: 'picture.html', label: 'היכרות בעזרת תמונות - تعارف عن طريق الصور' },
-  { href: 'slang.html', label: 'סלנג - مصطلحات عامية' },
-  { href: 'sayings.html', label: 'פתגמים  -  امثال' },
-  { href: 'fastest.html', label: 'הזוג הכי מהיר  -   أسرع اثنين' },
-  { href: 'truth-or-lie.html', label: 'אמת או שקר  -  صدق او كذب' },
-  { href: 'wind.html', label: 'הרוח נושבת  -  تهب الريح' },
-];
+import { activities } from '../activities.js';
 
 // Renders the contents of <nav id="header">. The mobile toggle and the dropdown are still
 // driven by Bootstrap 3's jQuery plugin through the data-toggle attributes.
