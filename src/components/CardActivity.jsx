@@ -28,15 +28,22 @@ function CircleButton({ direction, onClick, invisible }) {
 // - trackingName: page name for saveAction (e.g. "jokes")
 // - total: number of cards
 // - drawCard(turn, drawn): index of the card for a new turn; defaults to a random unused card
-// - renderCard(card): the card's content (rendered inside the activity layout)
-export default function CardActivity({ trackingName, total, drawCard, renderCard }) {
+// - renderCard(card, turn): the card's content (rendered inside the activity layout)
+// - trackingParams(turnBefore, turnAfter): params logged with getNext/getPrev; defaults to { cur: turnAfter }
+export default function CardActivity({
+  trackingName,
+  total,
+  drawCard,
+  renderCard,
+  trackingParams = (turnBefore, turnAfter) => ({ cur: turnAfter }),
+}) {
   const [turn, setTurn] = useState(-1); // -1: not started yet
   const [drawn, setDrawn] = useState([]); // cards drawn so far, in order
   const smallScreen = useMediaQuery('(max-width: 600px)');
 
   function next() {
     const nextTurn = turn + 1;
-    saveAction(trackingName, 'getNext', { cur: nextTurn });
+    saveAction(trackingName, 'getNext', trackingParams(turn, nextTurn));
     if (nextTurn === drawn.length) {
       const card = drawCard ? drawCard(nextTurn, drawn) : drawUnusedCard(total, drawn);
       setDrawn([...drawn, card]);
@@ -46,7 +53,7 @@ export default function CardActivity({ trackingName, total, drawCard, renderCard
 
   function prev() {
     const prevTurn = turn - 1;
-    saveAction(trackingName, 'getPrev', { cur: prevTurn });
+    saveAction(trackingName, 'getPrev', trackingParams(turn, prevTurn));
     setTurn(prevTurn);
   }
 
@@ -58,7 +65,7 @@ export default function CardActivity({ trackingName, total, drawCard, renderCard
     );
   }
 
-  const card = renderCard(drawn[turn]);
+  const card = renderCard(drawn[turn], turn);
   const nextButton = <CircleButton direction="left" onClick={next} invisible={turn === total - 1} />;
   // On the first card there's no "previous": hidden on small screens, an invisible placeholder otherwise.
   const prevButton = turn === 0 && smallScreen ? null : <CircleButton direction="right" onClick={prev} invisible={turn === 0} />;

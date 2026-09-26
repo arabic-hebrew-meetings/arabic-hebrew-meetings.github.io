@@ -5,6 +5,7 @@ import discussions from '../data/discussions.json';
 import fastest from '../data/fastest.json';
 import jokes from '../data/jokes.json';
 import sayings from '../data/sayings.json';
+import story from '../data/story.json';
 import three from '../data/three.json';
 
 // Activity pages whose cards are lines of text from a data file. Each entry replaces a legacy
@@ -23,6 +24,8 @@ const textActivities = {
     data: sayings,
     lines: { arabicText: 'Arabic', taatikText: 'Taatik', translationText: 'Translation', meaningText: 'Meaning' },
   },
+  // בונים ביחד סיפור - نبني مع بعض قصة (the data also has an unused "Taatik-English" field)
+  story: { data: story, lines: { hebrewText: 'Hebrew', arabicText: 'Arabic', taatikText: 'Taatik' } },
   // שלושה דברים - ثلاثة أشياء
   three: { data: three, lines: { hebrewText: 'Hebrew', arabicText: 'Arabic', taatikText: 'Taatik' } },
 };
