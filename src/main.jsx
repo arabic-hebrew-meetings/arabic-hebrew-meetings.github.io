@@ -6,6 +6,7 @@ import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
 import CountryCity from './pages/CountryCity.jsx';
 import DescribePhoto from './pages/DescribePhoto.jsx';
+import Questions from './pages/Questions.jsx';
 import Songs from './pages/Songs.jsx';
 import { textActivityPages } from './pages/textActivities.jsx';
 
@@ -31,6 +32,7 @@ for (const [elementId, Component] of Object.entries(islands)) {
 const activityPages = {
   countryCity: CountryCity,
   describePhoto: DescribePhoto,
+  questions: Questions,
   songs: Songs,
   ...textActivityPages,
 };
