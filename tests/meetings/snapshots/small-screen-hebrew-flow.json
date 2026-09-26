@@ -1,0 +1,59 @@
+{
+  "captures": {
+    "loaded": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:270px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div.select-ctr>[<div.selected-input.input-preview.active>[\"מה היא שפת האם שלכם?\",<br>,\"شو لغة الام تبعتكم؟\"],<div.cntr.rtl>,<div#options.options>[<div.input.input-1{data-val=Hebrew}>[\"עברית\"],<div.input.input-2{data-val=Arabic}>[\"عربي\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[\"ענו על השאלות הבאות\",<br>,\"כדי להצטרף למפגש\",<br>,\"جاوبوا على الاسئلة التالية\",<br>,\"عشان تنضموا للقاء\"]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "Hebrew: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Arabic: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"new_user\",\"entry.579761647\":\"\"}",
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"meetings_page_open\",\"entry.579761647\":\"{\\\"source_key\\\":\\\"unknown_source\\\",\\\"meeting_date\\\":\\\"unknown_date\\\",\\\"is_approved\\\":true,\\\"user_code\\\":\\\"testpwd\\\"}\"}"
+      ]
+    },
+    "levels": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:369.734px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div#my_spinner_groups>,<div.select-ctr>[<div.selected-input.input-preview.active>[\"סמנו את הרמה שלכם בערבית\",<br>,\"ובחרו קבוצה להצטרף אליה:\"],<div.cntr.rtl.display-above-600px>[<label.btn-radio.level-label{for=rdo-1}>[<input#rdo-1{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]],<label.btn-radio.level-label{for=rdo-2}>[<input#rdo-2{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-3}>[<input#rdo-3{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]]],<div.cntr.rtl.display-under-600px>[<label.btn-radio.level-label{for=rdo-4}>[<input#rdo-4{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]],<label.btn-radio.level-label{for=rdo-5}>[<input#rdo-5{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-6}>[<input#rdo-6{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]]],<div#optionsHeadline.optionsHeadline>[\"הקבוצה המומלצת לך:\"],<div#options.options>[<div.input.input-1-after-radio-buttons{data-val=Choose-Native-Language-Back}>[\"Back\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "Choose-Native-Language-Back: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"select_choice\",\"entry.579761647\":\"{\\\"choice\\\":\\\"Hebrew\\\"}\"}"
+      ]
+    },
+    "recommended": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:519.734px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div#my_spinner_groups>,<div.select-ctr>[<div.selected-input.input-preview>[\"סמנו את הרמה שלכם בערבית\",<br>,\"ובחרו קבוצה להצטרף אליה:\"],<div.cntr.rtl.display-above-600px>[<label.btn-radio.level-label{for=rdo-1}>[<input#rdo-1{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]],<label.btn-radio.level-label{for=rdo-2}>[<input#rdo-2{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-3}>[<input#rdo-3{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]]],<div.cntr.rtl.display-under-600px>[<label.btn-radio.level-label{for=rdo-4}>[<input#rdo-4{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]],<label.btn-radio.level-label{for=rdo-5}>[<input#rdo-5{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-6}>[<input#rdo-6{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]]],<div#optionsHeadline.optionsHeadline{visibility:visible}>[\"הקבוצה המומלצת לך:\"],<div#options.options>[<div.input.input-1-after-radio-buttons{data-val=H-Native-A-Beginner-Room-6}>[\"קבוצה מס' 6\"],<div.input.input-2-after-radio-buttons{data-val=Hebrew-Beginner-MoreOptions-2_4}>[\"קבוצות נוספות\"],<div.input.input-3-after-radio-buttons{data-val=Choose-Native-Language-Back}>[\"Back\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "H-Native-A-Beginner-Room-6: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Hebrew-Beginner-MoreOptions-2_4: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Choose-Native-Language-Back: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [],
+      "tracking": [
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"select_choice\",\"entry.579761647\":\"{\\\"choice\\\":\\\"H-Native-A-Beginner\\\"}\"}"
+      ]
+    },
+    "opened-room": {
+      "page": "<div.main-div>[<div.container>[<div.row-2-columns>[<div#leftCol.left-col{min-height:519.734px}>[<div#my_spinner_countdown>,<div.flex-container>[<section#question-area.content.rtl>[<div#my_spinner_groups>,<div.select-ctr>[<div.selected-input.input-preview.active>[\"סמנו את הרמה שלכם בערבית\",<br>,\"ובחרו קבוצה להצטרף אליה:\"],<div.cntr.rtl.display-above-600px>[<label.btn-radio.level-label{for=rdo-1}>[<input#rdo-1{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]],<label.btn-radio.level-label{for=rdo-2}>[<input#rdo-2{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-3}>[<input#rdo-3{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]]],<div.cntr.rtl.display-under-600px>[<label.btn-radio.level-label{for=rdo-4}>[<input#rdo-4{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בסיסית\"]],<label.btn-radio.level-label{for=rdo-5}>[<input#rdo-5{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה בינונית\"]],<label.btn-radio.level-label{for=rdo-6}>[<input#rdo-6{type=radio,name=radio-grp}>,<svg>,<span>[\"רמה מתקדמת\"]]],<div#optionsHeadline.optionsHeadline{visibility:visible}>[\"הקבוצה המומלצת לך:\"],<div#options.options>[<div.input.input-1-after-radio-buttons{data-val=H-Native-A-Beginner-Room-6}>[\"קבוצה מס' 6\"],<div.input.input-2-after-radio-buttons{data-val=Hebrew-Beginner-MoreOptions-2_4}>[\"קבוצות נוספות\"],<div.input.input-3-after-radio-buttons{data-val=Choose-Native-Language-Back}>[\"Back\"]]]]]],<div.right-col.rtl>[<div.row.text-center>[<div#headline.headline>[\"כניסה למפגש\",<br>,\"الدخول للقاء\"],<div#subheadline>[<div.subheadline>[<span{color:green}>[\"כרגע יש\",<b>[\"6\"],\"קבוצות במפגש\"]]]]]]],<div.container-fluid>]",
+      "menuButtons": [
+        "H-Native-A-Beginner-Room-6: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Hebrew-Beginner-MoreOptions-2_4: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)",
+        "Choose-Native-Language-Back: opacity 1, background rgb(255, 255, 255), transform matrix(1, 0, 0, 1, 0, 0)"
+      ],
+      "opened": [
+        [
+          "https://zoom.example/room-6",
+          "_blank"
+        ]
+      ],
+      "tracking": [
+        "gOqw8Q {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"Hebrew\",\"entry.1729768685\":\"Arabic-Beginner\",\"entry.579761647\":\"Room6-Hebrew\",\"entry.1804344661\":\"Room-6\",\"entry.358084798\":\"Recommended\",\"entry.12017553\":\"unknown_source\",\"entry.366684760\":\"unknown_date\"}",
+        "VsCLJQ {\"entry.354079520\":\"<session-id>\",\"entry.1032780145\":\"meetings\",\"entry.1729768685\":\"select_choice\",\"entry.579761647\":\"{\\\"choice\\\":\\\"H-Native-A-Beginner-Room-6\\\"}\"}"
+      ]
+    }
+  },
+  "sheetRequests": 2,
+  "errors": [],
+  "dialogs": []
+}
