@@ -161,14 +161,14 @@ footer {
     background: linear-gradient(to bottom, #346332, #346332);
 }
 
-/* header: green -> teal -> blue gradient */
+/* header: mint -> blue -> indigo gradient */
 .navbar-custom {
-	background-color: #1f9d55; /* fallback */
-	background-image: linear-gradient(120deg, #1f9d55 0%, #13a085 50%, #1c7ed6 100%);
+	background-color: #22b573; /* fallback */
+	background-image: linear-gradient(120deg, #22b573 0%, #3a8dde 55%, #5a4fcf 100%);
     color:#ffffff;
 	border: none;
   	border-radius:0;
-	box-shadow: 0 4px 18px rgba(12, 74, 90, 0.25);
+	box-shadow: 0 4px 18px rgba(60, 60, 160, 0.25);
 	padding-top: 1vw;
 	padding-bottom: 1vw;
 }
@@ -186,6 +186,10 @@ footer {
 .navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-custom .navbar-nav .open>a  {
   background-color: rgba(255, 255, 255, 0.18);
 }
+/* bootstrap.min.css is loaded again after this file, so its ".nav .open>a:focus" (#eee) would otherwise win */
+.navbar-custom .navbar-nav .open>a:hover, .navbar-custom .navbar-nav .open>a:focus {
+  background-color: rgba(255, 255, 255, 0.18);
+}
 
 .navbar-custom .navbar-collapse {
   border-color: rgba(255, 255, 255, 0.25);
@@ -196,19 +200,19 @@ footer {
   background-color: #fff;
   border: none;
   border-radius: 14px;
-  box-shadow: 0 12px 32px rgba(12, 74, 90, 0.22);
+  box-shadow: 0 12px 32px rgba(60, 60, 160, 0.25);
   padding: 6px;
   margin-top: 6px;
 }
 .navbar-custom .navbar-nav .dropdown-menu>li>a  {
-  color: #14505a;
+  color: #2f2a6b;
   font-size: 2vw;
   border-radius: 8px;
   transition: background 0.2s ease, color 0.2s ease;
 }
 .navbar-custom .navbar-nav .dropdown-menu>li>a:hover,.navbar-custom .navbar-nav .dropdown-menu>li>a:focus  {
-  color: #0f7a4a;
-  background: linear-gradient(120deg, #e3f7ec, #e2effc);
+  color: #5a4fcf;
+  background: linear-gradient(120deg, #e4f8ee, #ecebfb);
 }
 /* in the collapsed (mobile) menu bootstrap makes the dropdown transparent, so keep items white on the gradient */
 @media (max-width: 767px) {
