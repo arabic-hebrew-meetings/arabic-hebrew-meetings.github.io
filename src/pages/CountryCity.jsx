@@ -56,6 +56,7 @@ export default function CountryCity() {
       drawCard={drawLetter}
       renderCard={(letter) => <LetterCard letter={letter} />}
       explanation={explanations.countryCity}
+      startTiles
     />
   );
 }

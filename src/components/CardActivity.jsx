@@ -32,6 +32,7 @@ function CircleButton({ direction, onClick, invisible }) {
 // - renderCard(card, turn): the card's content (rendered inside the activity layout)
 // - trackingParams(turnBefore, turnAfter): params logged with getNext/getPrev; defaults to { cur: turnAfter }
 // - explanation: { he, ar } paragraphs; if given, the explanation button opens it in a modal
+// - startTiles: show the start/explanation buttons as big tiles
 export default function CardActivity({
   trackingName,
   total,
@@ -39,6 +40,7 @@ export default function CardActivity({
   renderCard,
   trackingParams = (turnBefore, turnAfter) => ({ cur: turnAfter }),
   explanation,
+  startTiles,
 }) {
   const [explanationOpen, setExplanationOpen] = useState(false);
   const [turn, setTurn] = useState(-1); // -1: not started yet
@@ -64,7 +66,7 @@ export default function CardActivity({
   if (turn === -1) {
     return (
       <div className="activity-content rtl" id="button-and-text">
-        <StartButtons onStart={next} onExplain={explanation && (() => setExplanationOpen(true))} />
+        <StartButtons onStart={next} onExplain={explanation && (() => setExplanationOpen(true))} tiles={startTiles} />
         {explanation && (
           <ExplanationModal open={explanationOpen} onClose={() => setExplanationOpen(false)} explanation={explanation} />
         )}

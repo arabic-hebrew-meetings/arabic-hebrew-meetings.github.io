@@ -1,10 +1,12 @@
 import { useLayoutEffect, useRef } from 'react';
+import './StartButtons.css';
 
 // "Start" and "Explanation" buttons shown before an activity starts.
 // Replaces getNewStartActivity(), makeButtonWidthEqual() and scrollToDetails() from headerFooterScript.js.
 // With onExplain the explanation button calls it (opens the explanation modal); without it, the button
 // scrolls to the explanation section at the bottom of the page.
-export default function StartButtons({ onStart, onExplain }) {
+// With tiles, each button is a big tile: Hebrew above a large icon, Arabic below it.
+export default function StartButtons({ onStart, onExplain, tiles }) {
   const startRef = useRef(null);
   const detailsRef = useRef(null);
 
@@ -18,6 +20,29 @@ export default function StartButtons({ onStart, onExplain }) {
   function scrollToDetails() {
     const details = document.querySelector('.details');
     window.scrollTo({ top: details.getBoundingClientRect().top + window.scrollY - 70, behavior: 'smooth' });
+  }
+
+  if (tiles) {
+    return (
+      <>
+        <a ref={startRef} className="btn btn-info btn-xl rtl two-options start-tile" onClick={onStart} role="button">
+          <span className="my-activity-button-text">התחילו</span>
+          <span className="glyphicon glyphicon-play start-tile__icon" aria-hidden="true"></span>
+          <span className="my-activity-button-text" lang="ar">بلشو</span>
+        </a>{' '}
+        <a
+          ref={detailsRef}
+          id="detailsBtn"
+          className="btn btn-danger btn-xl rtl two-options start-tile"
+          onClick={onExplain || scrollToDetails}
+          role="button"
+        >
+          <span className="my-activity-button-text">הסבר</span>
+          <span className="glyphicon glyphicon-info-sign start-tile__icon" aria-hidden="true"></span>
+          <span className="my-activity-button-text" lang="ar">شرح</span>
+        </a>
+      </>
+    );
   }
 
   return (

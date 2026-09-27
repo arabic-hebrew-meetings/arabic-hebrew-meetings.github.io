@@ -1,0 +1,56 @@
+/* Start/explanation buttons as big tiles (StartButtons with `tiles`): Hebrew above a large icon, Arabic
+   below it. Side by side, stacked on phones. Colors stay bootstrap's .btn-info / .btn-danger. */
+
+.start-tile.btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: auto; /* .btn-xl sets a fixed 50px */
+  padding: 22px 28px 20px;
+  border: none;
+  border-radius: 18px;
+  line-height: 1.2;
+  white-space: normal;
+  vertical-align: top;
+  box-shadow: 0 10px 24px rgba(20, 30, 60, 0.18);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.start-tile.btn:hover,
+.start-tile.btn:focus {
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(20, 30, 60, 0.24);
+}
+.start-tile.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(20, 30, 60, 0.2);
+}
+
+.start-tile__icon {
+  top: 0; /* glyphicons are nudged down 1px by default */
+  font-size: 48px;
+  line-height: 1;
+}
+
+/* Phones: the tiles stacked, start on top. (fit-content keeps each tile sized to its content, so the
+   equal-width logic in StartButtons measures the real width; the !important overrides main.css's
+   .two-options margins.) */
+@media (max-width: 600px) {
+  .start-tile.btn {
+    display: flex;
+    width: fit-content;
+    min-width: 170px; /* smaller than on wide screens (main.css's .two-options sets 210px) */
+    margin: 24px auto !important;
+    padding: 14px 24px 12px;
+    gap: 6px;
+    border-radius: 16px;
+  }
+  .start-tile.btn ~ .start-tile.btn {
+    margin-top: 36px !important; /* the gap between the two tiles */
+  }
+  .start-tile__icon {
+    font-size: 36px;
+  }
+}

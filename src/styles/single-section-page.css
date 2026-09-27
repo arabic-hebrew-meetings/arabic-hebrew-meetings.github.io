@@ -31,15 +31,3 @@ body.single-section-page .activity-content > .row {
   margin-right: 0;
 }
 
-/* Start and explanation buttons stacked vertically (start on top), like on phones, instead of side by
-   side. Phones (up to 600px) already stack them by wrapping, so this only changes wider screens. The
-   !important overrides main.css's `.two-options { margin: 30px !important }`. */
-@media (min-width: 601px) {
-  body.single-section-page .activity-content > .two-options {
-    display: table; /* on its own line but sized to its content (display: block would stretch it) */
-    margin: 20px auto 0 !important;
-  }
-  body.single-section-page .activity-content > .two-options:first-child {
-    margin-top: 80px !important; /* same height on the page as the side-by-side buttons had */
-  }
-}
