@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { saveAction } from '../lib/tracking.js';
+import ExplanationModal from './ExplanationModal.jsx';
 import StartButtons from './StartButtons.jsx';
 
 // Draws a random card that hasn't been drawn yet.
@@ -30,13 +31,16 @@ function CircleButton({ direction, onClick, invisible }) {
 // - drawCard(turn, drawn): index of the card for a new turn; defaults to a random unused card
 // - renderCard(card, turn): the card's content (rendered inside the activity layout)
 // - trackingParams(turnBefore, turnAfter): params logged with getNext/getPrev; defaults to { cur: turnAfter }
+// - explanation: { he, ar } paragraphs; if given, the explanation button opens it in a modal
 export default function CardActivity({
   trackingName,
   total,
   drawCard,
   renderCard,
   trackingParams = (turnBefore, turnAfter) => ({ cur: turnAfter }),
+  explanation,
 }) {
+  const [explanationOpen, setExplanationOpen] = useState(false);
   const [turn, setTurn] = useState(-1); // -1: not started yet
   const [drawn, setDrawn] = useState([]); // cards drawn so far, in order
   const smallScreen = useMediaQuery('(max-width: 600px)');
@@ -60,7 +64,10 @@ export default function CardActivity({
   if (turn === -1) {
     return (
       <div className="activity-content rtl" id="button-and-text">
-        <StartButtons onStart={next} />
+        <StartButtons onStart={next} onExplain={explanation && (() => setExplanationOpen(true))} />
+        {explanation && (
+          <ExplanationModal open={explanationOpen} onClose={() => setExplanationOpen(false)} explanation={explanation} />
+        )}
       </div>
     );
   }

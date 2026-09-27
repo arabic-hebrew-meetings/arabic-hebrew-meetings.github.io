@@ -2,7 +2,9 @@ import { useLayoutEffect, useRef } from 'react';
 
 // "Start" and "Explanation" buttons shown before an activity starts.
 // Replaces getNewStartActivity(), makeButtonWidthEqual() and scrollToDetails() from headerFooterScript.js.
-export default function StartButtons({ onStart }) {
+// With onExplain the explanation button calls it (opens the explanation modal); without it, the button
+// scrolls to the explanation section at the bottom of the page.
+export default function StartButtons({ onStart, onExplain }) {
   const startRef = useRef(null);
   const detailsRef = useRef(null);
 
@@ -24,7 +26,7 @@ export default function StartButtons({ onStart }) {
         <span className="my-activity-button-text">התחילו - بلشو!</span>{' '}
         <span className="glyphicon glyphicon-play my-activity-button"></span>
       </a>{' '}
-      <a ref={detailsRef} id="detailsBtn" className="btn btn-danger btn-xl rtl two-options" onClick={scrollToDetails} role="button">
+      <a ref={detailsRef} id="detailsBtn" className="btn btn-danger btn-xl rtl two-options" onClick={onExplain || scrollToDetails} role="button">
         <span className="my-activity-button-text">הסבר - شرح</span>{' '}
         <span className="glyphicon glyphicon-info-sign my-activity-button"></span>
       </a>
