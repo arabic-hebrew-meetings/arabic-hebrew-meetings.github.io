@@ -1,5 +1,6 @@
 import CardActivity from '../components/CardActivity.jsx';
 import TextCard from '../components/TextCard.jsx';
+import { explanations } from '../explanations.js';
 import twentyOneQuestions from '../data/21questions.json';
 import discussions from '../data/discussions.json';
 import fastest from '../data/fastest.json';
@@ -38,6 +39,8 @@ export const textActivityPages = Object.fromEntries(
       <CardActivity
         trackingName={name}
         total={data.length}
+        explanation={explanations[name]}
+        startTiles
         renderCard={(i) => (
           <TextCard lines={Object.entries(lines).map(([id, field]) => ({ id, html: data[i][field] }))} />
         )}

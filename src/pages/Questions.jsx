@@ -1,5 +1,6 @@
 import CardActivity from '../components/CardActivity.jsx';
 import questions from '../data/questions.json';
+import { explanations } from '../explanations.js';
 
 // "שואלים אחד את השני - منسأل بعض": a random question per card. Replaces public/questionsScript.js.
 //
@@ -14,6 +15,8 @@ export default function Questions() {
     <CardActivity
       trackingName="questions"
       total={data.length}
+      explanation={explanations.questions}
+      startTiles
       // The legacy script logged the turn from before the click, plus the category.
       trackingParams={(turnBefore) => ({ cur: turnBefore, category: CATEGORY_SIMPLE })}
       renderCard={(i, turn) => (

@@ -6,7 +6,7 @@ import './ExplanationModal.css';
 // Escape, or a click on the backdrop.
 //
 // - open / onClose: controlled by the parent
-// - explanation: { he: [paragraphs], ar: [paragraphs] }
+// - explanation: { he: [paragraphs], ar: [paragraphs], credits?: [paragraphs] }
 export default function ExplanationModal({ open, onClose, explanation }) {
   const dialogRef = useRef(null);
   const arabicRef = useRef(null);
@@ -70,6 +70,13 @@ export default function ExplanationModal({ open, onClose, explanation }) {
             <p key={i}>{paragraph}</p>
           ))}
         </section>
+        {explanation.credits && (
+          <section className="explanation-modal__credits" lang="he">
+            {explanation.credits.map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </section>
+        )}
       </div>
 
       <div className="explanation-modal__footer">
