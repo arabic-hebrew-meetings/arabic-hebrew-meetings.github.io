@@ -1,6 +1,5 @@
 // Usage tracking: actions and meeting entries are logged by posting to Google Forms.
-// Moved from public/headerFooterScript.js. Until every page is converted, legacyGlobals.js
-// also exposes these functions on window for the legacy page scripts.
+// Moved from public/headerFooterScript.js.
 
 const ACTIONS_FORM_URL =
   'https://docs.google.com/forms/u/0/d/e/1FAIpQLSc80anqYMA0tJUUe6VTZ6AqIWT5METAW_by6iZaw0XrVsCLJQ/formResponse';

@@ -1,4 +1,3 @@
-import './legacyGlobals.js';
 import { createRoot } from 'react-dom/client';
 import Carousel from './components/Carousel.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';

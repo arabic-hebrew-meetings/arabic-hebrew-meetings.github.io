@@ -145,7 +145,7 @@ async function runScenario(browser, base, scenario) {
     if (screenshotDir) await page.screenshot({ path: join(screenshotDir, `${scenario.name}--${name}.png`) });
   };
 
-  await page.goto(`${base}/${scenario.page || 'meetings'}.html${scenario.query}`, { waitUntil: 'networkidle2' });
+  await page.goto(`${base}/${encodeURIComponent(scenario.page || 'meetings')}.html${scenario.query}`, { waitUntil: 'networkidle2' });
   await wait(LOAD_WAIT);
   await capture('loaded');
   for (const step of scenario.steps) {
