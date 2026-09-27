@@ -1,4 +1,5 @@
 import CardActivity from '../components/CardActivity.jsx';
+import { explanations } from '../explanations.js';
 
 // "ארץ עיר - إنسان حيوان نبات": each click draws a random Hebrew or Arabic letter.
 // Replaces public/countryCityScript.js.
@@ -54,6 +55,8 @@ export default function CountryCity() {
       total={TOTAL_LETTERS}
       drawCard={drawLetter}
       renderCard={(letter) => <LetterCard letter={letter} />}
+      explanation={explanations.countryCity}
+      startTiles
     />
   );
 }
