@@ -94,6 +94,32 @@ html.explanation-modal-open {
   overscroll-behavior: contain;
 }
 
+/* A visible scrollbar whenever the text is longer than the modal (macOS otherwise hides scrollbars until
+   you scroll). Styling it with ::-webkit-scrollbar makes Chrome/Safari/Edge keep it visible. */
+.explanation-modal__body::-webkit-scrollbar {
+  width: 12px;
+}
+.explanation-modal__body::-webkit-scrollbar-track {
+  margin: 6px 0;
+  border-radius: 12px;
+  background: #f1f2f8;
+}
+.explanation-modal__body::-webkit-scrollbar-thumb {
+  border: 3px solid #f1f2f8;
+  border-radius: 12px;
+  background: #b4b8dc;
+}
+.explanation-modal__body::-webkit-scrollbar-thumb:hover {
+  background: #8f94c8;
+}
+/* Firefox (no ::-webkit-scrollbar): a thin scrollbar in the same colors. */
+@supports not selector(::-webkit-scrollbar) {
+  .explanation-modal__body {
+    scrollbar-width: thin;
+    scrollbar-color: #b4b8dc #f1f2f8;
+  }
+}
+
 .explanation-modal__jump {
   display: inline-block;
   margin-bottom: 12px;

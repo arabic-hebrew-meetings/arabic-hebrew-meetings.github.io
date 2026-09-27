@@ -1,0 +1,32 @@
+/* Pages with <body class="single-section-page">: one background color from the header to the bottom of
+   the page, and the footer at the bottom of the screen when the content is shorter than the screen (it
+   follows the content normally when the content is longer). Used by activities whose explanation is in
+   the explanation modal, so they no longer have a second (white) explanation section. */
+
+body.single-section-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh; /* mobile browsers: the visible height, excluding their toolbars */
+  background-color: #eee; /* bootstrap's .jumbotron grey, now for the whole page */
+}
+
+body.single-section-page > .jumbotron {
+  flex: 1 0 auto; /* takes the remaining height, pushing the footer to the bottom */
+  margin-bottom: 0;
+  background-color: transparent;
+}
+
+body.single-section-page > footer {
+  margin-top: 0;
+  padding-top: 12px;
+  padding-bottom: 16px;
+}
+
+/* The activity's small-screen layout wraps the card and the buttons in bootstrap .row elements without a
+   .container, so their -15px side margins made the page 15px wider than the screen (it could be dragged
+   sideways on phones). */
+body.single-section-page .activity-content > .row {
+  margin-left: 0;
+  margin-right: 0;
+}

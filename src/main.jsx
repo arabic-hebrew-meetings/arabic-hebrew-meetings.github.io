@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import './styles/single-section-page.css';
 import Carousel from './components/Carousel.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
 import Footer from './components/Footer.jsx';
