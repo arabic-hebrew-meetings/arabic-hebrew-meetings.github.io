@@ -1,7 +1,7 @@
 /* Pages with <body class="single-section-page">: one background color from the header to the bottom of
    the page, and the footer at the bottom of the screen when the content is shorter than the screen (it
-   follows the content normally when the content is longer). Used by activities whose explanation is in
-   the explanation modal, so they no longer have a second (white) explanation section. */
+   follows the content normally when the content is longer). Used by the activity pages: the explanation
+   moved to the explanation modal, so they no longer need a separate white section below. */
 
 body.single-section-page {
   display: flex;
@@ -11,22 +11,26 @@ body.single-section-page {
   background-color: #eee; /* bootstrap's .jumbotron grey, now for the whole page */
 }
 
-body.single-section-page > .jumbotron {
-  flex: 1 0 auto; /* takes the remaining height, pushing the footer to the bottom */
-  margin-bottom: 0;
-  background-color: transparent;
+body.single-section-page > section,
+body.single-section-page .container2 {
+  background-color: transparent; /* bootstrap's grey .jumbotron, main.css's white .container2 sections */
+}
+
+body.single-section-page > section:last-of-type {
+  margin-bottom: 0; /* bootstrap's .jumbotron margin, when nothing but the footer follows */
 }
 
 body.single-section-page > footer {
-  margin-top: 0;
+  margin-top: auto; /* takes the remaining height, so the footer sits at the bottom */
   padding-top: 12px;
   padding-bottom: 16px;
 }
 
-/* The activity's small-screen layout wraps the card and the buttons in bootstrap .row elements without a
-   .container, so their -15px side margins made the page 15px wider than the screen (it could be dragged
-   sideways on phones). */
-body.single-section-page .activity-content > .row {
+/* Bootstrap .row elements that aren't inside a bootstrap .container (the activity's small-screen layout,
+   and main.css's .container2 sections) have -15px side margins that made the page 15px wider than the
+   screen, so it could be dragged sideways. */
+body.single-section-page .activity-content > .row,
+body.single-section-page .container2 > .row {
   margin-left: 0;
   margin-right: 0;
 }
