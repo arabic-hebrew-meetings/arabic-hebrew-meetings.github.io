@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import songs from '../data/songs.json';
 import { saveAction } from '../lib/tracking.js';
+import './Songs.css';
 
 // "שירים - اغاني": a list of Arabic and Hebrew songs; picking one shows its lyrics at the top of the page.
 // Replaces public/songsScript.js. Mounted on #songs (the list); the chosen song is rendered into
@@ -13,41 +14,38 @@ const LANG_ARABIC = 2;
 // Lyrics are stored with " | " between lines.
 const lyricsToHtml = (lyrics) => lyrics.replace(/ \| /g, '<br>').replace(/\| /g, '<br>').replace(/ \|/g, '<br>');
 
-const Title = ({ html }) => <h2 className="rtl activityContent" style={{ textDecoration: 'underline' }} dangerouslySetInnerHTML={{ __html: html }} />;
-const Lyrics = ({ html }) => <h2 className="rtl activityContent" dangerouslySetInnerHTML={{ __html: html }} />;
-const Separator = () => <h2 className="my-line">* * * * * * *</h2>;
+const LABELS = { hebrew: 'עברית', arabic: 'عربي', taatik: 'תעתיק' };
+
+// One language of the song: a small label, its title (if any) and its lyrics (if any).
+function SongSection({ name, title, lyrics }) {
+  if (title === '' && lyrics === '') return null;
+  return (
+    <section className={`song-card__section song-card__section--${name}`} lang={name === 'arabic' ? 'ar' : 'he'}>
+      <div className="song-card__label">{LABELS[name]}</div>
+      {title !== '' && <h3 className="song-card__title" dangerouslySetInnerHTML={{ __html: title }} />}
+      {lyrics !== '' && <p className="song-card__lyrics" dangerouslySetInnerHTML={{ __html: lyricsToHtml(lyrics) }} />}
+    </section>
+  );
+}
 
 function Song({ lang, song }) {
-  // Each language section is its title (if any) followed by its lyrics (if any).
-  const section = (name, title, lyrics) => [
-    title !== '' && <Title key={`${name}-title`} html={title} />,
-    lyrics !== '' && <Lyrics key={`${name}-lyrics`} html={lyricsToHtml(lyrics)} />,
-  ];
-  const hebrew = section('hebrew', song.HebrewTitle, song.HebrewLyrics);
-  const arabic = section('arabic', song.ArabicTitle, song.ArabicLyrics);
-  const taatik = section('taatik', song.TaatikTitle, song.TaatikLyrics);
-
-  // Separators go between sections, counted by how many titles the song has.
-  const titles = [song.HebrewTitle, song.ArabicTitle, song.TaatikTitle].filter((t) => t !== '').length;
-  const line1 = titles >= 2 && <Separator key="line1" />;
-  const line2 = titles >= 3 && <Separator key="line2" />;
-
+  const hebrew = <SongSection key="hebrew" name="hebrew" title={song.HebrewTitle} lyrics={song.HebrewLyrics} />;
+  const arabic = <SongSection key="arabic" name="arabic" title={song.ArabicTitle} lyrics={song.ArabicLyrics} />;
+  const taatik = <SongSection key="taatik" name="taatik" title={song.TaatikTitle} lyrics={song.TaatikLyrics} />;
   // The song's own language comes first.
-  const content =
-    lang === LANG_HEBREW ? [hebrew, line1, arabic, line2, taatik] : [arabic, line1, taatik, line2, hebrew];
+  const sections = lang === LANG_HEBREW ? [hebrew, arabic, taatik] : [arabic, taatik, hebrew];
 
   return (
-    <div className="rectangle">
-      <div id="song">
-        {content}
-        {song.Link !== '' && (
-          <h2 className="activityContent">
-            <a target="_blank" href={song.Link}>
-              שמעו את השיר - اسمعوا الاغنية
-            </a>
-          </h2>
-        )}
-      </div>
+    <div className="song-card" id="song">
+      {song.Link !== '' && (
+        <a className="song-card__listen" target="_blank" href={song.Link}>
+          <span className="glyphicon glyphicon-play" aria-hidden="true"></span>
+          <span>
+            שמעו את השיר - <span lang="ar">اسمعوا الاغنية</span>
+          </span>
+        </a>
+      )}
+      {sections}
     </div>
   );
 }

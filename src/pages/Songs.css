@@ -1,0 +1,99 @@
+/* The chosen song (Songs.jsx), shown at the top of the songs page. */
+
+.song-card {
+  max-width: 760px;
+  margin: 10px auto 0;
+  padding: 24px 32px 12px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(30, 30, 90, 0.12);
+  text-align: right;
+  animation: song-card-in 0.28s ease-out;
+}
+@keyframes song-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .song-card { animation: none; }
+}
+
+.song-card__listen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  margin: 0 auto 8px;
+  padding: 12px 26px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, #22b573 0%, #3a8dde 55%, #5a4fcf 100%);
+  box-shadow: 0 8px 20px rgba(60, 60, 160, 0.25);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s ease;
+}
+.song-card__listen:hover,
+.song-card__listen:focus {
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+.song-card__listen .glyphicon {
+  top: 0;
+  font-size: 15px;
+}
+
+.song-card__section {
+  padding: 20px 0;
+  border-top: 1px dashed #d9dcf0;
+}
+.song-card__section:first-of-type {
+  border-top: none;
+}
+.song-card__label {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: #f1f2f8;
+  color: #5a4fcf;
+  font-size: 14px;
+  font-weight: 700;
+}
+.song-card__title {
+  margin: 0 0 10px;
+  color: #2f2a6b;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.song-card__lyrics {
+  margin: 0;
+  color: #1f2937;
+  font-size: 20px;
+  line-height: 1.8;
+}
+.song-card__section--taatik .song-card__lyrics {
+  color: #4b5563;
+}
+
+@media (max-width: 600px) {
+  .song-card {
+    margin-left: 14px;
+    margin-right: 14px;
+    padding: 18px 18px 6px;
+  }
+  .song-card__title {
+    font-size: 22px;
+  }
+  .song-card__lyrics {
+    font-size: 18px;
+  }
+  .song-card__listen {
+    width: 100%;
+    font-size: 17px;
+  }
+}

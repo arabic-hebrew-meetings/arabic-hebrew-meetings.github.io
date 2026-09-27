@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useMediaQuery } from '../hooks/useMediaQuery.js';
 import { saveAction } from '../lib/tracking.js';
+import './CardActivity.css';
 import ExplanationModal from './ExplanationModal.jsx';
 import StartButtons from './StartButtons.jsx';
 
@@ -14,16 +14,8 @@ export function drawUnusedCard(total, drawn) {
   }
 }
 
-function CircleButton({ direction, onClick, invisible }) {
-  return (
-    <a className={invisible ? 'circle-button invisible' : 'circle-button'} onClick={onClick} role="button">
-      <span className={`glyphicon glyphicon glyphicon-chevron-${direction} my-activity-button-single`}></span>
-    </a>
-  );
-}
-
-// The shared flow of the activity pages: start/explanation buttons, then one card at a time with
-// previous/next buttons. Cards are drawn in random order and remembered, so "previous" goes back
+// The shared flow of the activity pages: start/explanation buttons, then one card at a time (with a
+// "3 / 24" progress pill) and previous/next buttons below it. Cards are drawn in random order and remembered, so "previous" goes back
 // through the same cards.
 //
 // - trackingName: page name for saveAction (e.g. "jokes")
@@ -45,7 +37,6 @@ export default function CardActivity({
   const [explanationOpen, setExplanationOpen] = useState(false);
   const [turn, setTurn] = useState(-1); // -1: not started yet
   const [drawn, setDrawn] = useState([]); // cards drawn so far, in order
-  const smallScreen = useMediaQuery('(max-width: 600px)');
 
   function next() {
     const nextTurn = turn + 1;
@@ -74,28 +65,37 @@ export default function CardActivity({
     );
   }
 
-  const card = renderCard(drawn[turn], turn);
-  const nextButton = <CircleButton direction="left" onClick={next} invisible={turn === total - 1} />;
-  // On the first card there's no "previous": hidden on small screens, an invisible placeholder otherwise.
-  const prevButton = turn === 0 && smallScreen ? null : <CircleButton direction="right" onClick={prev} invisible={turn === 0} />;
+  const isFirst = turn === 0;
+  const isLast = turn === total - 1;
 
   return (
     <div className="activity-content rtl" id="button-and-text">
-      {smallScreen ? (
-        <>
-          <div className="row">{card}</div>
-          <div className="row">
-            {prevButton}
-            {nextButton}
-          </div>
-        </>
-      ) : (
-        <>
-          {prevButton}
-          {card}
-          {nextButton}
-        </>
-      )}
+      <div className="activity-stage">
+        <div className="activity-progress" dir="ltr" aria-live="polite">
+          {turn + 1} / {total}
+        </div>
+        {/* keyed by turn so each new card fades in */}
+        <div className="activity-card" key={turn}>
+          {renderCard(drawn[turn], turn)}
+        </div>
+        <div className="activity-nav">
+          {/* In RTL the first button is on the right: "previous" (invisible but keeping its place on the first card), then "next". */}
+          <button
+            type="button"
+            className={'activity-nav__button activity-nav__prev' + (isFirst ? ' is-hidden' : '')}
+            onClick={prev}
+            aria-hidden={isFirst}
+            tabIndex={isFirst ? -1 : undefined}
+          >
+            <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span>הקודם - <span lang="ar">السابق</span></span>
+          </button>
+          <button type="button" className="activity-nav__button activity-nav__next" onClick={next} disabled={isLast}>
+            <span>הבא - <span lang="ar">التالي</span></span>
+            <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

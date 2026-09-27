@@ -1,0 +1,182 @@
+/* The running activity (CardActivity): a "3 / 24" progress pill, the current card, and previous/next
+   buttons below it. Colors follow the header gradient. */
+
+.activity-stage {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.activity-progress {
+  display: inline-block;
+  margin: 4px 0 14px;
+  padding: 4px 16px;
+  border-radius: 999px;
+  background: #fff;
+  color: #5a4fcf;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 10px rgba(60, 60, 160, 0.12);
+}
+
+.activity-card {
+  animation: activity-card-in 0.28s ease-out;
+}
+@keyframes activity-card-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .activity-card { animation: none; }
+}
+
+/* The card itself (.rectangle, from main.css: a black-bordered inline box). */
+.activity-card .rectangle {
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 28px 32px;
+  border: none;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 32px rgba(30, 30, 90, 0.12);
+}
+.activity-card .activityContent {
+  color: #1f2937;
+  line-height: 1.45;
+}
+/* Transliteration lines: softer and a bit smaller. */
+.activity-card #taatikText {
+  color: #6b7280;
+  font-size: 24px;
+}
+/* Photos (describePhoto). */
+.activity-card #image img {
+  max-width: 100%;
+  max-height: 60vh;
+  border-radius: 12px;
+}
+
+.activity-nav {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 22px;
+}
+.activity-nav__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 180px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.activity-nav__button .glyphicon {
+  top: 1px;
+  font-size: 15px;
+}
+.activity-nav__next {
+  border: none;
+  color: #fff;
+  background: linear-gradient(120deg, #22b573 0%, #3a8dde 55%, #5a4fcf 100%);
+  box-shadow: 0 8px 20px rgba(60, 60, 160, 0.25);
+}
+.activity-nav__prev {
+  border: 2px solid #d9dcf0;
+  color: #2f2a6b;
+  background: #fff;
+}
+.activity-nav__button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.activity-nav__next:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+}
+.activity-nav__prev.is-hidden {
+  visibility: hidden;
+}
+.activity-nav__button:focus-visible {
+  outline: 3px solid rgba(90, 79, 207, 0.45);
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .activity-stage {
+    padding: 0 14px; /* a gutter on phones, where the card would otherwise touch the screen edges */
+  }
+  .activity-card .rectangle {
+    margin-top: 0; /* main.css pulls the card up on phones */
+    padding: 18px 16px;
+  }
+  .activity-card #taatikText {
+    font-size: 18px !important; /* main.css: .activityContent { font-size: 22px !important } on phones */
+  }
+  .activity-nav {
+    gap: 10px;
+  }
+  .activity-nav__button {
+    flex: 1;
+    min-width: 0;
+    padding: 12px 8px;
+    font-size: 17px;
+  }
+}
+
+/* countryCity: the drawn letter as a badge, the categories as chips. */
+.activity-card .letter-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 120px;
+  margin: 10px auto 18px;
+  padding: 0 28px;
+  border-radius: 60px;
+  background: linear-gradient(135deg, #e4f8ee, #e6eefc 55%, #ecebfb);
+  color: #3f36b0;
+  font-size: 64px;
+  font-weight: 700;
+}
+.activity-card .categories-title {
+  margin-bottom: 10px !important;
+  font-weight: 700;
+}
+.category-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.category-chips li {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #f1f2f8;
+  color: #2f2a6b;
+  font-size: 19px;
+}
+@media (max-width: 600px) {
+  .activity-card .letter-badge {
+    min-width: 96px;
+    height: 96px;
+    font-size: 48px;
+  }
+  .category-chips li {
+    font-size: 16px;
+    padding: 5px 12px;
+  }
+}
+
+/* describePhoto wraps the photo in an <h2>; drop its heading margins so the card fits the photo. */
+.activity-card #image {
+  margin: 0;
+}

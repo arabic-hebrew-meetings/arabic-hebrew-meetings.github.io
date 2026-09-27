@@ -25,6 +25,19 @@ function drawLetter(turn, drawn) {
   }
 }
 
+const CATEGORIES_HE = ['ארץ', 'עיר', 'חי', 'צומח', 'דומם', 'שם', 'מקצוע', 'אישיות'];
+const CATEGORIES_AR = ['بلاد', 'مدينة', 'حيوان', 'نبات', 'جماد', 'اسم', 'مهنة', 'شخصية مشهورة'];
+
+function Chips({ items, lang }) {
+  return (
+    <ul className="category-chips" lang={lang}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
 function LetterCard({ letter }) {
   const isHebrew = letter < HEBREW_LETTERS.length;
   return (
@@ -35,15 +48,12 @@ function LetterCard({ letter }) {
       <h2 className="rtl activityContent" id="language2">
         {isHebrew ? 'طلعلكم الحرف بالعبراني:' : 'طلعلكم الحرف بالعربي:'}
       </h2>
-      <h1 className="rtl" id="letter">
+      <h1 className="rtl letter-badge" id="letter">
         {isHebrew ? HEBREW_LETTERS[letter] : ARABIC_LETTERS[letter - HEBREW_LETTERS.length]}
       </h1>
-      <h2 className="rtl activityContent">
-        <br />
-        הקטגוריות - الفئات:
-      </h2>
-      <h2 className="rtl activityContent">ארץ - עיר - חי - צומח - דומם - שם - מקצוע - אישיות</h2>
-      <h2 className="rtl activityContent">بلاد - مدينة - حيوان - نبات - جماد - اسم - مهنة - شخصية مشهورة</h2>
+      <h2 className="rtl activityContent categories-title">הקטגוריות - الفئات:</h2>
+      <Chips items={CATEGORIES_HE} />
+      <Chips items={CATEGORIES_AR} lang="ar" />
     </div>
   );
 }
