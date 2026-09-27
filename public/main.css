@@ -1,7 +1,6 @@
 
 
 body {
-  font-family: 'Roboto', sans-serif;
   font-weight: 300;
   padding-top:50px;
 }
@@ -166,7 +165,6 @@ footer {
 	background-color: #22b573; /* fallback */
 	background-image: linear-gradient(120deg, #22b573 0%, #3a8dde 55%, #5a4fcf 100%);
     color:#ffffff;
-	border: none;
   	border-radius:0;
 	box-shadow: 0 4px 18px rgba(60, 60, 160, 0.25);
 	padding-top: 1vw;
@@ -183,7 +181,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.18);
 }
 
-.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus, .navbar-custom .navbar-nav .open>a  {
+.navbar-custom .navbar-nav > li > a:hover, .navbar-custom .navbar-nav .open>a  {
   background-color: rgba(255, 255, 255, 0.18);
 }
 /* bootstrap.min.css is loaded again after this file, so its ".nav .open>a:focus" (#eee) would otherwise win */
@@ -216,6 +214,11 @@ footer {
 }
 /* in the collapsed (mobile) menu bootstrap makes the dropdown transparent, so keep items white on the gradient */
 @media (max-width: 767px) {
+  .navbar-custom .navbar-nav .open .dropdown-menu {
+    background-color: transparent;
+    box-shadow: none;
+    margin-top: 0;
+  }
   .navbar-custom .navbar-nav .open .dropdown-menu>li>a {
     color: #fff;
   }
@@ -302,8 +305,6 @@ footer {
 }
 
 .btn-xl {
-    font-size: 70px;
-    border-radius: 10px;
 	height: 50px;
 }
 
@@ -700,8 +701,8 @@ ul.countdown li p {
 .two-options {
 	margin: 30px !important;
 	/* Keeps the start/explanation buttons at the width the legacy makeButtonWidthEqual() ended up with:
-	   it measured them before the second bootstrap.min.css reset .btn-xl's 70px font-size, so the
-	   spaces inside were measured at 70px. */
+	   it measured them while the page was loading, when a 70px font-size (since removed) still applied
+	   to .btn-xl, so the spaces inside were measured at 70px. */
 	min-width: 210px;
 }
 
