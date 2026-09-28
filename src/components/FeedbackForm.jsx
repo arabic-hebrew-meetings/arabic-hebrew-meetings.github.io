@@ -45,35 +45,44 @@ export default function FeedbackForm({ page }) {
 
   if (sent) {
     return (
-      <>
-        <h3>תודה! شكرا!</h3>
-        <button type="button" onClick={() => setSent(false)}>
-          Back
+      <div className="form__thanks" role="status">
+        <div className="form__thanks-icon" aria-hidden="true">
+          <span className="glyphicon glyphicon-ok"></span>
+        </div>
+        <p className="form__thanks-text">
+          תודה! <span lang="ar">شكرا!</span>
+        </p>
+        <button type="button" className="form__back" onClick={() => setSent(false)}>
+          חזרה - <span lang="ar">رجوع</span>
         </button>
-      </>
+      </div>
     );
   }
 
   return (
     <form name="feedback" onSubmit={handleSubmit}>
-      שם:
-      <br />
-      <input className="form__email" type="text" placeholder="" name="feeback_name" id="feeback_name" required />
-      <br />
-      תוכן ההודעה:
-      <br />
-      <textarea
-        className="form__message"
-        cols="30"
-        placeholder=""
-        name="feedback_content"
-        id="feedback_content"
-        required
-        rows="5"
-      ></textarea>
-      <br />
-      <button className="form__submit">Submit</button>
-      <br />
+      <label className="form__field">
+        <span className="form__label">שם</span>
+        <input className="form__email" type="text" placeholder="" name="feeback_name" id="feeback_name" required />
+      </label>
+      <label className="form__field">
+        <span className="form__label">תוכן ההודעה</span>
+        <textarea
+          className="form__message"
+          cols="30"
+          placeholder=""
+          name="feedback_content"
+          id="feedback_content"
+          required
+          rows="5"
+        ></textarea>
+      </label>
+      <button className="form__submit">
+        <span>
+          שליחה - <span lang="ar">إرسال</span>
+        </span>
+        <span className="glyphicon glyphicon-send" aria-hidden="true"></span>
+      </button>
     </form>
   );
 }
