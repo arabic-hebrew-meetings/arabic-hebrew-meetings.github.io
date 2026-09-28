@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { postToGoogleForm, saveAction } from '../lib/tracking.js';
+import FormThanks, { SubmitButton } from './FormThanks.jsx';
 
 const FEEDBACK_FORM_URL =
   'https://docs.google.com/forms/u/0/d/e/1FAIpQLSfy9Cenad7cEtTJ2p9ebx-5Je2yYAPL3OSTmAyH6zXtLJgmEA/formResponse';
@@ -44,19 +45,7 @@ export default function FeedbackForm({ page }) {
   }
 
   if (sent) {
-    return (
-      <div className="form__thanks" role="status">
-        <div className="form__thanks-icon" aria-hidden="true">
-          <span className="glyphicon glyphicon-ok"></span>
-        </div>
-        <p className="form__thanks-text">
-          תודה! <span lang="ar">شكرا!</span>
-        </p>
-        <button type="button" className="form__back" onClick={() => setSent(false)}>
-          חזרה - <span lang="ar">رجوع</span>
-        </button>
-      </div>
-    );
+    return <FormThanks onBack={() => setSent(false)} />;
   }
 
   return (
@@ -77,12 +66,7 @@ export default function FeedbackForm({ page }) {
           rows="5"
         ></textarea>
       </label>
-      <button className="form__submit">
-        <span>
-          שליחה - <span lang="ar">إرسال</span>
-        </span>
-        <span className="glyphicon glyphicon-send" aria-hidden="true"></span>
-      </button>
+      <SubmitButton />
     </form>
   );
 }

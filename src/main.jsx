@@ -6,6 +6,7 @@ import Carousel from './components/Carousel.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
 import Footer from './components/Footer.jsx';
 import Navbar from './components/Navbar.jsx';
+import SuggestionForm from './components/SuggestionForm.jsx';
 import CountryCity from './pages/CountryCity.jsx';
 import Meetings from './pages/meetings/Meetings.jsx';
 import DescribePhoto from './pages/DescribePhoto.jsx';
@@ -44,4 +45,13 @@ const activityPages = {
 for (const element of document.querySelectorAll('[data-activity]')) {
   const ActivityPage = activityPages[element.dataset.activity];
   createRoot(element).render(<ActivityPage {...element.dataset} />);
+}
+
+// Activities' "suggest new content" forms: replace each static form (which posts to Google Forms in a new
+// tab) with SuggestionForm, which sends in the background and shows a thank-you, like the feedback form.
+for (const form of document.querySelectorAll('.ideas form[action*="docs.google.com/forms/"]')) {
+  const field = form.querySelector('textarea');
+  const container = document.createElement('div');
+  form.replaceWith(container);
+  createRoot(container).render(<SuggestionForm formUrl={form.action} fieldName={field.name} placeholder={field.placeholder} />);
 }
