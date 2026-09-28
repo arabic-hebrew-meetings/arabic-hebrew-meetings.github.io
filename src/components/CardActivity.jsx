@@ -88,10 +88,10 @@ export default function CardActivity({
             tabIndex={isFirst ? -1 : undefined}
           >
             <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span>הקודם - <span lang="ar">السابق</span></span>
+            <span>הקודם - <span lang="ar">اللي قبل</span></span>
           </button>
           <button type="button" className="activity-nav__button activity-nav__next" onClick={next} disabled={isLast}>
-            <span>הבא - <span lang="ar">التالي</span></span>
+            <span>הבא - <span lang="ar">الجاي</span></span>
             <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
           </button>
         </div>
