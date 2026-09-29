@@ -2,13 +2,15 @@
    rounded, shadowed tiles with a hover lift, and a centered bilingual title. Other pages that show the
    tiles (meetings, index2) keep main.css's floated squares. */
 
+/* body's padding-top (50px, main.css) is shorter than the fixed header, which is about 51px + 2vw tall,
+   so the space below the header is set here: 2vw + 1px to clear it, plus the gap itself. */
 .jumbotron1.home {
-  padding-top: 0;
+  padding-top: calc(2vw + 1px + 40px);
   background: #f6f7fb;
 }
 
 .jumbotron1.home .home-title {
-  margin: 36px 16px 22px;
+  margin: 0 16px 24px;
   font-size: 30px;
   font-weight: 800;
   color: #2f2a6b;
@@ -41,10 +43,49 @@
   background: none;
   box-shadow: 0 8px 22px rgba(30, 30, 90, 0.14);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  -webkit-tap-highlight-color: transparent; /* no grey rectangle on phones; the press effect below replaces it */
 }
-.home #activities-carousel .my-square:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(30, 30, 90, 0.22);
+/* Hover lift only with a real pointer, so a tap on a phone doesn't leave the tile lifted. */
+@media (hover: hover) {
+  .home #activities-carousel .my-square:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(30, 30, 90, 0.22);
+  }
+}
+/* Pressed: the tile sinks in (smaller, closer shadow, slightly darker) for immediate feedback on click/tap. */
+.home #activities-carousel .my-square:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 8px rgba(30, 30, 90, 0.18);
+  transition-duration: 0.08s;
+}
+.home #activities-carousel .my-square-content::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 20, 60, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.08s ease;
+}
+.home #activities-carousel .my-square:active .my-square-content::after {
+  opacity: 1;
+}
+/* Keyboard focus: a rounded ring around the whole tile. A mouse click or tap shows no ring (Bootstrap's
+   a:focus outline used to draw a square blue frame that stayed after clicking). */
+.home #activities-carousel a:focus {
+  outline: none;
+}
+.home #activities-carousel .my-square:has(a:focus-visible) {
+  overflow: visible;
+  outline: 3px solid #5a4fcf;
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .home #activities-carousel .my-square,
+  .home #activities-carousel .my-square:hover,
+  .home #activities-carousel .my-square:active {
+    transform: none;
+  }
 }
 .home #activities-carousel .my-square-content {
   border-radius: 22px;
@@ -71,8 +112,11 @@
 }
 
 @media (max-width: 700px) {
+  .jumbotron1.home {
+    padding-top: calc(2vw + 1px + 28px);
+  }
   .jumbotron1.home .home-title {
-    margin: 24px 16px 16px;
+    margin: 0 16px 18px;
     font-size: 22px;
   }
   .home #activities-carousel .fade-in {
