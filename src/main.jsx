@@ -1,4 +1,5 @@
 import { createRoot } from 'react-dom/client';
+import './styles/home-tiles.css';
 import './styles/single-section-page.css';
 import './styles/static-activity.css';
 import './styles/suggestion-forms.css';
