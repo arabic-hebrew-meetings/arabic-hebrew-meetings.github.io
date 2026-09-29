@@ -1,6 +1,7 @@
 /* Homepage (index.html, <section class="jumbotron1 home">): the activity tiles as a right-to-left grid of
-   rounded, shadowed tiles with a hover lift, and a centered bilingual title. Other pages that show the
-   tiles (meetings, index2) keep main.css's floated squares. */
+   rounded, shadowed tiles with a hover lift (5 per row on desktop, 3 on tablets and phones, 2 on phones
+   narrower than 360px), and a centered bilingual title. Other pages that show the tiles (meetings, index2)
+   keep main.css's floated squares. */
 
 /* body's padding-top (50px, main.css) is shorter than the fixed header, which is about 51px + 2vw tall,
    so the space below the header is set here: 2vw + 1px to clear it, plus the gap itself. */
@@ -127,5 +128,17 @@
   .home #activities-carousel .my-square,
   .home #activities-carousel .my-square-content {
     border-radius: 18px;
+  }
+}
+
+/* Phones 360px and wider: 3 tiles per row, like tablets (15 tiles fill 5 full rows). Narrower phones keep 2. */
+@media (min-width: 360px) and (max-width: 700px) {
+  .home #activities-carousel .fade-in {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .home #activities-carousel .my-square,
+  .home #activities-carousel .my-square-content {
+    border-radius: 16px;
   }
 }
