@@ -1,0 +1,87 @@
+/* Homepage (index.html, <section class="jumbotron1 home">): the activity tiles as a right-to-left grid of
+   rounded, shadowed tiles with a hover lift, and a centered bilingual title. Other pages that show the
+   tiles (meetings, index2) keep main.css's floated squares. */
+
+.jumbotron1.home {
+  padding-top: 0;
+  background: #f6f7fb;
+}
+
+.jumbotron1.home .home-title {
+  margin: 36px 16px 22px;
+  font-size: 30px;
+  font-weight: 800;
+  color: #2f2a6b;
+  text-align: center;
+}
+.home-title [lang='ar'] {
+  color: #5a4fcf;
+}
+.home-title__dash {
+  margin: 0 10px;
+  color: #b4b8dc;
+}
+
+.home #activities-carousel .fade-in {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 22px;
+  direction: rtl;
+}
+
+.home #activities-carousel .my-square {
+  float: none;
+  width: auto;
+  margin: 0;
+  padding-bottom: 100%; /* square */
+  border-radius: 22px;
+  background: none;
+  box-shadow: 0 8px 22px rgba(30, 30, 90, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.home #activities-carousel .my-square:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(30, 30, 90, 0.22);
+}
+.home #activities-carousel .my-square-content {
+  border-radius: 22px;
+  overflow: hidden;
+}
+.home #activities-carousel .img-hover-zoom--brightness,
+.home #activities-carousel .img-hover-zoom--brightness a {
+  display: block;
+  height: 100%;
+}
+/* No zoom (it cropped the tile text); the tile lifts instead. */
+.home #activities-carousel .img-hover-zoom--brightness:hover img {
+  transform: none;
+  filter: none;
+}
+.home #activities-carousel .myimg {
+  display: block;
+}
+
+@media (max-width: 1000px) {
+  .home #activities-carousel .fade-in {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .jumbotron1.home .home-title {
+    margin: 24px 16px 16px;
+    font-size: 22px;
+  }
+  .home #activities-carousel .fade-in {
+    padding: 0 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .home #activities-carousel .my-square,
+  .home #activities-carousel .my-square-content {
+    border-radius: 18px;
+  }
+}
